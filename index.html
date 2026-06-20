@@ -42,7 +42,7 @@ body{
   background-size:42px 42px;
   mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
 }
-.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 18px 70px;}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 18px calc(86px + env(safe-area-inset-bottom));}
 
 /* HEADER */
 header{padding:26px 0 10px;text-align:center;}
@@ -77,14 +77,22 @@ h1.title{
 #scheduleStatus.off{color:var(--muted);border-color:var(--line);background:transparent;}
 
 /* NAV */
-nav.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:26px 0 22px;}
-nav.tabs button{
-  font-family:'Orbitron',sans-serif;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
-  background:var(--panel);border:1px solid var(--line);color:var(--muted);
-  padding:11px 18px;border-radius:3px;cursor:pointer;transition:all .2s ease;position:relative;
+nav.tabs{
+  position:fixed;left:0;right:0;bottom:0;z-index:200;display:flex;justify-content:space-around;align-items:stretch;
+  background:rgba(8,12,22,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(0,0,0,.45);
+  padding:8px 4px calc(8px + env(safe-area-inset-bottom));margin:0;gap:2px;
 }
-nav.tabs button:hover{color:var(--text);border-color:var(--cyan-dim);}
-nav.tabs button.active{color:#04161a;background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 22px rgba(57,243,255,.45);}
+nav.tabs button{
+  flex:1 1 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  font-family:'Rajdhani',sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;
+  background:none;border:none;color:var(--muted);padding:6px 2px 5px;border-radius:10px;cursor:pointer;transition:all .2s ease;position:relative;
+}
+nav.tabs button .nav-icon{font-size:19px;line-height:1;filter:grayscale(.4) opacity(.7);transition:.2s;}
+nav.tabs button:hover{color:var(--text);}
+nav.tabs button.active{color:var(--cyan);}
+nav.tabs button.active .nav-icon{filter:none;text-shadow:0 0 14px rgba(57,243,255,.7);}
+nav.tabs button.active::before{content:'';position:absolute;top:0;left:18%;right:18%;height:2px;background:var(--cyan);border-radius:2px;box-shadow:0 0 8px var(--cyan);}
 
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;backdrop-filter:blur(8px);}
 section.tabpanel{display:none;}
@@ -249,10 +257,10 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
   </div>
 
   <nav class="tabs">
-    <button data-tab="grupos" class="active">Grupos &amp; Simulação</button>
-    <button data-tab="artilheiros">Artilheiros</button>
-    <button data-tab="estadios">Estádios</button>
-    <button data-tab="historico">Histórico</button>
+    <button data-tab="grupos" class="active"><span class="nav-icon">⚽</span>Grupos</button>
+    <button data-tab="artilheiros"><span class="nav-icon">🥇</span>Artilheiros</button>
+    <button data-tab="estadios"><span class="nav-icon">🏟️</span>Estádios</button>
+    <button data-tab="historico"><span class="nav-icon">🏆</span>Histórico</button>
   </nav>
 
   <!-- GRUPOS -->
