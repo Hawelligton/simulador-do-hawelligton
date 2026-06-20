@@ -67,14 +67,14 @@ h1.title{
 .tick-item{font-size:14px;color:var(--text);}
 .tick-item b{color:var(--cyan);}
 
-.share-bar{margin:0 0 20px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
-.share-text{display:flex;align-items:flex-start;gap:12px;}
-.share-icon{font-size:20px;line-height:1.3;}
-.share-title{font-family:'Orbitron';font-size:12px;letter-spacing:.04em;color:#fff;}
-.share-sub{font-size:12.5px;color:var(--muted);margin-top:3px;max-width:520px;line-height:1.4;}
-.share-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-#syncStatus.live{color:var(--green);border-color:rgba(61,255,176,.35);background:rgba(61,255,176,.07);}
-#syncStatus.off{color:var(--muted);border-color:var(--line);background:transparent;}
+.sched-bar{margin:0 0 20px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+.sched-text{display:flex;align-items:flex-start;gap:12px;}
+.sched-icon{font-size:20px;line-height:1.3;}
+.sched-title{font-family:'Orbitron';font-size:12px;letter-spacing:.04em;color:#fff;}
+.sched-sub{font-size:12.5px;color:var(--muted);margin-top:3px;max-width:520px;line-height:1.4;}
+.sched-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+#scheduleStatus.live{color:var(--green);border-color:rgba(61,255,176,.35);background:rgba(61,255,176,.07);}
+#scheduleStatus.off{color:var(--muted);border-color:var(--line);background:transparent;}
 
 /* NAV */
 nav.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:26px 0 22px;}
@@ -235,17 +235,16 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
     <div class="ticker-track" id="ticker"></div>
   </div>
 
-  <div class="panel share-bar">
-    <div class="share-text">
-      <span class="share-icon">🔗</span>
+  <div class="panel sched-bar">
+    <div class="sched-text">
+      <span class="sched-icon">📅</span>
       <div>
-        <div class="share-title">Compartilhe com seus amigos</div>
-        <div class="share-sub" id="shareSub">Use o botão "Compartilhar" do Claude para enviar este link — toda simulação que você (ou eles) fizer atualiza automaticamente para o grupo.</div>
+        <div class="sched-title">Agenda de atualizações</div>
+        <div class="sched-sub" id="scheduleSub">Carregando próximos jogos…</div>
       </div>
     </div>
-    <div class="share-actions">
-      <span class="status-pill" id="syncStatus">verificando sincronização…</span>
-      <button class="btn ghost" id="btnSyncNow">↻ Sincronizar agora</button>
+    <div class="sched-actions">
+      <span class="status-pill" id="scheduleStatus">—</span>
     </div>
   </div>
 
@@ -442,115 +441,45 @@ let GROUPS = JSON.parse(JSON.stringify(INITIAL_GROUPS));
 let bracketState = null; // built on demand
 let bkZoom = 1;
 
-/* ============== SINCRONIZAÇÃO COMPARTILHADA (window.storage) ============== */
-const SYNC_KEY = 'copa2026-hawelligton-sim-v1';
-let lastAppliedTs = 0;
-let isApplyingRemote = false;
-const hasStorage = () => (typeof window !== 'undefined' && !!window.storage);
-
-function extractPicks(){
-  if(!bracketState) return null;
-  const picks = {};
-  ['r32','r16','qf','sf'].forEach(rk=>{
-    bracketState[rk].forEach((m,i)=>{ if(m.winner) picks[`${rk}:${i}`] = m.winner.code; });
-  });
-  if(bracketState.final.winner) picks['final:0'] = bracketState.final.winner.code;
-  if(bracketState.third.winner) picks['third:0'] = bracketState.third.winner.code;
-  return picks;
+/* ============== AGENDA / PRÓXIMOS JOGOS ============== */
+function matchDateTime(m){
+  const [day,month] = m.d.split('/');
+  const [hh,mm] = m.tm.split(':');
+  return new Date(`2026-${month}-${day}T${hh}:${mm}:00-03:00`);
 }
 
-function applyPicks(picks){
-  if(!picks || !bracketState) return;
-  ['r32','r16','qf','sf'].forEach(rk=>{
-    bracketState[rk].forEach((m,i)=>{
-      const code = picks[`${rk}:${i}`];
-      if(code){
-        if(m.a && m.a.code===code) m.winner = m.a;
-        else if(m.b && m.b.code===code) m.winner = m.b;
-      }
+function renderSchedule(){
+  const statusEl = document.getElementById('scheduleStatus');
+  const subEl = document.getElementById('scheduleSub');
+  if(!statusEl || !subEl) return;
+  const now = new Date();
+  const future = [];
+  const pending = [];
+  Object.values(GROUPS).forEach(g=>{
+    g.matches.forEach(m=>{
+      if(m.hs!==null && m.as!==null) return;
+      const dt = matchDateTime(m);
+      const estimatedEnd = new Date(dt.getTime() + 2.5*60*60*1000);
+      if(dt > now) future.push({m, dt});
+      else if(estimatedEnd <= now) pending.push({m, dt});
     });
-    propagateBracket();
   });
-  if(picks['final:0']){
-    if(bracketState.final.a && bracketState.final.a.code===picks['final:0']) bracketState.final.winner = bracketState.final.a;
-    else if(bracketState.final.b && bracketState.final.b.code===picks['final:0']) bracketState.final.winner = bracketState.final.b;
-  }
-  if(picks['third:0']){
-    if(bracketState.third.a && bracketState.third.a.code===picks['third:0']) bracketState.third.winner = bracketState.third.a;
-    else if(bracketState.third.b && bracketState.third.b.code===picks['third:0']) bracketState.third.winner = bracketState.third.b;
-  }
-}
+  future.sort((a,b)=>a.dt-b.dt);
 
-function setSyncStatus(text, cls){
-  const el = document.getElementById('syncStatus');
-  if(!el) return;
-  el.textContent = text;
-  el.className = 'status-pill' + (cls? ' '+cls : '');
-}
-
-async function pushSharedState(){
-  if(!hasStorage() || isApplyingRemote) return;
-  try{
-    const ts = Date.now();
-    const payload = {
-      ts,
-      groups: GROUPS,
-      bracketBuilt: !!bracketState,
-      picks: extractPicks(),
-      bkZoom,
-    };
-    await window.storage.set(SYNC_KEY, JSON.stringify(payload), true);
-    lastAppliedTs = ts;
-    setSyncStatus('🔗 sincronizado às ' + new Date(ts).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}), 'live');
-  }catch(err){
-    setSyncStatus('⚠ falha ao sincronizar', 'off');
+  if(pending.length>0){
+    statusEl.textContent = `⏰ ${pending.length} resultado(s) pendente(s)`;
+    statusEl.className = 'status-pill off';
+    subEl.innerHTML = pending.slice(0,3).map(x=>`${teamName(x.m.h)} × ${teamName(x.m.a)} (encerrou ~${x.m.d} ${x.m.tm})`).join(' · ') + ' — esses jogos já devem ter acabado. Peça "atualizar os placares" na conversa pra eu buscar o resultado real e publicar.';
+  } else if(future.length>0){
+    const next = future[0];
+    statusEl.textContent = '📅 próximo jogo';
+    statusEl.className = 'status-pill live';
+    subEl.textContent = `${teamName(next.m.h)} × ${teamName(next.m.a)} — ${next.m.d} às ${next.m.tm} (Brasília). Assim que terminar, peça "atualizar os placares" aqui na conversa que eu busco o resultado e republico o site.`;
+  } else {
+    statusEl.textContent = '✅ em dia';
+    statusEl.className = 'status-pill live';
+    subEl.textContent = 'Todos os jogos cadastrados já têm placar (real ou simulado).';
   }
-}
-let pushTimer = null;
-function scheduleSync(){
-  clearTimeout(pushTimer);
-  pushTimer = setTimeout(pushSharedState, 700);
-}
-
-async function pullSharedState(silent){
-  if(!hasStorage()) return;
-  try{
-    const result = await window.storage.get(SYNC_KEY, true);
-    if(!result || !result.value) {
-      if(!silent) setSyncStatus('🔗 pronto para compartilhar — nenhuma simulação enviada ainda', 'live');
-      return;
-    }
-    const payload = JSON.parse(result.value);
-    if(!payload.ts || payload.ts <= lastAppliedTs) {
-      if(!silent) setSyncStatus('🔗 sincronizado às ' + new Date(lastAppliedTs||payload.ts).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}), 'live');
-      return;
-    }
-    isApplyingRemote = true;
-    GROUPS = payload.groups;
-    bkZoom = payload.bkZoom || 1;
-    renderGroups();
-    renderTicker();
-    if(payload.bracketBuilt){
-      buildBracket();
-      applyPicks(payload.picks);
-      renderBracket();
-    }
-    lastAppliedTs = payload.ts;
-    setSyncStatus('🔗 atualizado por um amigo às ' + new Date(payload.ts).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}), 'live');
-    isApplyingRemote = false;
-  }catch(err){
-    isApplyingRemote = false;
-    if(!silent) setSyncStatus('⚠ sincronização indisponível', 'off');
-  }
-}
-
-function initSync(){
-  if(!hasStorage()){
-    setSyncStatus('🔌 disponível apenas ao abrir este artefato no Claude.ai', 'off');
-    document.getElementById('shareSub').textContent = 'Abra/edite este simulador como artefato no Claude.ai e use o botão "Compartilhar" — assim os links ficam sincronizados em tempo real entre você e seus amigos.';
-    return;
-  }
-  pullSharedState(false).then(()=> setInterval(()=>pullSharedState(true), 5000));
 }
 let bkLastDims = null;
 
@@ -748,7 +677,7 @@ function renderGroups(){
       refocus();
       requestAnimationFrame(refocus);
 
-      if(!isApplyingRemote) scheduleSync();
+      renderSchedule();
     });
   });
 }
@@ -765,7 +694,7 @@ function simulateRandom(){
   document.getElementById('simStatus').textContent = 'simulação aleatória aplicada';
   renderGroups();
   renderTicker();
-  if(!isApplyingRemote) pushSharedState();
+  renderSchedule();
 }
 
 function resetData(){
@@ -776,7 +705,7 @@ function resetData(){
   renderTicker();
   document.getElementById('bracket2').innerHTML = '<p style="color:var(--muted);padding:20px;">Clique em "Gerar / Atualizar Mata-Mata" para montar o chaveamento com a classificação atual.</p>';
   document.getElementById('thirdsBox').innerHTML = '';
-  if(!isApplyingRemote) pushSharedState();
+  renderSchedule();
 }
 
 /* ============== RENDER: BRACKET (estrutura oficial FIFA) ============== */
@@ -1036,7 +965,6 @@ function renderBracket(){
       if(!team) return;
       m.winner = team;
       renderBracket();
-      if(!isApplyingRemote) pushSharedState();
     });
   });
 
@@ -1109,10 +1037,7 @@ document.querySelectorAll('nav.tabs button').forEach(btn=>{
 
 document.getElementById('btnReset').addEventListener('click', resetData);
 document.getElementById('btnRandom').addEventListener('click', simulateRandom);
-document.getElementById('btnBuildBracket').addEventListener('click', ()=>{
-  buildBracket();
-  if(!isApplyingRemote) pushSharedState();
-});
+document.getElementById('btnBuildBracket').addEventListener('click', buildBracket);
 
 document.getElementById('bkZoomOut').addEventListener('click', ()=>{
   bkZoom = Math.max(0.3, +(bkZoom-0.1).toFixed(2));
@@ -1137,8 +1062,6 @@ document.getElementById('bkZoomFit').addEventListener('click', ()=>{
   bkZoom = +bkZoom.toFixed(2);
   applyBkZoom();
 });
-
-document.getElementById('btnSyncNow').addEventListener('click', ()=>pullSharedState(false));
 
 function setupTickerPause(){
   const badge = document.getElementById('liveBadge');
@@ -1166,7 +1089,8 @@ renderGroups();
 renderScorers();
 renderStadiums();
 renderHistory();
-initSync();
+renderSchedule();
+setInterval(renderSchedule, 60000); // reavalia a cada minuto se algum jogo já deveria ter terminado
 
 </script>
 </body>
