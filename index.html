@@ -189,10 +189,12 @@ table.standings tr.thirdwatch td:first-child{color:var(--gold);}
 
 /* ARTILHEIROS */
 .scorers-list{display:flex;flex-direction:column;gap:8px;}
-.scorer-row{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:14px;padding:11px 16px;border-radius:5px;background:rgba(255,255,255,.02);border:1px solid transparent;transition:.2s;}
+.scorer-row{display:grid;grid-template-columns:34px 44px 1fr auto;align-items:center;gap:13px;padding:11px 16px;border-radius:5px;background:rgba(255,255,255,.02);border:1px solid transparent;transition:.2s;}
 .scorer-row:hover{border-color:var(--line);background:rgba(57,243,255,.04);}
 .scorer-rank{font-family:'Orbitron';font-size:15px;color:var(--cyan-dim);text-align:center;}
 .scorer-row:nth-child(1) .scorer-rank{color:var(--gold);}
+.scorer-avatar{width:44px;height:44px;border-radius:50%;background:var(--panel-solid);border:2px solid var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:20px;flex:0 0 auto;}
+.scorer-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center;}
 .scorer-name{font-weight:700;font-size:15.5px;display:flex;align-items:center;gap:9px;}
 .scorer-club{font-size:12px;color:var(--muted);margin-top:2px;}
 .scorer-goals{font-family:'Orbitron';font-size:20px;color:var(--cyan);text-align:right;}
@@ -722,30 +724,30 @@ function setupGamesSubnav(){
 }
 
 const SCORERS = [
- {name:'Lionel Messi', code:'ARG', goals:3, club:'Inter Miami'},
- {name:'Jonathan David', code:'CAN', goals:3, club:'Juventus'},
- {name:'Kylian Mbappé', code:'FRA', goals:2, club:'Real Madrid'},
- {name:'Erling Haaland', code:'NOR', goals:2, club:'Manchester City'},
- {name:'Kai Havertz', code:'GER', goals:2, club:'Arsenal'},
- {name:'Harry Kane', code:'ENG', goals:2, club:'Bayern de Munique'},
- {name:'Folarin Balogun', code:'USA', goals:2, club:'AS Monaco'},
- {name:'Elijah Just', code:'NZL', goals:2, club:'Kawasaki Frontale'},
- {name:'Yasin Ayari', code:'SWE', goals:2, club:'Brighton & Hove Albion'},
- {name:'Matheus Cunha', code:'BRA', goals:2, club:'Manchester United'},
- {name:'Vinícius Júnior', code:'BRA', goals:2, club:'Real Madrid'},
- {name:'Ismael Saibari', code:'MAR', goals:2, club:'PSV Eindhoven'},
- {name:'Brian Brobbey', code:'NED', goals:2, club:'Sunderland'},
- {name:'Cody Gakpo', code:'NED', goals:2, club:'Liverpool'},
- {name:'Deniz Undav', code:'GER', goals:2, club:'VfB Stuttgart'},
- {name:'Viktor Gyökeres', code:'SWE', goals:1, club:'Arsenal'},
- {name:'Jamal Musiala', code:'GER', goals:1, club:'Bayern de Munique'},
- {name:'Cyle Larin', code:'CAN', goals:1, club:'Mallorca'},
- {name:'Raúl Jiménez', code:'MEX', goals:1, club:'Fulham'},
- {name:'Alexander Isak', code:'SWE', goals:1, club:'Liverpool'},
- {name:'Mohammad Mohebi', code:'IRN', goals:1, club:'Nassaji Mazandaran'},
- {name:'Matías Galarza', code:'PAR', goals:1, club:'River Plate'},
- {name:'Anthony Elanga', code:'SWE', goals:1, club:'Newcastle United'},
- {name:'Franck Kessié', code:'CIV', goals:1, club:'Al-Ahli (Arábia Saudita)'},
+ {name:'Lionel Messi', code:'ARG', goals:3, club:'Inter Miami', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Lionel_Messi_White_House_2026_%283x4_cropped%29.jpg/500px-Lionel_Messi_White_House_2026_%283x4_cropped%29.jpg'},
+ {name:'Jonathan David', code:'CAN', goals:3, club:'Juventus', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Jonathan_David_asse_losc_2425_%28cropped%29.jpg/500px-Jonathan_David_asse_losc_2425_%28cropped%29.jpg'},
+ {name:'Kylian Mbappé', code:'FRA', goals:2, club:'Real Madrid', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Picture_with_Mbapp%C3%A9_%28cropped_and_rotated%29.jpg/500px-Picture_with_Mbapp%C3%A9_%28cropped_and_rotated%29.jpg'},
+ {name:'Erling Haaland', code:'NOR', goals:2, club:'Manchester City', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg/500px-Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg'},
+ {name:'Kai Havertz', code:'GER', goals:2, club:'Arsenal', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/1_kai_havertz_2026_%28cropped%29.jpg/500px-1_kai_havertz_2026_%28cropped%29.jpg'},
+ {name:'Harry Kane', code:'ENG', goals:2, club:'Bayern de Munique', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Harry_Kane_on_October_10%2C_2023.jpg/500px-Harry_Kane_on_October_10%2C_2023.jpg'},
+ {name:'Folarin Balogun', code:'USA', goals:2, club:'AS Monaco', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Folarin_Balogun_USMNT_v_Belgium_Mar_28_2026-69_%28cropped%29.jpg/500px-Folarin_Balogun_USMNT_v_Belgium_Mar_28_2026-69_%28cropped%29.jpg'},
+ {name:'Elijah Just', code:'NZL', goals:2, club:'Kawasaki Frontale', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Elijah_Just_%28cropped%29.jpg/500px-Elijah_Just_%28cropped%29.jpg'},
+ {name:'Yasin Ayari', code:'SWE', goals:2, club:'Brighton & Hove Albion', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Yasin_Ayari_-_Sweden_-_Greece20_%28cropped%29.jpg/500px-Yasin_Ayari_-_Sweden_-_Greece20_%28cropped%29.jpg'},
+ {name:'Matheus Cunha', code:'BRA', goals:2, club:'Manchester United', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Matheus_Cunha_em_2021.jpg/500px-Matheus_Cunha_em_2021.jpg'},
+ {name:'Vinícius Júnior', code:'BRA', goals:2, club:'Real Madrid', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/2023_05_06_Final_de_la_Copa_del_Rey_-_52879242230_%28cropped%29.jpg/500px-2023_05_06_Final_de_la_Copa_del_Rey_-_52879242230_%28cropped%29.jpg'},
+ {name:'Ismael Saibari', code:'MAR', goals:2, club:'PSV Eindhoven', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Ismael_Saibari_Morocco_v_Norway_7_June_2026-162_%28cropped%29.jpg/500px-Ismael_Saibari_Morocco_v_Norway_7_June_2026-162_%28cropped%29.jpg'},
+ {name:'Brian Brobbey', code:'NED', goals:2, club:'Sunderland', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/GAE_-_Ajax_-_52788469380_%28Brobbey%29.jpg/500px-GAE_-_Ajax_-_52788469380_%28Brobbey%29.jpg'},
+ {name:'Cody Gakpo', code:'NED', goals:2, club:'Liverpool', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Cody_Gakpo_06042025_%282%29_%28cropped%29.jpg/500px-Cody_Gakpo_06042025_%282%29_%28cropped%29.jpg'},
+ {name:'Deniz Undav', code:'GER', goals:2, club:'VfB Stuttgart', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Deniz_undav.jpg/500px-Deniz_undav.jpg'},
+ {name:'Viktor Gyökeres', code:'SWE', goals:1, club:'Arsenal', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Viktor_Gy%C3%B6keres_2026-06-04_1.jpg/500px-Viktor_Gy%C3%B6keres_2026-06-04_1.jpg'},
+ {name:'Jamal Musiala', code:'GER', goals:1, club:'Bayern de Munique', photo:'https://upload.wikimedia.org/wikipedia/commons/4/44/Jamal_Musiala_2022_%28cropped%29.jpg'},
+ {name:'Cyle Larin', code:'CAN', goals:1, club:'Mallorca', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Cyle_Larin_%282021-22_S%C3%BCper_Lig%29_-_Resim1_%28cropped%29.png/500px-Cyle_Larin_%282021-22_S%C3%BCper_Lig%29_-_Resim1_%28cropped%29.png'},
+ {name:'Raúl Jiménez', code:'MEX', goals:1, club:'Fulham', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Ra%C3%BAl_Jim%C3%A9nez_04032026_%281%29.jpg/500px-Ra%C3%BAl_Jim%C3%A9nez_04032026_%281%29.jpg'},
+ {name:'Alexander Isak', code:'SWE', goals:1, club:'Liverpool', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Alexander_Isak_-_Sweden_-_Greece21_%28cropped%29.jpg/500px-Alexander_Isak_-_Sweden_-_Greece21_%28cropped%29.jpg'},
+ {name:'Mohammad Mohebi', code:'IRN', goals:1, club:'Nassaji Mazandaran', photo:'https://upload.wikimedia.org/wikipedia/commons/f/f9/Mohammad_Mohebi%2C_Esteghlal_FC_vs_Gol_Gohar_Sirjan_FC%2C_6_March_2023.jpg'},
+ {name:'Matías Galarza', code:'PAR', goals:1, club:'River Plate', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Mat%C3%ADas_Galarza_-_Brasileir%C3%A3o_S%C3%A9rie_A-_Bragantino_4_x_2_Coritiba_-_52150854647_%28cropped%29.jpg/500px-Mat%C3%ADas_Galarza_-_Brasileir%C3%A3o_S%C3%A9rie_A-_Bragantino_4_x_2_Coritiba_-_52150854647_%28cropped%29.jpg'},
+ {name:'Anthony Elanga', code:'SWE', goals:1, club:'Newcastle United', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Anthony_Elanga_%28Sweden_vs_Moldova%2C_12_October_2023%29.jpg/500px-Anthony_Elanga_%28Sweden_vs_Moldova%2C_12_October_2023%29.jpg'},
+ {name:'Franck Kessié', code:'CIV', goals:1, club:'Al-Ahli (Arábia Saudita)', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Franck_Yannick_Kessi%C3%A9.jpg/500px-Franck_Yannick_Kessi%C3%A9.jpg'},
 ].sort((a,b)=>b.goals-a.goals);
 
 const STADIUMS = [
@@ -1225,8 +1227,11 @@ function renderScorers(){
   list.innerHTML = SCORERS.map((s,i)=>`
     <div class="scorer-row">
       <div class="scorer-rank">${i+1}</div>
+      <div class="scorer-avatar">${s.photo
+        ? `<img src="${s.photo}" alt="${s.name}" loading="lazy" onerror="this.parentElement.innerHTML='${F(teamFlag(s.code))}';">`
+        : F(teamFlag(s.code))}</div>
       <div>
-        <div class="scorer-name">${F(teamFlag(s.code))} ${s.name}</div>
+        <div class="scorer-name">${s.name}</div>
         <div class="scorer-club">${s.club} · ${teamName(s.code)}</div>
       </div>
       <div class="scorer-goals">${s.goals}<span>gols</span></div>
