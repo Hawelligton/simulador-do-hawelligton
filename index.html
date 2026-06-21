@@ -314,10 +314,32 @@ table.standings tr.thirdwatch td:first-child{color:var(--gold);}
 .sgr-score.done{color:var(--green);border-color:rgba(61,255,176,.35);background:rgba(61,255,176,.08);}
 
 /* HISTORICO */
-.history-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;}
-.history-card{padding:18px;}
-.history-card .year{font-family:'Orbitron';font-size:24px;color:var(--cyan);}
-.history-card .host{font-size:12px;color:var(--muted);margin-bottom:14px;}
+.history-grid{display:flex;flex-direction:column;gap:18px;}
+.history-card{padding:0;overflow:hidden;}
+.hist-year-band{padding:18px 20px 14px;background:linear-gradient(135deg,rgba(255,178,63,.12),rgba(255,61,166,.08));border-bottom:1px solid var(--line);}
+.history-card .year{font-family:'Orbitron';font-size:26px;color:var(--gold);text-shadow:0 0 18px rgba(255,178,63,.4);}
+.history-card .host{font-size:12.5px;color:var(--muted);margin-top:2px;}
+.hist-body{padding:6px 20px 18px;}
+.hist-row{display:flex;align-items:flex-start;gap:13px;padding:12px 0;border-top:1px solid rgba(255,255,255,.06);}
+.hist-row:first-child{border-top:none;}
+.hist-icon{font-size:18px;width:22px;text-align:center;flex:0 0 auto;margin-top:1px;}
+.hist-label{width:64px;flex:0 0 auto;color:var(--muted);font-weight:700;font-size:12.5px;letter-spacing:.02em;margin-top:2px;}
+.hist-value{flex:1;min-width:0;}
+.hist-value .simple{font-weight:700;font-size:14.5px;display:flex;align-items:center;gap:7px;}
+.hist-value .sub{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.hist-match-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.hist-team{display:flex;flex-direction:column;align-items:center;gap:5px;}
+.hist-team .flag{font-size:24px;}
+.hist-team .code{font-family:'Orbitron';font-size:11.5px;color:var(--text);}
+.hist-score-pill{font-family:'Orbitron';font-size:15px;color:var(--gold);background:rgba(255,178,63,.1);border:1px solid rgba(255,178,63,.3);border-radius:9px;padding:6px 13px;white-space:nowrap;}
+.hist-pen{font-size:10px;color:var(--muted);display:block;text-align:center;margin-top:2px;}
+.hist-scorers{font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.6;}
+.hist-scorers b{color:var(--text);}
+.hist-goals-badge{font-family:'Orbitron';font-size:12px;color:var(--cyan);background:rgba(57,243,255,.1);border:1px solid rgba(57,243,255,.3);border-radius:14px;padding:4px 10px;margin-left:auto;white-space:nowrap;}
+.hist-note{font-size:11px;color:var(--muted);font-style:italic;margin-top:6px;}
+.hist-traj-toggle{cursor:pointer;color:var(--cyan);font-size:12.5px;font-weight:700;text-align:center;padding:10px 0 2px;border-top:1px solid var(--line);margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px;}
+.hist-traj{display:none;margin-top:6px;}
+.hist-traj.open{display:block;}
 .finalist{display:flex;gap:10px;padding:9px 0;border-top:1px solid rgba(255,255,255,.06);}
 .finalist:first-child{border-top:none;}
 .finalist .pos{font-family:'Orbitron';font-size:13px;width:22px;color:var(--gold);}
@@ -944,133 +966,133 @@ const STADIUMS = [
 ];
 
 const HISTORY = [
- {year:'2022', host:'Catar', four:[
+ {year:'2022', host:'Catar', stadium:'Estádio Lusail', city:'Lusail', final:{a:'ARG',b:'FRA',hs:3,as:3,pen:'4 x 2',scorers:[{code:'ARG',name:'Messi (pênalti)',min:23},{code:'ARG',name:'Di María',min:36},{code:'FRA',name:'Mbappé (pênalti)',min:80},{code:'FRA',name:'Mbappé',min:81},{code:'ARG',name:'Messi',min:108},{code:'FRA',name:'Mbappé (pênalti)',min:118}],referee:'Szymon Marciniak (POL)',attendance:'88.966'}, third:{a:'HRV',b:'MAR',hs:2,as:1,scorers:[{code:'HRV',name:'Gvardiol',min:7},{code:'MAR',name:'Dari',min:9},{code:'HRV',name:'Orsić',min:42}]}, topScorer:{name:'Kylian Mbappé',code:'FRA',goals:8}, four:[
    {pos:'Campeã', code:'ARG', t:'Tetra histórica decidida nos pênaltis contra a França, com Messi finalmente erguendo a taça em sua última Copa. Campanha marcada pela derrota na estreia para a Arábia Saudita e reviravolta a partir daí.'},
    {pos:'Vice', code:'FRA', t:'Buscava o bicampeonato e protagonizou uma das finais mais eletrizantes da história, com hat-trick de Mbappé, mas caiu nos pênaltis.'},
    {pos:'3º lugar', code:'HRV', t:'Croácia repetiu o ótimo desempenho de 2018, vencendo Marrocos no jogo do terceiro lugar com a geração de Modrić.'},
    {pos:'4º lugar', code:'MAR', t:'Primeira seleção africana a chegar a uma semifinal de Copa, com campanha histórica eliminando Espanha, Portugal e Bélgica.'},
  ]},
- {year:'2018', host:'Rússia', four:[
+ {year:'2018', host:'Rússia', stadium:'Estádio Lujniki', city:'Moscou', final:{a:'FRA',b:'HRV',hs:4,as:2,scorers:[{code:'HRV',name:'Mandžukić (contra)',min:18},{code:'HRV',name:'Perišić',min:28},{code:'FRA',name:'Griezmann (pênalti)',min:38},{code:'FRA',name:'Pogba',min:59},{code:'FRA',name:'Mbappé',min:65},{code:'HRV',name:'Mandžukić',min:69}],referee:'Néstor Pitana (ARG)',attendance:'78.011'}, third:{a:'BEL',b:'ENG',hs:2,as:0,scorers:[{code:'BEL',name:'Eden Hazard',min:82},{code:'BEL',name:'Meunier',min:4}]}, topScorer:{name:'Harry Kane',code:'ENG',goals:6}, four:[
    {pos:'Campeã', code:'FRA', t:'Geração jovem liderada por um Mbappé revelação conquistou o segundo título mundial, vencendo a Croácia por 4 a 2 na final.'},
    {pos:'Vice', code:'HRV', t:'Melhor campanha da história croata, com três jogos decididos na prorrogação até chegar à final, liderada por Luka Modrić, eleito o melhor jogador do torneio.'},
    {pos:'3º lugar', code:'BEL', t:'A "geração de ouro" belga, com De Bruyne, Hazard e Lukaku, alcançou seu melhor resultado mundial vencendo a Inglaterra.'},
    {pos:'4º lugar', code:'ENG', t:'Sob comando de Gareth Southgate, a Inglaterra voltou a uma semifinal após décadas, parando nos belgas.'},
  ]},
- {year:'2014', host:'Brasil', four:[
+ {year:'2014', host:'Brasil', stadium:'Maracanã', city:'Rio de Janeiro', final:{a:'DEU',b:'ARG',hs:1,as:0,scorers:[{code:'DEU',name:'Götze',min:113}],referee:'Nicola Rizzoli (ITA)',attendance:'74.738'}, third:{a:'NLD',b:'BRA',hs:3,as:0,scorers:[{code:'NLD',name:'Van Persie (pênalti)',min:3},{code:'NLD',name:'Daley Blind',min:17},{code:'NLD',name:'Wijnaldum',min:90}]}, topScorer:{name:'James Rodríguez',code:'COL',goals:6}, four:[
    {pos:'Campeã', code:'DEU', t:'Conquistou o tetracampeonato com a histórica goleada de 7 a 1 sobre o Brasil na semifinal e título sobre a Argentina na prorrogação.'},
    {pos:'Vice', code:'ARG', t:'Liderada por Messi, chegou à final pela primeira vez desde 1990, mas perdeu para os alemães na prorrogação.'},
    {pos:'3º lugar', code:'NLD', t:'Holanda, com Robben e Van Persie, venceu o anfitrião Brasil no jogo do terceiro lugar.'},
    {pos:'4º lugar', code:'BRA', t:'O anfitrião viveu o trauma do "Mineiraço", goleada histórica sofrida da Alemanha em casa, encerrando o sonho do hexa.'},
  ]},
- {year:'2010', host:'África do Sul', four:[
+ {year:'2010', host:'África do Sul', stadium:'Soccer City', city:'Joanesburgo', final:{a:'ESP',b:'NLD',hs:1,as:0,scorers:[{code:'ESP',name:'Iniesta',min:116}],referee:'Howard Webb (ENG)',attendance:'84.490'}, third:{a:'DEU',b:'URU',hs:3,as:2,scorers:[{code:'DEU',name:'Khedira',min:19},{code:'URU',name:'Cavani',min:28},{code:'DEU',name:'Müller',min:56},{code:'URU',name:'Forlán',min:67},{code:'DEU',name:'Jansen',min:82}]}, topScorer:{name:'Thomas Müller',code:'DEU',goals:5}, four:[
    {pos:'Campeã', code:'ESP', t:'Conquistou seu primeiro título mundial com o "tiki-taka" de Xavi e Iniesta, vencendo a Holanda na prorrogação com gol de Iniesta.'},
    {pos:'Vice', code:'NLD', t:'Chegou à terceira final de sua história, mas voltou a perder, desta vez para a Espanha, em jogo bastante truncado.'},
    {pos:'3º lugar', code:'DEU', t:'Time jovem liderado por Müller e Özil surpreendeu, goleando a Argentina nas quartas antes de ficar com o terceiro lugar.'},
    {pos:'4º lugar', code:'URU', t:'Surpresa do torneio, avançou às semifinais com a dupla Forlán e Suárez, parando diante da Holanda.'},
  ]},
- {year:'2006', host:'Alemanha', four:[
+ {year:'2006', host:'Alemanha', stadium:'Estádio Olímpico de Berlim', city:'Berlim', final:{a:'ITA',b:'FRA',hs:1,as:1,pen:'5 x 3',scorers:[{code:'FRA',name:'Zidane (pênalti)',min:7},{code:'ITA',name:'Materazzi',min:19}],referee:'Horacio Elizondo (ARG)',attendance:'69.000'}, third:{a:'DEU',b:'POR',hs:3,as:1,scorers:[{code:'DEU',name:'Schweinsteiger',min:56},{code:'DEU',name:'Schweinsteiger',min:78},{code:'POR',name:'Petit',min:88},{code:'DEU',name:'Hitzlsperger',min:90}]}, topScorer:{name:'Miroslav Klose',code:'DEU',goals:5}, four:[
    {pos:'Campeã', code:'ITA', t:'Conquistou o tetracampeonato vencendo a França nos pênaltis, em final marcada pela cabeçada de Zidane em Materazzi e a expulsão do francês.'},
    {pos:'Vice', code:'FRA', t:'Zidane comandou uma campanha de despedida quase perfeita, mas a seleção parou nos pênaltis na final.'},
    {pos:'3º lugar', code:'DEU', name:'Alemanha', t:'Anfitriã, encantou o país com um futebol ofensivo liderado por Klose, artilheiro do torneio, e ficou com o terceiro lugar em casa.'},
    {pos:'4º lugar', code:'POR', t:'Geração de Cristiano Ronaldo e Deco chegou à sua melhor campanha em décadas, parando na semifinal contra a França.'},
  ]},
- {year:'2002', host:'Coreia do Sul e Japão', four:[
+ {year:'2002', host:'Coreia do Sul e Japão', stadium:'Estádio Internacional de Yokohama', city:'Yokohama', final:{a:'BRA',b:'DEU',hs:2,as:0,scorers:[{code:'BRA',name:'Ronaldo',min:67},{code:'BRA',name:'Ronaldo',min:79}],referee:'Pierluigi Collina (ITA)',attendance:'69.029'}, third:{a:'TUR',b:'KOR',hs:3,as:2,scorers:[{code:'TUR',name:'Hakan Şükür',min:1},{code:'KOR',name:'Lee Eul-yong',min:9},{code:'TUR',name:'Ümit Davala',min:13},{code:'TUR',name:'İlhan Mansız',min:32},{code:'KOR',name:'Song Chong-gug',min:90}]}, topScorer:{name:'Ronaldo',code:'BRA',goals:8}, four:[
    {pos:'Campeã', code:'BRA', t:'Pentacampeonato com o trio Ronaldo, Rivaldo e Ronaldinho. Ronaldo, de volta de graves lesões, foi artilheiro e decidiu a final contra a Alemanha com dois gols.'},
    {pos:'Vice', code:'DEU', name:'Alemanha', t:'Surpreendeu ao chegar à final com uma campanha mais defensiva, parando diante do Brasil de Ronaldo.'},
    {pos:'3º lugar', code:'TUR', t:'Turquia surpreendeu o mundo com campanha histórica, eliminando o anfitrião Japão antes de ficar com o terceiro lugar.'},
    {pos:'4º lugar', code:'KOR', t:'Coreia do Sul, coanfitriã, viveu sua melhor Copa da história, eliminando Itália e Espanha antes de parar na semifinal.'},
  ]},
- {year:'1998', host:'França', four:[
+ {year:'1998', host:'França', stadium:'Stade de France', city:'Saint-Denis', final:{a:'FRA',b:'BRA',hs:3,as:0,scorers:[{code:'FRA',name:'Zidane',min:27},{code:'FRA',name:'Zidane',min:45},{code:'FRA',name:'Petit',min:90}],referee:'Said Belqola (MAR)',attendance:'75.000'}, third:{a:'HRV',b:'NLD',hs:2,as:1,scorers:[{code:'HRV',name:'Prosinečki',min:13},{code:'NLD',name:'Zenden',min:21},{code:'HRV',name:'Šuker',min:35}]}, topScorer:{name:'Davor Šuker',code:'HRV',goals:6}, four:[
    {pos:'Campeã', code:'FRA', t:'Conquistou seu primeiro título mundial em casa, goleando o Brasil por 3 a 0 na final, com hat-trick de Zinedine Zidane de cabeça.'},
    {pos:'Vice', code:'BRA', t:'Buscava o bicampeonato, mas viveu um dia conturbado antes da final, com o mal-estar de Ronaldo, e foi atropelada pelos franceses.'},
    {pos:'3º lugar', code:'HRV', t:'Estreia de gala da Croácia em Copas, com Davor Šuker artilheiro do torneio e campanha que só parou diante dos anfitriões franceses.'},
    {pos:'4º lugar', code:'NLD', t:'Time talentoso com Bergkamp e Davids caiu nos pênaltis para o Brasil na semifinal, após um dos gols mais bonitos da história das Copas.'},
  ]},
- {year:'1994', host:'Estados Unidos', four:[
+ {year:'1994', host:'Estados Unidos', stadium:'Rose Bowl', city:'Pasadena', final:{a:'BRA',b:'ITA',hs:0,as:0,pen:'3 x 2',scorers:[],referee:'Sándor Puhl (HUN)',attendance:'94.194'}, third:{a:'SWE',b:'BUL',hs:4,as:0,scorers:[{code:'SWE',name:'Brolin (pênalti)',min:5},{code:'SWE',name:'K. Andersson',min:23},{code:'SWE',name:'K. Andersson',min:28},{code:'SWE',name:'Mild',min:47}]}, topScorer:{name:'Hristo Stoichkov e Oleg Salenko',code:'BUL',goals:6}, four:[
    {pos:'Campeã', code:'BRA', t:'Conquistou o tetracampeonato, encerrando 24 anos de jejum, na primeira final de Copa decidida nos pênaltis, contra a Itália.'},
    {pos:'Vice', code:'ITA', t:'Carregada por Roberto Baggio, chegou à final mas parou no goleiro Taffarel e na cobrança de pênalti que foi para fora.'},
    {pos:'3º lugar', code:'SWE', name:'Suécia', t:'Surpresa do torneio com a dupla de ataque Dahlin e Brolin, ficou com o terceiro lugar diante da Bulgária.'},
    {pos:'4º lugar', code:'BUL', t:'Maior campanha da história búlgara, liderada pelo artilheiro Hristo Stoichkov, parou na semifinal diante da Itália.'},
  ]},
- {year:'1990', host:'Itália', four:[
+ {year:'1990', host:'Itália', stadium:'Estádio Olímpico de Roma', city:'Roma', final:{a:'DEU',b:'ARG',hs:1,as:0,scorers:[{code:'DEU',name:'Brehme (pênalti)',min:85}],referee:'Edgardo Codesal (MEX)',attendance:'73.603'}, third:{a:'ITA',b:'ENG',hs:2,as:1,scorers:[{code:'ITA',name:'Baggio',min:9},{code:'ENG',name:'Platt',min:81},{code:'ITA',name:'Schillaci (pênalti)',min:86}]}, topScorer:{name:'Salvatore Schillaci',code:'ITA',goals:6}, four:[
    {pos:'Campeã', code:'DEU', name:'Alemanha Ocidental', t:'Conquistou o tricampeonato vencendo a Argentina de Maradona numa final truncada e marcada por dois pênaltis polêmicos a favor dos alemães.'},
    {pos:'Vice', code:'ARG', t:'Maradona, já sem o brilho de 1986, levou a Argentina a uma final apagada, com duas expulsões no time argentino.'},
    {pos:'3º lugar', code:'ITA', t:'Anfitriã, embalada pelos gols de "Totò" Schillaci, artilheiro do torneio, ficou com o terceiro lugar após cair nos pênaltis para a Argentina na semifinal.'},
    {pos:'4º lugar', code:'ENG', t:'Geração de Gary Lineker fez boa campanha, mas parou nos pênaltis diante da Alemanha Ocidental na semifinal.'},
  ]},
- {year:'1986', host:'México', four:[
+ {year:'1986', host:'México', stadium:'Estádio Azteca', city:'Cidade do México', final:{a:'ARG',b:'DEU',hs:3,as:2,scorers:[{code:'ARG',name:'Brown',min:23},{code:'ARG',name:'Valdano',min:56},{code:'DEU',name:'Rummenigge',min:74},{code:'DEU',name:'Völler',min:80},{code:'ARG',name:'Burruchaga',min:84}],referee:'Romualdo Arppi Filho (BRA)',attendance:'114.600'}, third:{a:'FRA',b:'BEL',hs:4,as:2,scorers:[{code:'FRA',name:'Ferreri',min:26},{code:'BEL',name:'Veyt',min:43},{code:'FRA',name:'Genghini',min:49},{code:'FRA',name:'Amoros (pênalti)',min:104},{code:'BEL',name:'Vercauteren',min:114},{code:'FRA',name:'Bellone',min:119}]}, topScorer:{name:'Gary Lineker',code:'ENG',goals:6}, four:[
    {pos:'Campeã', code:'ARG', t:'Diego Maradona, sozinho, carregou a Argentina ao bicampeonato, sendo autor da "Mão de Deus" e do "Gol do Século", ambos na mesma partida contra a Inglaterra.'},
    {pos:'Vice', code:'DEU', name:'Alemanha Ocidental', t:'Buscou a virada heroica na final contra a Argentina, empatando em 2 a 2, mas cedeu o gol decisivo nos minutos finais.'},
    {pos:'3º lugar', code:'FRA', t:'Geração de Platini fez um dos melhores futebóis do torneio, mas parou na semifinal diante da Alemanha Ocidental.'},
    {pos:'4º lugar', code:'BEL', t:'Surpresa do torneio, eliminou a União Soviética e o Brasil, parando apenas na semifinal contra a Argentina de Maradona.'},
  ]},
- {year:'1982', host:'Espanha', four:[
+ {year:'1982', host:'Espanha', stadium:'Santiago Bernabéu', city:'Madri', final:{a:'ITA',b:'DEU',hs:3,as:1,scorers:[{code:'ITA',name:'Rossi',min:57},{code:'ITA',name:'Tardelli',min:69},{code:'ITA',name:'Altobelli',min:81},{code:'DEU',name:'Breitner',min:83}],referee:'Arnaldo Cézar Coelho (BRA)',attendance:'90.000'}, third:{a:'POL',b:'FRA',hs:3,as:2,scorers:[{code:'POL',name:'Szarmach',min:39},{code:'POL',name:'Majewski',min:45},{code:'FRA',name:'Girard (pênalti)',min:49},{code:'POL',name:'Majewski',min:51},{code:'FRA',name:'Couriol',min:72}]}, topScorer:{name:'Paolo Rossi',code:'ITA',goals:6}, four:[
    {pos:'Campeã', code:'ITA', t:'Conquistou o tricampeonato com Paolo Rossi, artilheiro e melhor jogador do torneio, que decidiu sozinho a vitória sobre o favorito Brasil nas quartas de final.'},
    {pos:'Vice', code:'DEU', name:'Alemanha Ocidental', t:'Chegou a uma final marcada por uma das faltas mais violentas da história das Copas, cometida pelo goleiro Schumacher na semifinal contra a França.'},
    {pos:'3º lugar', code:'POL', t:'Liderada por Zbigniew Boniek, a Polônia teve sua melhor campanha em Copas, parando apenas diante da Itália campeã.'},
    {pos:'4º lugar', code:'FRA', t:'Protagonizou a célebre semifinal contra a Alemanha Ocidental, com uma sequência de pênaltis histórica, e caiu após estar à frente no placar.'},
  ]},
- {year:'1978', host:'Argentina', four:[
+ {year:'1978', host:'Argentina', stadium:'Estádio Monumental', city:'Buenos Aires', final:{a:'ARG',b:'NLD',hs:3,as:1,scorers:[{code:'ARG',name:'Kempes',min:38},{code:'NLD',name:'Nanninga',min:81},{code:'ARG',name:'Kempes',min:105},{code:'ARG',name:'Bertoni',min:115}],referee:'Sergio Gonella (ITA)',attendance:'71.483'}, third:{a:'BRA',b:'ITA',hs:2,as:1,scorers:[{code:'BRA',name:'Nelinho',min:38},{code:'ITA',name:'Causio',min:39},{code:'BRA',name:'Dirceu',min:71}]}, topScorer:{name:'Mario Kempes',code:'ARG',goals:6}, four:[
    {pos:'Campeã', code:'ARG', t:'Conquistou seu primeiro título mundial em casa, vencendo a Holanda na prorrogação, em meio a um contexto político tenso sob a ditadura militar.'},
    {pos:'Vice', code:'NLD', name:'Holanda', t:'Sem Johan Cruyff, que recusou disputar o torneio, ainda assim chegou a uma segunda final seguida, perdendo novamente.'},
    {pos:'3º lugar', code:'BRA', t:'Time de Zico ficou invicto no torneio, mas critérios de desempate da época o deixaram fora da final, conformando-se com o terceiro lugar.'},
    {pos:'4º lugar', code:'ITA', t:'Geração jovem italiana surpreendeu com futebol ofensivo, parando apenas na fase final por diferença de gols.'},
  ]},
- {year:'1974', host:'Alemanha Ocidental', four:[
+ {year:'1974', host:'Alemanha Ocidental', stadium:'Olympiastadion', city:'Munique', final:{a:'DEU',b:'NLD',hs:2,as:1,scorers:[{code:'NLD',name:'Neeskens (pênalti)',min:2},{code:'DEU',name:'Breitner (pênalti)',min:25},{code:'DEU',name:'Müller',min:43}],referee:'Jack Taylor (ENG)',attendance:'75.200'}, third:{a:'POL',b:'BRA',hs:1,as:0,scorers:[{code:'POL',name:'Lato',min:76}]}, topScorer:{name:'Grzegorz Lato',code:'POL',goals:7}, four:[
    {pos:'Campeã', code:'DEU', name:'Alemanha Ocidental', t:'Anfitriã, venceu a favorita Holanda do "Futebol Total" de Cruyff na final, mesmo levando um pênalti sofrido antes mesmo de tocar na bola.'},
    {pos:'Vice', code:'NLD', name:'Holanda', t:'Revolucionou o futebol mundial com o "Futebol Total" de Johan Cruyff, mas perdeu a final em casa do anfitrião.'},
    {pos:'3º lugar', code:'POL', t:'Com o artilheiro Grzegorz Lato, a Polônia teve a melhor campanha de sua história, parando diante do anfitrião na semifinal.'},
    {pos:'4º lugar', code:'BRA', t:'Time pós-tricampeonato, sem boa parte da geração de 1970, decepcionou e ficou apenas com o quarto lugar.'},
  ]},
- {year:'1970', host:'México', four:[
+ {year:'1970', host:'México', stadium:'Estádio Azteca', city:'Cidade do México', final:{a:'BRA',b:'ITA',hs:4,as:1,scorers:[{code:'BRA',name:'Pelé',min:18},{code:'ITA',name:'Boninsegna',min:37},{code:'BRA',name:'Gérson',min:66},{code:'BRA',name:'Jairzinho',min:70},{code:'BRA',name:'Carlos Alberto',min:86}],referee:'Rudi Glöckner (RDA)',attendance:'107.412'}, third:{a:'DEU',b:'URU',hs:1,as:0,scorers:[{code:'DEU',name:'Overath',min:26}]}, topScorer:{name:'Gerd Müller',code:'DEU',goals:10}, four:[
    {pos:'Campeã', code:'BRA', t:'Considerada por muitos a melhor seleção da história, conquistou o tricampeonato com Pelé, Jairzinho, Tostão e Rivellino, goleando a Itália na final.'},
    {pos:'Vice', code:'ITA', t:'Chegou à final após vencer a Alemanha Ocidental por 4 a 3 na prorrogação, em um dos jogos mais memoráveis da história das Copas.'},
    {pos:'3º lugar', code:'DEU', name:'Alemanha Ocidental', t:'Protagonista do épico "Jogo do Século" contra a Itália na semifinal, ficou com o terceiro lugar.'},
    {pos:'4º lugar', code:'URU', t:'Surpreendeu ao chegar à semifinal, parando diante do Brasil que viria a ser campeão.'},
  ]},
- {year:'1966', host:'Inglaterra', four:[
+ {year:'1966', host:'Inglaterra', stadium:'Wembley Stadium', city:'Londres', final:{a:'ENG',b:'DEU',hs:4,as:2,scorers:[{code:'DEU',name:'Haller',min:12},{code:'ENG',name:'Hurst',min:18},{code:'ENG',name:'Peters',min:78},{code:'DEU',name:'Weber',min:89},{code:'ENG',name:'Hurst',min:101},{code:'ENG',name:'Hurst',min:120}],referee:'Gottfried Dienst (SUI)',attendance:'96.924'}, third:{a:'POR',b:'URS',hs:2,as:1,scorers:[{code:'POR',name:'Eusébio (pênalti)',min:12},{code:'POR',name:'Torres',min:88},{code:'URS',name:'Malofeyev',min:43}]}, topScorer:{name:'Eusébio',code:'POR',goals:9}, four:[
    {pos:'Campeã', code:'ENG', t:'Anfitriã, conquistou seu único título mundial até hoje, vencendo a Alemanha Ocidental na prorrogação, com o polêmico "gol fantasma" de Geoff Hurst.'},
    {pos:'Vice', code:'DEU', name:'Alemanha Ocidental', t:'Chegou à sua segunda final, mas parou na prorrogação diante do anfitrião inglês, em uma decisão até hoje questionada.'},
    {pos:'3º lugar', code:'POR', t:'Estreia histórica de Portugal em Copas, liderada pelo artilheiro Eusébio, "Pantera Negra", que encantou o mundo.'},
    {pos:'4º lugar', code:'URS', name:'União Soviética', t:'Melhor campanha soviética em Copas do Mundo, parando na semifinal diante do anfitrião inglês.'},
  ]},
- {year:'1962', host:'Chile', four:[
+ {year:'1962', host:'Chile', stadium:'Estádio Nacional', city:'Santiago', final:{a:'BRA',b:'TCH',hs:3,as:1,scorers:[{code:'TCH',name:'Masopust',min:15},{code:'BRA',name:'Amarildo',min:17},{code:'BRA',name:'Zito',min:69},{code:'BRA',name:'Vavá',min:78}],referee:'Nikolai Latyshev (URS)',attendance:'68.679'}, third:{a:'CHI',b:'YUG',hs:1,as:0,scorers:[{code:'CHI',name:'Rojas',min:90}]}, topScorer:{name:'6 jogadores empatados',code:'BRA',goals:4}, four:[
    {pos:'Campeã', code:'BRA', t:'Conquistou o bicampeonato mesmo perdendo Pelé por lesão logo no início do torneio, com Garrincha assumindo o protagonismo e brilhando na campanha.'},
    {pos:'Vice', code:'TCH', name:'Tchecoslováquia', t:'Surpresa do torneio, chegou à final embalada pelo artilheiro Josef Mašopust, mas parou diante do Brasil.'},
    {pos:'3º lugar', code:'CHI', t:'Anfitriã, viveu sua melhor campanha histórica em Copas, parando apenas na semifinal diante do Brasil bicampeão.'},
    {pos:'4º lugar', code:'YUG', name:'Iugoslávia', t:'Equipe equilibrada parou na semifinal diante da Tchecoslováquia, ficando com o quarto lugar.'},
  ]},
- {year:'1958', host:'Suécia', four:[
+ {year:'1958', host:'Suécia', stadium:'Råsunda Stadium', city:'Solna (Estocolmo)', final:{a:'BRA',b:'SWE',hs:5,as:2,scorers:[{code:'SWE',name:'Liedholm',min:4},{code:'BRA',name:'Vavá',min:9},{code:'BRA',name:'Vavá',min:32},{code:'BRA',name:'Pelé',min:55},{code:'BRA',name:'Zagallo',min:68},{code:'SWE',name:'Simonsson',min:80},{code:'BRA',name:'Pelé',min:90}],referee:'Maurice Guigue (FRA)',attendance:'49.737'}, third:{a:'FRA',b:'DEU',hs:6,as:3,scorers:[{code:'FRA',name:'Fontaine',min:15},{code:'DEU',name:'Cieslarczyk',min:18},{code:'FRA',name:'Kopa (pênalti)',min:22},{code:'FRA',name:'Fontaine',min:36},{code:'DEU',name:'Rahn',min:53},{code:'FRA',name:'Fontaine',min:63},{code:'FRA',name:'Douis',min:75},{code:'DEU',name:'Schäfer',min:82},{code:'FRA',name:'Fontaine',min:77}]}, topScorer:{name:'Just Fontaine',code:'FRA',goals:13}, four:[
    {pos:'Campeã', code:'BRA', t:'Conquistou seu primeiro título mundial com a estreia de um Pelé de 17 anos, que marcou duas vezes na final contra os anfitriões suecos.'},
    {pos:'Vice', code:'SWE', name:'Suécia', t:'Anfitriã, fez excelente campanha e chegou à final, mas não resistiu ao talento do Brasil de Pelé e Garrincha.'},
    {pos:'3º lugar', code:'FRA', t:'Liderada pelo artilheiro Just Fontaine, que marcou 13 gols, recorde histórico até hoje, a França ficou com o terceiro lugar.'},
    {pos:'4º lugar', code:'DEU', name:'Alemanha Ocidental', t:'Campeã em 1954, não conseguiu repetir o título e parou na semifinal diante do anfitrião.'},
  ]},
- {year:'1954', host:'Suíça', four:[
+ {year:'1954', host:'Suíça', stadium:'Wankdorf Stadion', city:'Berna', final:{a:'DEU',b:'HUN',hs:3,as:2,scorers:[{code:'HUN',name:'Puskás',min:6},{code:'HUN',name:'Czibor',min:8},{code:'DEU',name:'Morlock',min:10},{code:'DEU',name:'Rahn',min:18},{code:'DEU',name:'Rahn',min:84}],referee:'William Ling (ENG)',attendance:'62.500'}, third:{a:'AUT',b:'URU',hs:3,as:1,scorers:[{code:'URU',name:'Hohberg',min:15},{code:'AUT',name:'Stojaspal (pênalti)',min:18},{code:'AUT',name:'Cordoba',min:21},{code:'AUT',name:'Probst',min:49}]}, topScorer:{name:'Sándor Kocsis',code:'HUN',goals:11}, four:[
    {pos:'Campeã', code:'DEU', name:'Alemanha Ocidental', t:'Protagonizou o "Milagre de Berna", vencendo a favoritíssima Hungria do "Time de Ouro" na final, após perder para os húngaros na fase de grupos.'},
    {pos:'Vice', code:'HUN', name:'Hungria', t:'O lendário "Time de Ouro" húngaro, com Puskás, chegou à final invicto havia anos, mas sofreu a maior decepção de sua história.'},
    {pos:'3º lugar', code:'AUT', t:'Áustria, com o artilheiro Theodor Wagner, ficou com o terceiro lugar após cair na semifinal diante da Alemanha Ocidental.'},
    {pos:'4º lugar', code:'URU', t:'Bicampeã mundial e invicta em Copas até então, foi eliminada pela Hungria na semifinal, encerrando uma série histórica.'},
  ]},
- {year:'1950', host:'Brasil', four:[
+ {year:'1950', host:'Brasil', stadium:'Maracanã', city:'Rio de Janeiro', final:{a:'URU',b:'BRA',hs:2,as:1,note:'Decisão em formato de grupo final (não mata-mata); jogo decisivo Brasil x Uruguai',scorers:[{code:'BRA',name:'Friaça',min:47},{code:'URU',name:'Schiaffino',min:66},{code:'URU',name:'Ghiggia',min:79}],referee:'George Reader (ENG)',attendance:'173.850'}, third:{a:'SWE',b:'ESP',hs:3,as:1,scorers:[]}, topScorer:{name:'Ademir',code:'BRA',goals:9}, four:[
    {pos:'Campeã', code:'URU', t:'Protagonizou o "Maracanaço", vencendo o Brasil por 2 a 1 na decisão (disputada em formato de grupo final, não mata-mata), diante de mais de 170 mil pessoas no Maracanã.'},
    {pos:'Vice', code:'BRA', t:'Anfitriã e favorita ao título, viveu o maior trauma de sua história ao perder a decisão para o Uruguai dentro de casa.'},
    {pos:'3º lugar', code:'SWE', name:'Suécia', t:'Fez boa campanha no grupo final decisivo, ficando com o terceiro lugar atrás de Uruguai e Brasil.'},
    {pos:'4º lugar', code:'ESP', t:'Espanha integrou o grupo final que decidiu o título, terminando na quarta colocação.'},
  ]},
- {year:'1938', host:'França', four:[
+ {year:'1938', host:'França', stadium:'Stade Olympique de Colombes', city:'Paris', final:{a:'ITA',b:'HUN',hs:4,as:2,scorers:[{code:'ITA',name:'Colaussi',min:6},{code:'HUN',name:'Titkos',min:8},{code:'ITA',name:'Piola',min:16},{code:'ITA',name:'Colaussi',min:35},{code:'HUN',name:'Sárosi',min:70},{code:'ITA',name:'Piola',min:82}],referee:null,attendance:'45.000'}, third:{a:'BRA',b:'SWE',hs:4,as:2,scorers:[]}, topScorer:{name:'Leônidas da Silva',code:'BRA',goals:7}, four:[
    {pos:'Campeã', code:'ITA', t:'Conquistou o bicampeonato mundial, repetindo o título de 1934, com Giuseppe Meazza e Silvio Piola, mesmo jogando fora de casa.'},
    {pos:'Vice', code:'HUN', name:'Hungria', t:'Chegou à sua primeira final mundial, mas não resistiu à força da Itália bicampeã.'},
    {pos:'3º lugar', code:'BRA', t:'Com Leônidas da Silva, o "Diamante Negro", artilheiro do torneio, o Brasil ficou com seu primeiro pódio em Copas.'},
    {pos:'4º lugar', code:'SWE', name:'Suécia', t:'Surpreendeu ao chegar à semifinal, parando diante do Brasil de Leônidas.'},
  ]},
- {year:'1934', host:'Itália', four:[
+ {year:'1934', host:'Itália', stadium:'Stadio Nazionale PNF', city:'Roma', final:{a:'ITA',b:'TCH',hs:2,as:1,scorers:[{code:'TCH',name:'Puč',min:71},{code:'ITA',name:'Orsi',min:81},{code:'ITA',name:'Schiavio',min:95}],referee:'Ivan Eklind (SWE)',attendance:'55.000'}, third:{a:'DEU',b:'AUT',hs:3,as:2,scorers:[]}, topScorer:{name:'Oldřich Nejedlý',code:'TCH',goals:5}, four:[
    {pos:'Campeã', code:'ITA', t:'Conquistou seu primeiro título mundial em casa, sob o regime fascista de Mussolini, vencendo a Tchecoslováquia na prorrogação da final.'},
    {pos:'Vice', code:'TCH', name:'Tchecoslováquia', t:'Chegou perto da zebra, abrindo o placar na final, mas a Itália buscou a virada na prorrogação.'},
    {pos:'3º lugar', code:'DEU', name:'Alemanha', t:'Alemanha ficou com o terceiro lugar nesta que foi a segunda edição da Copa do Mundo.'},
    {pos:'4º lugar', code:'AUT', t:'A "Wunderteam" austríaca, uma das melhores seleções da época, parou na semifinal diante da anfitriã Itália.'},
  ]},
- {year:'1930', host:'Uruguai', four:[
+ {year:'1930', host:'Uruguai', stadium:'Estádio Centenário', city:'Montevidéu', final:{a:'URU',b:'ARG',hs:4,as:2,scorers:[{code:'URU',name:'Dorado',min:12},{code:'ARG',name:'Peucelle',min:20},{code:'ARG',name:'Stábile',min:37},{code:'URU',name:'Cea',min:57},{code:'URU',name:'Iriarte',min:68},{code:'URU',name:'Castro',min:89}],referee:'John Langenus (BEL)',attendance:'68.346'}, third:null, topScorer:{name:'Guillermo Stábile',code:'ARG',goals:8}, four:[
    {pos:'Campeã', code:'URU', t:'Anfitriã e campeã olímpica, venceu a Argentina na grande final da primeira Copa do Mundo da história, em jogo disputado no recém-construído Estádio Centenário.'},
    {pos:'Vice', code:'ARG', t:'Chegou à final do primeiro Mundial da história, mas não resistiu ao anfitrião uruguaio.'},
    {pos:'3º lugar', code:'USA', t:'Estados Unidos surpreendeu ao chegar à semifinal da primeira Copa, sendo lembrados como os "Shot-Putters" pelo porte físico dos jogadores.'},
@@ -1694,21 +1716,90 @@ function renderStadiums(){
 }
 
 /* ============== RENDER: HISTORICO ============== */
+let expandedHistTraj = new Set();
+
+function hFlag(code){ return HFLAGS[code] || teamFlag(code) || '🏳️'; }
+function hName(code){ return HNAMES[code] || teamName(code) || code; }
+
+function histMatchHtml(m){
+  if(!m) return '<div class="hist-value sub">Não disputado nesta edição.</div>';
+  const scorersHtml = m.scorers && m.scorers.length
+    ? `<div class="hist-scorers">${m.scorers.map(s=>`${hFlag(s.code)} <b>${s.name}</b> ${s.min}'`).join(' · ')}</div>`
+    : (m.hs===0 && m.as===0 ? `<div class="hist-scorers">0 a 0 no tempo normal${m.pen?', decidido nos pênaltis':''}.</div>` : '');
+  return `
+    <div class="hist-match-row">
+      <div class="hist-team"><span class="flag">${hFlag(m.a)}</span><span class="code">${m.a}</span></div>
+      <div class="hist-score-pill">${m.hs} x ${m.as}${m.pen?`<span class="hist-pen">pên. ${m.pen}</span>`:''}</div>
+      <div class="hist-team"><span class="flag">${hFlag(m.b)}</span><span class="code">${m.b}</span></div>
+    </div>
+    ${scorersHtml}
+    ${m.note?`<div class="hist-note">${m.note}</div>`:''}
+  `;
+}
+
 function renderHistory(){
   const grid = document.getElementById('historyGrid');
-  grid.innerHTML = HISTORY.map(h=>`
-    <div class="history-card panel">
-      <div class="year">${h.year}</div>
-      <div class="host">Sede: ${h.host}</div>
-      ${h.four.map(f=>`
-        <div class="finalist">
-          <div class="pos">${f.pos==='Campeã'?'🏆':f.pos==='Vice'?'2º':f.pos==='3º lugar'?'3º':'4º'}</div>
-          <div class="info">
-            <b>${HFLAGS[f.code]||'🏳️'} ${f.name||HNAMES[f.code]||f.code} — ${f.pos}</b>
-            <p>${f.t}</p>
-          </div>
-        </div>`).join('')}
-    </div>`).join('');
+  grid.innerHTML = HISTORY.map(h=>{
+    const isOpen = expandedHistTraj.has(h.year);
+    return `<div class="history-card panel">
+      <div class="hist-year-band">
+        <div class="year">${h.year}</div>
+        <div class="host">Sede: ${h.host}</div>
+      </div>
+      <div class="hist-body">
+        ${h.stadium?`<div class="hist-row">
+          <div class="hist-icon">🏟️</div>
+          <div class="hist-label">Estádio</div>
+          <div class="hist-value"><div class="simple">${h.stadium}</div><div class="sub">${h.city||''}</div></div>
+        </div>`:''}
+        <div class="hist-row">
+          <div class="hist-icon">🏆</div>
+          <div class="hist-label">Final</div>
+          <div class="hist-value">${histMatchHtml(h.final)}</div>
+        </div>
+        ${h.third!==undefined?`<div class="hist-row">
+          <div class="hist-icon">🥉</div>
+          <div class="hist-label">3º lugar</div>
+          <div class="hist-value">${histMatchHtml(h.third)}</div>
+        </div>`:''}
+        ${h.final && h.final.referee?`<div class="hist-row">
+          <div class="hist-icon">🟧</div>
+          <div class="hist-label">Árbitro</div>
+          <div class="hist-value"><div class="simple">${h.final.referee}</div><div class="sub">apitou a final</div></div>
+        </div>`:''}
+        ${h.final && h.final.attendance?`<div class="hist-row">
+          <div class="hist-icon">👥</div>
+          <div class="hist-label">Público</div>
+          <div class="hist-value"><div class="simple">${h.final.attendance}</div><div class="sub">na final</div></div>
+        </div>`:''}
+        ${h.topScorer?`<div class="hist-row">
+          <div class="hist-icon">⚽</div>
+          <div class="hist-label">Artilheiro</div>
+          <div class="hist-value"><div class="simple">${hFlag(h.topScorer.code)} ${h.topScorer.name}<span class="hist-goals-badge">${h.topScorer.goals} gols</span></div></div>
+        </div>`:''}
+        <div class="hist-traj-toggle" data-year="${h.year}">${isOpen?'Ocultar trajetórias ▲':'Ver trajetórias dos 4 primeiros ▼'}</div>
+        <div class="hist-traj ${isOpen?'open':''}">
+          ${h.four.map(f=>`
+            <div class="finalist">
+              <div class="pos">${f.pos==='Campeã'?'🏆':f.pos==='Vice'?'2º':f.pos==='3º lugar'?'3º':'4º'}</div>
+              <div class="info">
+                <b>${hFlag(f.code)} ${f.name||hName(f.code)} — ${f.pos}</b>
+                <p>${f.t}</p>
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  grid.querySelectorAll('.hist-traj-toggle').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const year = btn.dataset.year;
+      if(expandedHistTraj.has(year)) expandedHistTraj.delete(year);
+      else expandedHistTraj.add(year);
+      renderHistory();
+    });
+  });
 }
 
 /* ============== RENDER: CONVOCACOES ============== */
