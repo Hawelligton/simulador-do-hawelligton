@@ -76,6 +76,15 @@ h1.title{
 #scheduleStatus.live{color:var(--green);border-color:rgba(61,255,176,.35);background:rgba(61,255,176,.07);}
 #scheduleStatus.off{color:var(--muted);border-color:var(--line);background:transparent;}
 
+.engage-bar{margin:0 0 20px;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+.engage-views{font-size:13px;color:var(--muted);}
+.engage-views span{color:var(--text);font-weight:700;font-family:'Orbitron';font-size:13px;}
+.engage-votes{display:flex;gap:8px;}
+.vote-btn{font-family:'Rajdhani';font-weight:700;font-size:13.5px;color:var(--text);background:var(--panel-solid);border:1px solid var(--line);border-radius:20px;padding:8px 14px;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:6px;}
+.vote-btn:hover:not(:disabled){border-color:var(--cyan-dim);}
+.vote-btn:disabled{cursor:default;opacity:.85;}
+.vote-btn.voted{border-color:var(--cyan);color:var(--cyan);background:rgba(57,243,255,.08);}
+
 /* NAV */
 nav.tabs{
   position:fixed;left:0;right:0;bottom:0;z-index:200;display:flex;justify-content:space-around;align-items:stretch;
@@ -356,6 +365,14 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
     </div>
     <div class="sched-actions">
       <span class="status-pill" id="scheduleStatus">—</span>
+    </div>
+  </div>
+
+  <div class="panel engage-bar">
+    <div class="engage-views">👁 <span id="viewCount">—</span> visualizações</div>
+    <div class="engage-votes">
+      <button class="vote-btn" id="likeBtn">👍 <span id="likeCount">0</span></button>
+      <button class="vote-btn" id="dislikeBtn">👎 <span id="dislikeCount">0</span></button>
     </div>
   </div>
 
@@ -1671,6 +1688,64 @@ function setupTickerPause(){
   badge.addEventListener('touchcancel', resume);
 }
 
+/* ============== VISUALIZACOES / CURTIR-NAO CURTIR ============== */
+const COUNTER_NS = 'simulador-hawelligton-copa2026';
+const COUNTER_BASE = 'https://abacus.jasoncameron.dev';
+const VOTE_KEY = 'copa2026_vote';
+
+async function initEngagement(){
+  // visualizacoes: conta 1 por carregamento de pagina
+  try{
+    const r = await fetch(`${COUNTER_BASE}/hit/${COUNTER_NS}/views`);
+    const d = await r.json();
+    document.getElementById('viewCount').textContent = (d.value||0).toLocaleString('pt-BR');
+  }catch(err){
+    document.getElementById('viewCount').textContent = '—';
+  }
+
+  // likes/dislikes: so le os valores atuais, sem incrementar so de visitar a pagina
+  try{
+    const [rl, rd] = await Promise.all([
+      fetch(`${COUNTER_BASE}/get/${COUNTER_NS}/likes`),
+      fetch(`${COUNTER_BASE}/get/${COUNTER_NS}/dislikes`),
+    ]);
+    const dl = await rl.json(), dd = await rd.json();
+    document.getElementById('likeCount').textContent = dl.value||0;
+    document.getElementById('dislikeCount').textContent = dd.value||0;
+  }catch(err){}
+
+  let myVote = null;
+  try{ myVote = localStorage.getItem(VOTE_KEY); }catch(err){}
+  if(myVote){
+    document.getElementById(myVote+'Btn').classList.add('voted');
+    document.getElementById('likeBtn').disabled = true;
+    document.getElementById('dislikeBtn').disabled = true;
+  }
+}
+
+async function castVote(type){
+  let already = null;
+  try{ already = localStorage.getItem(VOTE_KEY); }catch(err){}
+  if(already) return;
+
+  const key = type==='like' ? 'likes' : 'dislikes';
+  try{
+    const r = await fetch(`${COUNTER_BASE}/hit/${COUNTER_NS}/${key}`);
+    const d = await r.json();
+    document.getElementById(type+'Count').textContent = d.value;
+  }catch(err){
+    const el = document.getElementById(type+'Count');
+    el.textContent = (parseInt(el.textContent,10)||0) + 1;
+  }
+  try{ localStorage.setItem(VOTE_KEY, type); }catch(err){}
+  document.getElementById(type+'Btn').classList.add('voted');
+  document.getElementById('likeBtn').disabled = true;
+  document.getElementById('dislikeBtn').disabled = true;
+}
+
+document.getElementById('likeBtn')?.addEventListener('click', ()=>castVote('like'));
+document.getElementById('dislikeBtn')?.addEventListener('click', ()=>castVote('dislike'));
+
 /* INIT */
 renderTicker();
 setupTickerPause();
@@ -1681,6 +1756,7 @@ renderHistory();
 renderSchedule();
 setupGamesSubnav();
 renderGamesTab();
+initEngagement();
 setInterval(()=>{ renderSchedule(); renderGamesTab(); }, 60000); // reavalia a cada minuto status ao vivo/encerrado
 renderContinentPills();
 renderCountryGrid();
