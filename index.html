@@ -188,15 +188,40 @@ table.standings tr.thirdwatch td:first-child{color:var(--gold);}
 .bk-thirdlabel{position:absolute;font-size:10px;color:var(--muted);letter-spacing:.04em;text-align:center;width:160px;}
 
 /* ARTILHEIROS */
-.scorers-list{display:flex;flex-direction:column;gap:8px;}
-.scorer-row{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:14px;padding:11px 16px;border-radius:5px;background:rgba(255,255,255,.02);border:1px solid transparent;transition:.2s;}
-.scorer-row:hover{border-color:var(--line);background:rgba(57,243,255,.04);}
-.scorer-rank{font-family:'Orbitron';font-size:15px;color:var(--cyan-dim);text-align:center;}
-.scorer-row:nth-child(1) .scorer-rank{color:var(--gold);}
-.scorer-name{font-weight:700;font-size:15.5px;display:flex;align-items:center;gap:9px;}
-.scorer-club{font-size:12px;color:var(--muted);margin-top:2px;}
-.scorer-goals{font-family:'Orbitron';font-size:20px;color:var(--cyan);text-align:right;}
-.scorer-goals span{font-size:10px;color:var(--muted);display:block;text-align:right;letter-spacing:.05em;}
+.podium{display:flex;align-items:flex-end;gap:12px;justify-content:center;margin-bottom:22px;}
+.podium-card{flex:1;max-width:175px;border-radius:14px;border:1px solid var(--line);background:var(--panel);text-align:center;position:relative;padding-top:30px;overflow:hidden;}
+.podium-card.rank1{transform:translateY(-16px);}
+.podium-rank-badge{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron';font-weight:800;font-size:15px;box-shadow:0 4px 12px rgba(0,0,0,.4);}
+.podium-avatar{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;background:var(--panel-solid);border:3px solid;margin:0 auto 10px;}
+.podium-name{font-weight:700;font-size:15px;color:#fff;padding:0 6px;}
+.podium-country{font-size:12px;color:var(--muted);margin-bottom:14px;}
+.podium-goals{padding:14px 0 16px;}
+.podium-goals .num{font-family:'Orbitron';font-size:28px;display:block;line-height:1;}
+.podium-goals .lbl{font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;}
+.podium-card.rank1{border-color:var(--gold);}
+.podium-card.rank1 .podium-rank-badge{background:var(--gold);color:#3a2400;}
+.podium-card.rank1 .podium-avatar{border-color:var(--gold);}
+.podium-card.rank1 .podium-goals{background:rgba(255,178,63,.14);}
+.podium-card.rank1 .podium-goals .num{color:var(--gold);}
+.podium-card.rank2{border-color:var(--cyan);}
+.podium-card.rank2 .podium-rank-badge{background:var(--cyan);color:#04282d;}
+.podium-card.rank2 .podium-avatar{border-color:var(--cyan);}
+.podium-card.rank2 .podium-goals{background:rgba(57,243,255,.10);}
+.podium-card.rank2 .podium-goals .num{color:var(--cyan);}
+.podium-card.rank3{border-color:var(--magenta);}
+.podium-card.rank3 .podium-rank-badge{background:var(--magenta);color:#fff;}
+.podium-card.rank3 .podium-avatar{border-color:var(--magenta);}
+.podium-card.rank3 .podium-goals{background:rgba(255,61,166,.10);}
+.podium-card.rank3 .podium-goals .num{color:var(--magenta);}
+.scorers-list{display:flex;flex-direction:column;}
+.scorer-row{display:grid;grid-template-columns:34px 46px 1fr auto;align-items:center;gap:13px;padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.05);transition:.2s;}
+.scorer-row:last-child{border-bottom:none;}
+.scorer-row:hover{background:rgba(57,243,255,.04);}
+.scorer-rank{font-family:'Orbitron';font-size:14px;color:var(--cyan-dim);text-align:center;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:9px;padding:7px 0;}
+.scorer-avatar{width:42px;height:42px;border-radius:50%;background:var(--panel-solid);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:21px;}
+.scorer-name{font-weight:700;font-size:15px;}
+.scorer-club{font-size:12px;color:var(--muted);margin-top:1px;}
+.scorer-goals{font-family:'Orbitron';font-size:17px;color:var(--green);text-align:center;background:rgba(61,255,176,.1);border-radius:9px;padding:7px 14px;}
 
 /* ESTADIOS */
 .stadium-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
@@ -356,9 +381,10 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
 
   <!-- ARTILHEIROS -->
   <section class="tabpanel" id="tab-artilheiros">
-    <div class="panel" style="padding:18px 22px;">
-      <h2 class="section-title">Artilharia da Copa 2026</h2>
-      <p class="section-desc">Ranking de goleadores do torneio, atualizado conforme os jogos da fase de grupos disputados até 20/06/2026.</p>
+    <h2 class="section-title">Artilharia da Copa 2026</h2>
+    <p class="section-desc">Ranking de goleadores do torneio, atualizado conforme os jogos da fase de grupos disputados até 20/06/2026.</p>
+    <div class="podium" id="scorersPodium"></div>
+    <div class="panel">
       <div class="scorers-list" id="scorersList"></div>
     </div>
   </section>
@@ -1221,15 +1247,34 @@ function renderBracket(){
 
 /* ============== RENDER: ARTILHEIROS ============== */
 function renderScorers(){
+  const podiumEl = document.getElementById('scorersPodium');
   const list = document.getElementById('scorersList');
-  list.innerHTML = SCORERS.map((s,i)=>`
+  if(!podiumEl || !list) return;
+
+  const top3 = SCORERS.slice(0,3);
+  const rest = SCORERS.slice(3);
+
+  const podiumCard = (s, rank) => s ? `
+    <div class="podium-card rank${rank}">
+      <div class="podium-rank-badge">${rank}</div>
+      <div class="podium-avatar">${F(teamFlag(s.code))}</div>
+      <div class="podium-name">${s.name}</div>
+      <div class="podium-country">${teamName(s.code)}</div>
+      <div class="podium-goals"><span class="num">${s.goals}</span><span class="lbl">gols</span></div>
+    </div>` : '';
+
+  // ordem visual: 2º à esquerda, 1º ao centro (mais alto), 3º à direita
+  podiumEl.innerHTML = podiumCard(top3[1], 2) + podiumCard(top3[0], 1) + podiumCard(top3[2], 3);
+
+  list.innerHTML = rest.map((s,i)=>`
     <div class="scorer-row">
-      <div class="scorer-rank">${i+1}</div>
+      <div class="scorer-rank">${i+4}</div>
+      <div class="scorer-avatar">${F(teamFlag(s.code))}</div>
       <div>
-        <div class="scorer-name">${F(teamFlag(s.code))} ${s.name}</div>
-        <div class="scorer-club">${s.club} · ${teamName(s.code)}</div>
+        <div class="scorer-name">${s.name}</div>
+        <div class="scorer-club">${teamName(s.code)}</div>
       </div>
-      <div class="scorer-goals">${s.goals}<span>gols</span></div>
+      <div class="scorer-goals">${s.goals}</div>
     </div>`).join('');
 }
 
