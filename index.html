@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulador do Hawelligton // COPA 2026</title>
+<title>Simulador da Copa 2026 do Hawelligton</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -234,7 +234,7 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
 <div class="wrap">
   <header>
     <div class="eyebrow">Estados Unidos · México · Canadá</div>
-    <h1 class="title">SIMULADOR DO HAWELLIGTON</h1>
+    <h1 class="title">SIMULADOR DA COPA 2026 DO HAWELLIGTON</h1>
     <div class="subtitle">Copa do Mundo 2026 · Simule os jogos restantes a partir dos placares reais atualizados em 20/06/2026</div>
   </header>
 
@@ -325,7 +325,7 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
     </div>
   </section>
 
-  <footer>Simulador do Hawelligton · não-oficial · Dados de referência coletados em 20/06/2026 · Não afiliado à FIFA</footer>
+  <footer>Simulador da Copa 2026 do Hawelligton · não-oficial · Dados de referência coletados em 20/06/2026 · Não afiliado à FIFA</footer>
 </div>
 
 <script>
@@ -382,8 +382,8 @@ D:{teams:['USA','AUS','TUR','PAR'],matches:[
 E:{teams:['GER','CIV','ECU','CUR'],matches:[
   {r:1,d:'14/06',tm:'14:00',c:'Houston',h:'GER',a:'CUR',hs:7,as:1},
   {r:1,d:'14/06',tm:'20:00',c:'Filadélfia',h:'CIV',a:'ECU',hs:1,as:0},
-  {r:2,d:'20/06',tm:'17:00',c:'Toronto',h:'GER',a:'CIV',hs:null,as:null,live:true},
-  {r:2,d:'20/06',tm:'21:00',c:'Kansas City',h:'ECU',a:'CUR',hs:null,as:null},
+  {r:2,d:'20/06',tm:'17:00',c:'Toronto',h:'GER',a:'CIV',hs:2,as:1},
+  {r:2,d:'20/06',tm:'21:00',c:'Kansas City',h:'ECU',a:'CUR',hs:null,as:null,live:true},
   {r:3,d:'25/06',tm:'17:00',c:'Filadélfia',h:'CUR',a:'CIV',hs:null,as:null},
   {r:3,d:'25/06',tm:'17:00',c:'Nova York',h:'ECU',a:'GER',hs:null,as:null},
 ]},
@@ -506,6 +506,7 @@ const SCORERS = [
  {name:'Ismael Saibari', code:'MAR', goals:2, club:'PSV Eindhoven'},
  {name:'Brian Brobbey', code:'NED', goals:2, club:'Sunderland'},
  {name:'Cody Gakpo', code:'NED', goals:2, club:'Liverpool'},
+ {name:'Deniz Undav', code:'GER', goals:2, club:'VfB Stuttgart'},
  {name:'Viktor Gyökeres', code:'SWE', goals:1, club:'Arsenal'},
  {name:'Jamal Musiala', code:'GER', goals:1, club:'Bayern de Munique'},
  {name:'Cyle Larin', code:'CAN', goals:1, club:'Mallorca'},
@@ -514,6 +515,7 @@ const SCORERS = [
  {name:'Mohammad Mohebi', code:'IRN', goals:1, club:'Nassaji Mazandaran'},
  {name:'Matías Galarza', code:'PAR', goals:1, club:'River Plate'},
  {name:'Anthony Elanga', code:'SWE', goals:1, club:'Newcastle United'},
+ {name:'Franck Kessié', code:'CIV', goals:1, club:'Al-Ahli (Arábia Saudita)'},
 ].sort((a,b)=>b.goals-a.goals);
 
 const STADIUMS = [
