@@ -1,0 +1,210 @@
+[
+  {
+    "id": 16380,
+    "name": "H. Galíndez",
+    "age": 38,
+    "number": 1,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/16380.png"
+  },
+  {
+    "id": 81224,
+    "name": "M. Ramírez",
+    "age": 25,
+    "number": 12,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/81224.png"
+  },
+  {
+    "id": 16642,
+    "name": "G. Valle",
+    "age": 29,
+    "number": 22,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/16642.png"
+  },
+  {
+    "id": 46731,
+    "name": "P. Estupiñán",
+    "age": 27,
+    "number": 7,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/46731.png"
+  },
+  {
+    "id": 127817,
+    "name": "P. Hincapié",
+    "age": 23,
+    "number": 3,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/127817.png"
+  },
+  {
+    "id": 306940,
+    "name": "Y. Medina",
+    "age": 21,
+    "number": 26,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/306940.png"
+  },
+  {
+    "id": 354027,
+    "name": "J. Ordoñez",
+    "age": 21,
+    "number": 4,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/354027.png"
+  },
+  {
+    "id": 16367,
+    "name": "W. Pacho",
+    "age": 24,
+    "number": 6,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/16367.png"
+  },
+  {
+    "id": 2575,
+    "name": "J. Porozo",
+    "age": 25,
+    "number": 25,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/2575.png"
+  },
+  {
+    "id": 2583,
+    "name": "A. Preciado",
+    "age": 27,
+    "number": 17,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/2583.png"
+  },
+  {
+    "id": 63964,
+    "name": "F. Torres",
+    "age": 28,
+    "number": 2,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/63964.png"
+  },
+  {
+    "id": 16470,
+    "name": "J. Alcívar",
+    "age": 26,
+    "number": 5,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/16470.png"
+  },
+  {
+    "id": 116117,
+    "name": "M. Caicedo",
+    "age": 24,
+    "number": 23,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/116117.png"
+  },
+  {
+    "id": 338045,
+    "name": "D. Castillo",
+    "age": 21,
+    "number": 18,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/338045.png"
+  },
+  {
+    "id": 16360,
+    "name": "A. Franco",
+    "age": 27,
+    "number": 21,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/16360.png"
+  },
+  {
+    "id": 406303,
+    "name": "K. Páez",
+    "age": 18,
+    "number": 10,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/406303.png"
+  },
+  {
+    "id": 280695,
+    "name": "A. Minda",
+    "age": 22,
+    "number": 14,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/280695.png"
+  },
+  {
+    "id": 198347,
+    "name": "A. Valencia",
+    "age": 22,
+    "number": 8,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/198347.png"
+  },
+  {
+    "id": 237078,
+    "name": "P. Vite",
+    "age": 23,
+    "number": 15,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/237078.png"
+  },
+  {
+    "id": 361966,
+    "name": "K. Rodríguez",
+    "age": 25,
+    "number": 11,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/361966.png"
+  },
+  {
+    "id": 25414,
+    "name": "J. Yeboah",
+    "age": 25,
+    "number": 9,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/25414.png"
+  },
+  {
+    "id": 311543,
+    "name": "N. Angulo",
+    "age": 22,
+    "number": 20,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/311543.png"
+  },
+  {
+    "id": 16590,
+    "name": "J. Caicedo",
+    "age": 28,
+    "number": 16,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/16590.png"
+  },
+  {
+    "id": 350799,
+    "name": "Jeremy Arévalo",
+    "age": 20,
+    "number": 24,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/350799.png"
+  },
+  {
+    "id": 16369,
+    "name": "G. Plata",
+    "age": 25,
+    "number": 19,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/16369.png"
+  },
+  {
+    "id": 35533,
+    "name": "E. Valencia",
+    "age": 36,
+    "number": 13,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/35533.png"
+  }
+]

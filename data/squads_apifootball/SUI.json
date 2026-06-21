@@ -1,0 +1,210 @@
+[
+  {
+    "id": 123468,
+    "name": "M. Keller",
+    "age": 23,
+    "number": 21,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/123468.png"
+  },
+  {
+    "id": 25282,
+    "name": "G. Kobel",
+    "age": 28,
+    "number": 1,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/25282.png"
+  },
+  {
+    "id": 1142,
+    "name": "Y. Mvogo",
+    "age": 31,
+    "number": 12,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/1142.png"
+  },
+  {
+    "id": 5,
+    "name": "M. Akanji",
+    "age": 30,
+    "number": 5,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/5.png"
+  },
+  {
+    "id": 162414,
+    "name": "A. Amenda",
+    "age": 22,
+    "number": 24,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/162414.png"
+  },
+  {
+    "id": 48372,
+    "name": "E. Cömert",
+    "age": 27,
+    "number": 18,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/48372.png"
+  },
+  {
+    "id": 2803,
+    "name": "N. Elvedi",
+    "age": 29,
+    "number": 4,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/2803.png"
+  },
+  {
+    "id": 349344,
+    "name": "L. Jaquez",
+    "age": 22,
+    "number": 25,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/349344.png"
+  },
+  {
+    "id": 48489,
+    "name": "M. Muheim",
+    "age": 27,
+    "number": 2,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/48489.png"
+  },
+  {
+    "id": 1631,
+    "name": "R. Rodríguez",
+    "age": 33,
+    "number": 13,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/1631.png"
+  },
+  {
+    "id": 48378,
+    "name": "S. Widmer",
+    "age": 32,
+    "number": 3,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/48378.png"
+  },
+  {
+    "id": 951,
+    "name": "M. Aebischer",
+    "age": 28,
+    "number": 20,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/951.png"
+  },
+  {
+    "id": 2807,
+    "name": "R. Freuler",
+    "age": 33,
+    "number": 8,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/2807.png"
+  },
+  {
+    "id": 264705,
+    "name": "A. Jashari",
+    "age": 23,
+    "number": 14,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/264705.png"
+  },
+  {
+    "id": 957,
+    "name": "D. Sow",
+    "age": 28,
+    "number": 15,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/957.png"
+  },
+  {
+    "id": 1464,
+    "name": "G. Xhaka",
+    "age": 33,
+    "number": 10,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/1464.png"
+  },
+  {
+    "id": 2810,
+    "name": "D. Zakaria",
+    "age": 29,
+    "number": 6,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/2810.png"
+  },
+  {
+    "id": 952,
+    "name": "C. Fassnacht",
+    "age": 32,
+    "number": 16,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/952.png"
+  },
+  {
+    "id": 48497,
+    "name": "C. Itten",
+    "age": 29,
+    "number": 26,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/48497.png"
+  },
+  {
+    "id": 163032,
+    "name": "F. Rieder",
+    "age": 23,
+    "number": 22,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/163032.png"
+  },
+  {
+    "id": 48471,
+    "name": "R. Vargas",
+    "age": 27,
+    "number": 17,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/48471.png"
+  },
+  {
+    "id": 123469,
+    "name": "Z. Amdouni",
+    "age": 25,
+    "number": 23,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/123469.png"
+  },
+  {
+    "id": 421,
+    "name": "B. Embolo",
+    "age": 28,
+    "number": 7,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/421.png"
+  },
+  {
+    "id": 406244,
+    "name": "J. Manzambi",
+    "age": 20,
+    "number": 9,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/406244.png"
+  },
+  {
+    "id": 48389,
+    "name": "N. Okafor",
+    "age": 25,
+    "number": 19,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/48389.png"
+  },
+  {
+    "id": 48648,
+    "name": "D. Ndoye",
+    "age": 25,
+    "number": 11,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/48648.png"
+  }
+]

@@ -1,0 +1,210 @@
+[
+  {
+    "id": 369,
+    "name": "Diogo Costa",
+    "age": 26,
+    "number": 1,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/369.png"
+  },
+  {
+    "id": 1590,
+    "name": "José Sá",
+    "age": 32,
+    "number": 12,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/1590.png"
+  },
+  {
+    "id": 46672,
+    "name": "Rui Silva",
+    "age": 31,
+    "number": 22,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/46672.png"
+  },
+  {
+    "id": 161939,
+    "name": "Tomás Araújo",
+    "age": 23,
+    "number": 4,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/161939.png"
+  },
+  {
+    "id": 855,
+    "name": "João Cancelo",
+    "age": 31,
+    "number": 20,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/855.png"
+  },
+  {
+    "id": 886,
+    "name": "Diogo Dalot",
+    "age": 26,
+    "number": 5,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/886.png"
+  },
+  {
+    "id": 567,
+    "name": "Rúben Dias",
+    "age": 28,
+    "number": 3,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/567.png"
+  },
+  {
+    "id": 265595,
+    "name": "Gonçalo Inácio",
+    "age": 24,
+    "number": 14,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/265595.png"
+  },
+  {
+    "id": 263482,
+    "name": "Nuno Mendes",
+    "age": 23,
+    "number": 25,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/263482.png"
+  },
+  {
+    "id": 130,
+    "name": "Nélson Semedo",
+    "age": 32,
+    "number": 2,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/130.png"
+  },
+  {
+    "id": 336671,
+    "name": "Renato Veiga",
+    "age": 22,
+    "number": 13,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/336671.png"
+  },
+  {
+    "id": 190485,
+    "name": "Samú Costa",
+    "age": 25,
+    "number": 24,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/190485.png"
+  },
+  {
+    "id": 1485,
+    "name": "Bruno Fernandes",
+    "age": 31,
+    "number": 8,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/1485.png"
+  },
+  {
+    "id": 335051,
+    "name": "João Neves",
+    "age": 21,
+    "number": 15,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/335051.png"
+  },
+  {
+    "id": 2676,
+    "name": "Rúben Neves",
+    "age": 28,
+    "number": 21,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/2676.png"
+  },
+  {
+    "id": 41621,
+    "name": "Matheus Nunes",
+    "age": 27,
+    "number": 6,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/41621.png"
+  },
+  {
+    "id": 636,
+    "name": "Bernardo Silva",
+    "age": 31,
+    "number": 10,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/636.png"
+  },
+  {
+    "id": 128384,
+    "name": "Vitinha",
+    "age": 25,
+    "number": 23,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/128384.png"
+  },
+  {
+    "id": 161585,
+    "name": "Francisco Conceição",
+    "age": 23,
+    "number": 26,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/161585.png"
+  },
+  {
+    "id": 925,
+    "name": "Gonçalo Guedes",
+    "age": 29,
+    "number": 19,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/925.png"
+  },
+  {
+    "id": 583,
+    "name": "João Félix",
+    "age": 26,
+    "number": 11,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/583.png"
+  },
+  {
+    "id": 22236,
+    "name": "Rafael Leão",
+    "age": 26,
+    "number": 17,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/22236.png"
+  },
+  {
+    "id": 1864,
+    "name": "Pedro Neto",
+    "age": 25,
+    "number": 18,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/1864.png"
+  },
+  {
+    "id": 41585,
+    "name": "Gonçalo Ramos",
+    "age": 24,
+    "number": 9,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/41585.png"
+  },
+  {
+    "id": 874,
+    "name": "Cristiano Ronaldo",
+    "age": 40,
+    "number": 7,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/874.png"
+  },
+  {
+    "id": 41112,
+    "name": "Trincão",
+    "age": 26,
+    "number": 16,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/41112.png"
+  }
+]

@@ -1,0 +1,1898 @@
+{
+  "CZE": [
+    {
+      "name": "Matěj Kovář",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "1"
+    },
+    {
+      "name": "David Zima",
+      "position": "Defender",
+      "club": "",
+      "number": "2"
+    },
+    {
+      "name": "Tomáš Holeš",
+      "position": "Defender",
+      "club": "",
+      "number": "3"
+    },
+    {
+      "name": "Robin Hranáč",
+      "position": "Defender",
+      "club": "",
+      "number": "4"
+    },
+    {
+      "name": "Vladimír Coufal",
+      "position": "Defender",
+      "club": "",
+      "number": "5"
+    },
+    {
+      "name": "Štěpán Chaloupek",
+      "position": "Defender",
+      "club": "",
+      "number": "6"
+    },
+    {
+      "name": "Ladislav Krejčí",
+      "position": "Defender",
+      "club": "",
+      "number": "7"
+    },
+    {
+      "name": "Vladimír Darida",
+      "position": "Midfielder",
+      "club": "",
+      "number": "8"
+    },
+    {
+      "name": "Adam Hložek",
+      "position": "Attacker",
+      "club": "",
+      "number": "9"
+    },
+    {
+      "name": "Patrik Schick",
+      "position": "Attacker",
+      "club": "",
+      "number": "10"
+    },
+    {
+      "name": "Jan Kuchta",
+      "position": "Attacker",
+      "club": "",
+      "number": "11"
+    },
+    {
+      "name": "Lukáš Červ",
+      "position": "Midfielder",
+      "club": "",
+      "number": "12"
+    },
+    {
+      "name": "Mojmír Chytil",
+      "position": "Attacker",
+      "club": "",
+      "number": "13"
+    },
+    {
+      "name": "David Jurásek",
+      "position": "Defender",
+      "club": "",
+      "number": "14"
+    },
+    {
+      "name": "Pavel Šulc",
+      "position": "Attacker",
+      "club": "",
+      "number": "15"
+    },
+    {
+      "name": "Jindřich Staněk",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "16"
+    },
+    {
+      "name": "Lukáš Provod",
+      "position": "Midfielder",
+      "club": "",
+      "number": "17"
+    },
+    {
+      "name": "Michal Sadílek",
+      "position": "Midfielder",
+      "club": "",
+      "number": "18"
+    },
+    {
+      "name": "Tomáš Chorý",
+      "position": "Attacker",
+      "club": "",
+      "number": "19"
+    },
+    {
+      "name": "Jaroslav Zelený",
+      "position": "Defender",
+      "club": "",
+      "number": "20"
+    },
+    {
+      "name": "David Douděra",
+      "position": "Defender",
+      "club": "",
+      "number": "21"
+    },
+    {
+      "name": "Tomáš Souček",
+      "position": "Midfielder",
+      "club": "",
+      "number": "22"
+    },
+    {
+      "name": "Lukáš Horníček",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "23"
+    },
+    {
+      "name": "Alexandr Sojka",
+      "position": "Midfielder",
+      "club": "",
+      "number": "24"
+    },
+    {
+      "name": "Hugo Sochůrek",
+      "position": "Midfielder",
+      "club": "",
+      "number": "25"
+    },
+    {
+      "name": "Denis Višinský",
+      "position": "Attacker",
+      "club": "",
+      "number": "26"
+    }
+  ],
+  "BIH": [
+    {
+      "name": "Nikola Vasilj",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "1"
+    },
+    {
+      "name": "Nihad Mujakić",
+      "position": "Defender",
+      "club": "",
+      "number": "2"
+    },
+    {
+      "name": "Dennis Hadžikadunić",
+      "position": "Defender",
+      "club": "",
+      "number": "3"
+    },
+    {
+      "name": "Tarik Muharemović",
+      "position": "Defender",
+      "club": "",
+      "number": "4"
+    },
+    {
+      "name": "Sead Kolašinac",
+      "position": "Defender",
+      "club": "",
+      "number": "5"
+    },
+    {
+      "name": "Benjamin Tahirović",
+      "position": "Midfielder",
+      "club": "",
+      "number": "6"
+    },
+    {
+      "name": "Amar Dedić",
+      "position": "Defender",
+      "club": "",
+      "number": "7"
+    },
+    {
+      "name": "Armin Gigović",
+      "position": "Midfielder",
+      "club": "",
+      "number": "8"
+    },
+    {
+      "name": "Samed Baždar",
+      "position": "Attacker",
+      "club": "",
+      "number": "9"
+    },
+    {
+      "name": "Ermedin Demirović",
+      "position": "Attacker",
+      "club": "",
+      "number": "10"
+    },
+    {
+      "name": "Edin Džeko",
+      "position": "Attacker",
+      "club": "",
+      "number": "11"
+    },
+    {
+      "name": "Mladen Jurkas",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "12"
+    },
+    {
+      "name": "Ivan Bašić",
+      "position": "Midfielder",
+      "club": "",
+      "number": "13"
+    },
+    {
+      "name": "Ivan Šunjić",
+      "position": "Midfielder",
+      "club": "",
+      "number": "14"
+    },
+    {
+      "name": "Amar Memić",
+      "position": "Midfielder",
+      "club": "",
+      "number": "15"
+    },
+    {
+      "name": "Amir Hadžiahmetović",
+      "position": "Midfielder",
+      "club": "",
+      "number": "16"
+    },
+    {
+      "name": "Dženis Burnić",
+      "position": "Midfielder",
+      "club": "",
+      "number": "17"
+    },
+    {
+      "name": "Nikola Katić",
+      "position": "Defender",
+      "club": "",
+      "number": "18"
+    },
+    {
+      "name": "Kerim Alajbegović",
+      "position": "Attacker",
+      "club": "",
+      "number": "19"
+    },
+    {
+      "name": "Esmir Bajraktarević",
+      "position": "Attacker",
+      "club": "",
+      "number": "20"
+    },
+    {
+      "name": "Stjepan Radeljić",
+      "position": "Defender",
+      "club": "",
+      "number": "21"
+    },
+    {
+      "name": "Martin Zlomislić",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "22"
+    },
+    {
+      "name": "Haris Tabaković",
+      "position": "Attacker",
+      "club": "",
+      "number": "23"
+    },
+    {
+      "name": "Arjan Malić",
+      "position": "Defender",
+      "club": "",
+      "number": "24"
+    },
+    {
+      "name": "Jovo Lukić",
+      "position": "Attacker",
+      "club": "",
+      "number": "25"
+    },
+    {
+      "name": "Ermin Mahmić",
+      "position": "Midfielder",
+      "club": "",
+      "number": "26"
+    }
+  ],
+  "TUR": [
+    {
+      "name": "Mert Günok",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "1"
+    },
+    {
+      "name": "Zeki Çelik",
+      "position": "Defender",
+      "club": "",
+      "number": "2"
+    },
+    {
+      "name": "Merih Demiral",
+      "position": "Defender",
+      "club": "",
+      "number": "3"
+    },
+    {
+      "name": "Çağlar Söyüncü",
+      "position": "Defender",
+      "club": "",
+      "number": "4"
+    },
+    {
+      "name": "Salih Özcan",
+      "position": "Midfielder",
+      "club": "",
+      "number": "5"
+    },
+    {
+      "name": "Orkun Kökçü",
+      "position": "Midfielder",
+      "club": "",
+      "number": "6"
+    },
+    {
+      "name": "Kerem Aktürkoğlu",
+      "position": "Attacker",
+      "club": "",
+      "number": "7"
+    },
+    {
+      "name": "Arda Güler",
+      "position": "Attacker",
+      "club": "",
+      "number": "8"
+    },
+    {
+      "name": "Deniz Gül",
+      "position": "Attacker",
+      "club": "",
+      "number": "9"
+    },
+    {
+      "name": "Hakan Çalhanoğlu",
+      "position": "Midfielder",
+      "club": "",
+      "number": "10"
+    },
+    {
+      "name": "Kenan Yıldız",
+      "position": "Attacker",
+      "club": "",
+      "number": "11"
+    },
+    {
+      "name": "Altay Bayındır",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "12"
+    },
+    {
+      "name": "Eren Elmalı",
+      "position": "Defender",
+      "club": "",
+      "number": "13"
+    },
+    {
+      "name": "Abdülkerim Bardakcı",
+      "position": "Defender",
+      "club": "",
+      "number": "14"
+    },
+    {
+      "name": "Ozan Kabak",
+      "position": "Defender",
+      "club": "",
+      "number": "15"
+    },
+    {
+      "name": "İsmail Yüksek",
+      "position": "Midfielder",
+      "club": "",
+      "number": "16"
+    },
+    {
+      "name": "İrfan Can Kahveci",
+      "position": "Attacker",
+      "club": "",
+      "number": "17"
+    },
+    {
+      "name": "Mert Müldür",
+      "position": "Defender",
+      "club": "",
+      "number": "18"
+    },
+    {
+      "name": "Yunus Akgün",
+      "position": "Attacker",
+      "club": "",
+      "number": "19"
+    },
+    {
+      "name": "Ferdi Kadıoğlu",
+      "position": "Defender",
+      "club": "",
+      "number": "20"
+    },
+    {
+      "name": "Barış Alper Yılmaz",
+      "position": "Attacker",
+      "club": "",
+      "number": "21"
+    },
+    {
+      "name": "Kaan Ayhan",
+      "position": "Midfielder",
+      "club": "",
+      "number": "22"
+    },
+    {
+      "name": "Uğurcan Çakır",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "23"
+    },
+    {
+      "name": "Oğuz Aydın",
+      "position": "Attacker",
+      "club": "",
+      "number": "24"
+    },
+    {
+      "name": "Samet Akaydin",
+      "position": "Defender",
+      "club": "",
+      "number": "25"
+    },
+    {
+      "name": "Can Uzun",
+      "position": "Attacker",
+      "club": "",
+      "number": "26"
+    }
+  ],
+  "SEN": [
+    {
+      "name": "Yehvann Diouf",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "1"
+    },
+    {
+      "name": "Mamadou Sarr",
+      "position": "Defender",
+      "club": "",
+      "number": "2"
+    },
+    {
+      "name": "Kalidou Koulibaly",
+      "position": "Defender",
+      "club": "",
+      "number": "3"
+    },
+    {
+      "name": "Abdoulaye Seck",
+      "position": "Defender",
+      "club": "",
+      "number": "4"
+    },
+    {
+      "name": "Idrissa Gueye",
+      "position": "Midfielder",
+      "club": "",
+      "number": "5"
+    },
+    {
+      "name": "Pathé Ciss",
+      "position": "Midfielder",
+      "club": "",
+      "number": "6"
+    },
+    {
+      "name": "Assane Diao",
+      "position": "Attacker",
+      "club": "",
+      "number": "7"
+    },
+    {
+      "name": "Lamine Camara",
+      "position": "Midfielder",
+      "club": "",
+      "number": "8"
+    },
+    {
+      "name": "Bamba Dieng",
+      "position": "Attacker",
+      "club": "",
+      "number": "9"
+    },
+    {
+      "name": "Sadio Mané",
+      "position": "Attacker",
+      "club": "",
+      "number": "10"
+    },
+    {
+      "name": "Nicolas Jackson",
+      "position": "Attacker",
+      "club": "",
+      "number": "11"
+    },
+    {
+      "name": "Cherif Ndiaye",
+      "position": "Attacker",
+      "club": "",
+      "number": "12"
+    },
+    {
+      "name": "Iliman Ndiaye",
+      "position": "Attacker",
+      "club": "",
+      "number": "13"
+    },
+    {
+      "name": "Ismail Jakobs",
+      "position": "Defender",
+      "club": "",
+      "number": "14"
+    },
+    {
+      "name": "Krépin Diatta",
+      "position": "Defender",
+      "club": "",
+      "number": "15"
+    },
+    {
+      "name": "Édouard Mendy",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "16"
+    },
+    {
+      "name": "Pape Matar Sarr",
+      "position": "Midfielder",
+      "club": "",
+      "number": "17"
+    },
+    {
+      "name": "Ismaïla Sarr",
+      "position": "Attacker",
+      "club": "",
+      "number": "18"
+    },
+    {
+      "name": "Moussa Niakhaté",
+      "position": "Defender",
+      "club": "",
+      "number": "19"
+    },
+    {
+      "name": "Ibrahim Mbaye",
+      "position": "Attacker",
+      "club": "",
+      "number": "20"
+    },
+    {
+      "name": "Habib Diarra",
+      "position": "Midfielder",
+      "club": "",
+      "number": "21"
+    },
+    {
+      "name": "Bara Sapoko Ndiaye",
+      "position": "Midfielder",
+      "club": "",
+      "number": "22"
+    },
+    {
+      "name": "Mory Diaw",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "23"
+    },
+    {
+      "name": "Antoine Mendy",
+      "position": "Defender",
+      "club": "",
+      "number": "24"
+    },
+    {
+      "name": "El Hadji Malick Diouf",
+      "position": "Defender",
+      "club": "",
+      "number": "25"
+    },
+    {
+      "name": "Pape Gueye",
+      "position": "Midfielder",
+      "club": "",
+      "number": "26"
+    }
+  ],
+  "ALG": [
+    {
+      "name": "Melvin Mastil",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "1"
+    },
+    {
+      "name": "Aïssa Mandi",
+      "position": "Defender",
+      "club": "",
+      "number": "2"
+    },
+    {
+      "name": "Achref Abada",
+      "position": "Defender",
+      "club": "",
+      "number": "3"
+    },
+    {
+      "name": "Mohamed Amine Tougai",
+      "position": "Defender",
+      "club": "",
+      "number": "4"
+    },
+    {
+      "name": "Zineddine Belaïd",
+      "position": "Defender",
+      "club": "",
+      "number": "5"
+    },
+    {
+      "name": "Ramiz Zerrouki",
+      "position": "Midfielder",
+      "club": "",
+      "number": "6"
+    },
+    {
+      "name": "Riyad Mahrez",
+      "position": "Attacker",
+      "club": "",
+      "number": "7"
+    },
+    {
+      "name": "Houssem Aouar",
+      "position": "Midfielder",
+      "club": "",
+      "number": "8"
+    },
+    {
+      "name": "Amine Gouiri",
+      "position": "Attacker",
+      "club": "",
+      "number": "9"
+    },
+    {
+      "name": "Farès Chaïbi",
+      "position": "Midfielder",
+      "club": "",
+      "number": "10"
+    },
+    {
+      "name": "Anis Hadj Moussa",
+      "position": "Attacker",
+      "club": "",
+      "number": "11"
+    },
+    {
+      "name": "Nadhir Benbouali",
+      "position": "Attacker",
+      "club": "",
+      "number": "12"
+    },
+    {
+      "name": "Jaouen Hadjam",
+      "position": "Defender",
+      "club": "",
+      "number": "13"
+    },
+    {
+      "name": "Hicham Boudaoui",
+      "position": "Midfielder",
+      "club": "",
+      "number": "14"
+    },
+    {
+      "name": "Rayan Aït-Nouri",
+      "position": "Defender",
+      "club": "",
+      "number": "15"
+    },
+    {
+      "name": "Oussama Benbot",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "16"
+    },
+    {
+      "name": "Rafik Belghali",
+      "position": "Defender",
+      "club": "",
+      "number": "17"
+    },
+    {
+      "name": "Mohamed Amoura",
+      "position": "Attacker",
+      "club": "",
+      "number": "18"
+    },
+    {
+      "name": "Nabil Bentaleb",
+      "position": "Midfielder",
+      "club": "",
+      "number": "19"
+    },
+    {
+      "name": "Adil Boulbina",
+      "position": "Attacker",
+      "club": "",
+      "number": "20"
+    },
+    {
+      "name": "Ramy Bensebaini",
+      "position": "Defender",
+      "club": "",
+      "number": "21"
+    },
+    {
+      "name": "Ibrahim Maza",
+      "position": "Midfielder",
+      "club": "",
+      "number": "22"
+    },
+    {
+      "name": "Luca Zidane",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "23"
+    },
+    {
+      "name": "Yacine Titraoui",
+      "position": "Midfielder",
+      "club": "",
+      "number": "24"
+    },
+    {
+      "name": "Farès Ghedjemis",
+      "position": "Attacker",
+      "club": "",
+      "number": "25"
+    },
+    {
+      "name": "Samir Chergui",
+      "position": "Defender",
+      "club": "",
+      "number": "26"
+    }
+  ],
+  "COD": [
+    {
+      "name": "Lionel Mpasi",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "1"
+    },
+    {
+      "name": "Aaron Wan-Bissaka",
+      "position": "Defender",
+      "club": "",
+      "number": "2"
+    },
+    {
+      "name": "Steve Kapuadi",
+      "position": "Defender",
+      "club": "",
+      "number": "3"
+    },
+    {
+      "name": "Axel Tuanzebe",
+      "position": "Defender",
+      "club": "",
+      "number": "4"
+    },
+    {
+      "name": "Dylan Batubinsika",
+      "position": "Defender",
+      "club": "",
+      "number": "5"
+    },
+    {
+      "name": "Ngal'ayel Mukau",
+      "position": "Midfielder",
+      "club": "",
+      "number": "6"
+    },
+    {
+      "name": "Nathanaël Mbuku",
+      "position": "Midfielder",
+      "club": "",
+      "number": "7"
+    },
+    {
+      "name": "Samuel Moutoussamy",
+      "position": "Midfielder",
+      "club": "",
+      "number": "8"
+    },
+    {
+      "name": "Brian Cipenga",
+      "position": "Attacker",
+      "club": "",
+      "number": "9"
+    },
+    {
+      "name": "Théo Bongonda",
+      "position": "Midfielder",
+      "club": "",
+      "number": "10"
+    },
+    {
+      "name": "Gaël Kakuta",
+      "position": "Attacker",
+      "club": "",
+      "number": "11"
+    },
+    {
+      "name": "Joris Kayembe",
+      "position": "Defender",
+      "club": "",
+      "number": "12"
+    },
+    {
+      "name": "Meschak Elia",
+      "position": "Attacker",
+      "club": "",
+      "number": "13"
+    },
+    {
+      "name": "Noah Sadiki",
+      "position": "Midfielder",
+      "club": "",
+      "number": "14"
+    },
+    {
+      "name": "Aaron Tshibola",
+      "position": "Midfielder",
+      "club": "",
+      "number": "15"
+    },
+    {
+      "name": "Timothy Fayulu",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "16"
+    },
+    {
+      "name": "Cédric Bakambu",
+      "position": "Attacker",
+      "club": "",
+      "number": "17"
+    },
+    {
+      "name": "Charles Pickel",
+      "position": "Midfielder",
+      "club": "",
+      "number": "18"
+    },
+    {
+      "name": "Fiston Mayele",
+      "position": "Attacker",
+      "club": "",
+      "number": "19"
+    },
+    {
+      "name": "Yoane Wissa",
+      "position": "Attacker",
+      "club": "",
+      "number": "20"
+    },
+    {
+      "name": "Matthieu Epolo",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "21"
+    },
+    {
+      "name": "Chancel Mbemba",
+      "position": "Defender",
+      "club": "",
+      "number": "22"
+    },
+    {
+      "name": "Simon Banza",
+      "position": "Attacker",
+      "club": "",
+      "number": "23"
+    },
+    {
+      "name": "Gédéon Kalulu",
+      "position": "Defender",
+      "club": "",
+      "number": "24"
+    },
+    {
+      "name": "Edo Kayembe",
+      "position": "Midfielder",
+      "club": "",
+      "number": "25"
+    },
+    {
+      "name": "Arthur Masuaku",
+      "position": "Defender",
+      "club": "",
+      "number": "26"
+    }
+  ],
+  "KSA": [
+    {
+      "name": "Nawaf Al-Aqidi",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "1"
+    },
+    {
+      "name": "Ali Majrashi",
+      "position": "Defender",
+      "club": "",
+      "number": "2"
+    },
+    {
+      "name": "Ali Lajami",
+      "position": "Defender",
+      "club": "",
+      "number": "3"
+    },
+    {
+      "name": "Abdulelah Al-Amri",
+      "position": "Defender",
+      "club": "",
+      "number": "4"
+    },
+    {
+      "name": "Hassan Al-Tambakti",
+      "position": "Defender",
+      "club": "",
+      "number": "5"
+    },
+    {
+      "name": "Nasser Al-Dawsari",
+      "position": "Midfielder",
+      "club": "",
+      "number": "6"
+    },
+    {
+      "name": "Musab Al-Juwayr",
+      "position": "Midfielder",
+      "club": "",
+      "number": "7"
+    },
+    {
+      "name": "Ayman Yahya",
+      "position": "Attacker",
+      "club": "",
+      "number": "8"
+    },
+    {
+      "name": "Firas Al-Buraikan",
+      "position": "Attacker",
+      "club": "",
+      "number": "9"
+    },
+    {
+      "name": "Salem Al-Dawsari",
+      "position": "Attacker",
+      "club": "",
+      "number": "10"
+    },
+    {
+      "name": "Saleh Al-Shehri",
+      "position": "Attacker",
+      "club": "",
+      "number": "11"
+    },
+    {
+      "name": "Saud Abdulhamid",
+      "position": "Defender",
+      "club": "",
+      "number": "12"
+    },
+    {
+      "name": "Nawaf Boushal",
+      "position": "Defender",
+      "club": "",
+      "number": "13"
+    },
+    {
+      "name": "Hassan Kadesh",
+      "position": "Defender",
+      "club": "",
+      "number": "14"
+    },
+    {
+      "name": "Abdullah Al-Khaibari",
+      "position": "Midfielder",
+      "club": "",
+      "number": "15"
+    },
+    {
+      "name": "Ziyad Al-Johani",
+      "position": "Midfielder",
+      "club": "",
+      "number": "16"
+    },
+    {
+      "name": "Khalid Al-Ghannam",
+      "position": "Attacker",
+      "club": "",
+      "number": "17"
+    },
+    {
+      "name": "Alaa Al-Hejji",
+      "position": "Midfielder",
+      "club": "",
+      "number": "18"
+    },
+    {
+      "name": "Abdullah Al-Hamdan",
+      "position": "Attacker",
+      "club": "",
+      "number": "19"
+    },
+    {
+      "name": "Sultan Mandash",
+      "position": "Attacker",
+      "club": "",
+      "number": "20"
+    },
+    {
+      "name": "Mohammed Al-Owais",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "21"
+    },
+    {
+      "name": "Ahmed Al-Kassar",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "22"
+    },
+    {
+      "name": "Mohamed Kanno",
+      "position": "Midfielder",
+      "club": "",
+      "number": "23"
+    },
+    {
+      "name": "Moteb Al-Harbi",
+      "position": "Defender",
+      "club": "",
+      "number": "24"
+    },
+    {
+      "name": "Jehad Thakri",
+      "position": "Defender",
+      "club": "",
+      "number": "25"
+    },
+    {
+      "name": "Mohammed Abu Al-Shamat",
+      "position": "Defender",
+      "club": "",
+      "number": "26"
+    }
+  ],
+  "IRQ": [
+    {
+      "name": "Fahad Talib",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "1"
+    },
+    {
+      "name": "Rebin Sulaka",
+      "position": "Defender",
+      "club": "",
+      "number": "2"
+    },
+    {
+      "name": "Hussein Ali",
+      "position": "Defender",
+      "club": "",
+      "number": "3"
+    },
+    {
+      "name": "Zaid Tahseen",
+      "position": "Defender",
+      "club": "",
+      "number": "4"
+    },
+    {
+      "name": "Akam Hashim",
+      "position": "Defender",
+      "club": "",
+      "number": "5"
+    },
+    {
+      "name": "Munaf Younis",
+      "position": "Defender",
+      "club": "",
+      "number": "6"
+    },
+    {
+      "name": "Youssef Amyn",
+      "position": "Midfielder",
+      "club": "",
+      "number": "7"
+    },
+    {
+      "name": "Ibrahim Bayesh",
+      "position": "Midfielder",
+      "club": "",
+      "number": "8"
+    },
+    {
+      "name": "Ali Al-Hamadi",
+      "position": "Attacker",
+      "club": "",
+      "number": "9"
+    },
+    {
+      "name": "Mohanad Ali",
+      "position": "Attacker",
+      "club": "",
+      "number": "10"
+    },
+    {
+      "name": "Ahmed Qasem",
+      "position": "Attacker",
+      "club": "",
+      "number": "11"
+    },
+    {
+      "name": "Jalal Hassan",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "12"
+    },
+    {
+      "name": "Ali Yousif",
+      "position": "Attacker",
+      "club": "",
+      "number": "13"
+    },
+    {
+      "name": "Zidane Iqbal",
+      "position": "Midfielder",
+      "club": "",
+      "number": "14"
+    },
+    {
+      "name": "Ahmed Maknzi",
+      "position": "Defender",
+      "club": "",
+      "number": "15"
+    },
+    {
+      "name": "Amir Al-Ammari",
+      "position": "Midfielder",
+      "club": "",
+      "number": "16"
+    },
+    {
+      "name": "Ali Jasim",
+      "position": "Attacker",
+      "club": "",
+      "number": "17"
+    },
+    {
+      "name": "Aymen Hussein",
+      "position": "Attacker",
+      "club": "",
+      "number": "18"
+    },
+    {
+      "name": "Kevin Yakob",
+      "position": "Midfielder",
+      "club": "",
+      "number": "19"
+    },
+    {
+      "name": "Aimar Sher",
+      "position": "Midfielder",
+      "club": "",
+      "number": "20"
+    },
+    {
+      "name": "Marko Farji",
+      "position": "Attacker",
+      "club": "",
+      "number": "21"
+    },
+    {
+      "name": "Ahmed Basil",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "22"
+    },
+    {
+      "name": "Merchas Doski",
+      "position": "Defender",
+      "club": "",
+      "number": "23"
+    },
+    {
+      "name": "Zaid Ismail",
+      "position": "Midfielder",
+      "club": "",
+      "number": "24"
+    },
+    {
+      "name": "Mustafa Saadoon",
+      "position": "Defender",
+      "club": "",
+      "number": "25"
+    },
+    {
+      "name": "Frans Putros",
+      "position": "Defender",
+      "club": "",
+      "number": "26"
+    }
+  ],
+  "JOR": [
+    {
+      "name": "Yazeed Abulaila",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "1"
+    },
+    {
+      "name": "Mohammad Abu Hashish",
+      "position": "Defender",
+      "club": "",
+      "number": "2"
+    },
+    {
+      "name": "Abdallah Nasib",
+      "position": "Defender",
+      "club": "",
+      "number": "3"
+    },
+    {
+      "name": "Husam Abu Dahab",
+      "position": "Defender",
+      "club": "",
+      "number": "4"
+    },
+    {
+      "name": "Yazan Al-Arab",
+      "position": "Defender",
+      "club": "",
+      "number": "5"
+    },
+    {
+      "name": "Amer Jamous",
+      "position": "Midfielder",
+      "club": "",
+      "number": "6"
+    },
+    {
+      "name": "Mohammad Abu Zrayq",
+      "position": "Attacker",
+      "club": "",
+      "number": "7"
+    },
+    {
+      "name": "Noor Al-Rawabdeh",
+      "position": "Midfielder",
+      "club": "",
+      "number": "8"
+    },
+    {
+      "name": "Ali Olwan",
+      "position": "Attacker",
+      "club": "",
+      "number": "9"
+    },
+    {
+      "name": "Musa Al-Taamari",
+      "position": "Attacker",
+      "club": "",
+      "number": "10"
+    },
+    {
+      "name": "Odeh Al-Fakhouri",
+      "position": "Attacker",
+      "club": "",
+      "number": "11"
+    },
+    {
+      "name": "Nour Bani Attiah",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "12"
+    },
+    {
+      "name": "Mahmoud Al-Mardi",
+      "position": "Attacker",
+      "club": "",
+      "number": "13"
+    },
+    {
+      "name": "Rajaei Ayed",
+      "position": "Midfielder",
+      "club": "",
+      "number": "14"
+    },
+    {
+      "name": "Ibrahim Sadeh",
+      "position": "Midfielder",
+      "club": "",
+      "number": "15"
+    },
+    {
+      "name": "Mo Abualnadi",
+      "position": "Defender",
+      "club": "",
+      "number": "16"
+    },
+    {
+      "name": "Salim Obaid",
+      "position": "Defender",
+      "club": "",
+      "number": "17"
+    },
+    {
+      "name": "Mohammad Taha",
+      "position": "Midfielder",
+      "club": "",
+      "number": "18"
+    },
+    {
+      "name": "Saed Al-Rosan",
+      "position": "Defender",
+      "club": "",
+      "number": "19"
+    },
+    {
+      "name": "Mohannad Abu Taha",
+      "position": "Midfielder",
+      "club": "",
+      "number": "20"
+    },
+    {
+      "name": "Nizar Al-Rashdan",
+      "position": "Midfielder",
+      "club": "",
+      "number": "21"
+    },
+    {
+      "name": "Abdallah Al-Fakhouri",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "22"
+    },
+    {
+      "name": "Ihsan Haddad",
+      "position": "Defender",
+      "club": "",
+      "number": "23"
+    },
+    {
+      "name": "Ali Azaizeh",
+      "position": "Attacker",
+      "club": "",
+      "number": "24"
+    },
+    {
+      "name": "Mohammad Al-Dawoud",
+      "position": "Midfielder",
+      "club": "",
+      "number": "25"
+    },
+    {
+      "name": "Anas Badawi",
+      "position": "Defender",
+      "club": "",
+      "number": "26"
+    }
+  ],
+  "UZB": [
+    {
+      "name": "Utkir Yusupov",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "1"
+    },
+    {
+      "name": "Abdukodir Khusanov",
+      "position": "Defender",
+      "club": "",
+      "number": "2"
+    },
+    {
+      "name": "Khojiakbar Alijonov",
+      "position": "Defender",
+      "club": "",
+      "number": "3"
+    },
+    {
+      "name": "Farrukh Sayfiev",
+      "position": "Defender",
+      "club": "",
+      "number": "4"
+    },
+    {
+      "name": "Rustam Ashurmatov",
+      "position": "Defender",
+      "club": "",
+      "number": "5"
+    },
+    {
+      "name": "Akmal Mozgovoy",
+      "position": "Midfielder",
+      "club": "",
+      "number": "6"
+    },
+    {
+      "name": "Otabek Shukurov",
+      "position": "Midfielder",
+      "club": "",
+      "number": "7"
+    },
+    {
+      "name": "Jamshid Iskanderov",
+      "position": "Midfielder",
+      "club": "",
+      "number": "8"
+    },
+    {
+      "name": "Odiljon Hamrobekov",
+      "position": "Midfielder",
+      "club": "",
+      "number": "9"
+    },
+    {
+      "name": "Ruslanbek Jiyanov",
+      "position": "Midfielder",
+      "club": "",
+      "number": "10"
+    },
+    {
+      "name": "Oston Urunov",
+      "position": "Midfielder",
+      "club": "",
+      "number": "11"
+    },
+    {
+      "name": "Abduvohid Nematov",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "12"
+    },
+    {
+      "name": "Sherzod Nasrullaev",
+      "position": "Defender",
+      "club": "",
+      "number": "13"
+    },
+    {
+      "name": "Eldor Shomurodov",
+      "position": "Attacker",
+      "club": "",
+      "number": "14"
+    },
+    {
+      "name": "Umar Eshmurodov",
+      "position": "Defender",
+      "club": "",
+      "number": "15"
+    },
+    {
+      "name": "Botirali Ergashev",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "16"
+    },
+    {
+      "name": "Dostonbek Khamdamov",
+      "position": "Midfielder",
+      "club": "",
+      "number": "17"
+    },
+    {
+      "name": "Abdulla Abdullaev",
+      "position": "Defender",
+      "club": "",
+      "number": "18"
+    },
+    {
+      "name": "Azizjon Ganiev",
+      "position": "Midfielder",
+      "club": "",
+      "number": "19"
+    },
+    {
+      "name": "Azizbek Amonov",
+      "position": "Attacker",
+      "club": "",
+      "number": "20"
+    },
+    {
+      "name": "Igor Sergeev",
+      "position": "Attacker",
+      "club": "",
+      "number": "21"
+    },
+    {
+      "name": "Abbosbek Fayzullaev",
+      "position": "Midfielder",
+      "club": "",
+      "number": "22"
+    },
+    {
+      "name": "Sherzod Esanov",
+      "position": "Midfielder",
+      "club": "",
+      "number": "23"
+    },
+    {
+      "name": "Bekhruz Karimov",
+      "position": "Defender",
+      "club": "",
+      "number": "24"
+    },
+    {
+      "name": "Avazbek Ulmasaliev",
+      "position": "Defender",
+      "club": "",
+      "number": "25"
+    },
+    {
+      "name": "Jakhongir Urozov",
+      "position": "Defender",
+      "club": "",
+      "number": "26"
+    }
+  ],
+  "AUS": [
+    {
+      "name": "Mathew Ryan",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "1"
+    },
+    {
+      "name": "Miloš Degenek",
+      "position": "Defender",
+      "club": "",
+      "number": "2"
+    },
+    {
+      "name": "Alessandro Circati",
+      "position": "Defender",
+      "club": "",
+      "number": "3"
+    },
+    {
+      "name": "Jacob Italiano",
+      "position": "Defender",
+      "club": "",
+      "number": "4"
+    },
+    {
+      "name": "Jordan Bos",
+      "position": "Defender",
+      "club": "",
+      "number": "5"
+    },
+    {
+      "name": "Jason Geria",
+      "position": "Defender",
+      "club": "",
+      "number": "6"
+    },
+    {
+      "name": "Mathew Leckie",
+      "position": "Attacker",
+      "club": "",
+      "number": "7"
+    },
+    {
+      "name": "Connor Metcalfe",
+      "position": "Midfielder",
+      "club": "",
+      "number": "8"
+    },
+    {
+      "name": "Mohamed Touré",
+      "position": "Attacker",
+      "club": "",
+      "number": "9"
+    },
+    {
+      "name": "Ajdin Hrustic",
+      "position": "Attacker",
+      "club": "",
+      "number": "10"
+    },
+    {
+      "name": "Awer Mabil",
+      "position": "Attacker",
+      "club": "",
+      "number": "11"
+    },
+    {
+      "name": "Paul Izzo",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "12"
+    },
+    {
+      "name": "Aiden O'Neill",
+      "position": "Midfielder",
+      "club": "",
+      "number": "13"
+    },
+    {
+      "name": "Cammy Devlin",
+      "position": "Midfielder",
+      "club": "",
+      "number": "14"
+    },
+    {
+      "name": "Kai Trewin",
+      "position": "Defender",
+      "club": "",
+      "number": "15"
+    },
+    {
+      "name": "Aziz Behich",
+      "position": "Defender",
+      "club": "",
+      "number": "16"
+    },
+    {
+      "name": "Nestory Irankunda",
+      "position": "Attacker",
+      "club": "",
+      "number": "17"
+    },
+    {
+      "name": "Patrick Beach",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "18"
+    },
+    {
+      "name": "Harry Souttar",
+      "position": "Defender",
+      "club": "",
+      "number": "19"
+    },
+    {
+      "name": "Cristian Volpato",
+      "position": "Attacker",
+      "club": "",
+      "number": "20"
+    },
+    {
+      "name": "Cameron Burgess",
+      "position": "Defender",
+      "club": "",
+      "number": "21"
+    },
+    {
+      "name": "Jackson Irvine",
+      "position": "Midfielder",
+      "club": "",
+      "number": "22"
+    },
+    {
+      "name": "Nishan Velupillay",
+      "position": "Attacker",
+      "club": "",
+      "number": "23"
+    },
+    {
+      "name": "Paul Okon-Engstler",
+      "position": "Midfielder",
+      "club": "",
+      "number": "24"
+    },
+    {
+      "name": "Lucas Herrington",
+      "position": "Defender",
+      "club": "",
+      "number": "25"
+    },
+    {
+      "name": "Tete Yengi",
+      "position": "Attacker",
+      "club": "",
+      "number": "26"
+    }
+  ],
+  "NZL": [
+    {
+      "name": "Max Crocombe",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "1"
+    },
+    {
+      "name": "Tim Payne",
+      "position": "Defender",
+      "club": "",
+      "number": "2"
+    },
+    {
+      "name": "Francis de Vries",
+      "position": "Defender",
+      "club": "",
+      "number": "3"
+    },
+    {
+      "name": "Tyler Bindon",
+      "position": "Defender",
+      "club": "",
+      "number": "4"
+    },
+    {
+      "name": "Michael Boxall",
+      "position": "Defender",
+      "club": "",
+      "number": "5"
+    },
+    {
+      "name": "Joe Bell",
+      "position": "Midfielder",
+      "club": "",
+      "number": "6"
+    },
+    {
+      "name": "Logan Rogerson",
+      "position": "Attacker",
+      "club": "",
+      "number": "7"
+    },
+    {
+      "name": "Marko Stamenić",
+      "position": "Midfielder",
+      "club": "",
+      "number": "8"
+    },
+    {
+      "name": "Chris Wood",
+      "position": "Attacker",
+      "club": "",
+      "number": "9"
+    },
+    {
+      "name": "Sarpreet Singh",
+      "position": "Midfielder",
+      "club": "",
+      "number": "10"
+    },
+    {
+      "name": "Elijah Just",
+      "position": "Midfielder",
+      "club": "",
+      "number": "11"
+    },
+    {
+      "name": "Alex Paulsen",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "12"
+    },
+    {
+      "name": "Liberato Cacace",
+      "position": "Defender",
+      "club": "",
+      "number": "13"
+    },
+    {
+      "name": "Alex Rufer",
+      "position": "Midfielder",
+      "club": "",
+      "number": "14"
+    },
+    {
+      "name": "Nando Pijnaker",
+      "position": "Defender",
+      "club": "",
+      "number": "15"
+    },
+    {
+      "name": "Finn Surman",
+      "position": "Defender",
+      "club": "",
+      "number": "16"
+    },
+    {
+      "name": "Kosta Barbarouses",
+      "position": "Attacker",
+      "club": "",
+      "number": "17"
+    },
+    {
+      "name": "Ben Waine",
+      "position": "Attacker",
+      "club": "",
+      "number": "18"
+    },
+    {
+      "name": "Ben Old",
+      "position": "Midfielder",
+      "club": "",
+      "number": "19"
+    },
+    {
+      "name": "Callum McCowatt",
+      "position": "Midfielder",
+      "club": "",
+      "number": "20"
+    },
+    {
+      "name": "Jesse Randall",
+      "position": "Attacker",
+      "club": "",
+      "number": "21"
+    },
+    {
+      "name": "Michael Woud",
+      "position": "Goalkeeper",
+      "club": "",
+      "number": "22"
+    },
+    {
+      "name": "Ryan Thomas",
+      "position": "Midfielder",
+      "club": "",
+      "number": "23"
+    },
+    {
+      "name": "Callan Elliot",
+      "position": "Defender",
+      "club": "",
+      "number": "24"
+    },
+    {
+      "name": "Lachlan Bayliss",
+      "position": "Midfielder",
+      "club": "",
+      "number": "25"
+    },
+    {
+      "name": "Tommy Smith",
+      "position": "Defender",
+      "club": "",
+      "number": "26"
+    }
+  ]
+}

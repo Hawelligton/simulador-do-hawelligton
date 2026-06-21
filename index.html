@@ -94,6 +94,44 @@ nav.tabs button.active{color:var(--cyan);}
 nav.tabs button.active .nav-icon{filter:none;text-shadow:0 0 14px rgba(57,243,255,.7);}
 nav.tabs button.active::before{content:'';position:absolute;top:0;left:18%;right:18%;height:2px;background:var(--cyan);border-radius:2px;box-shadow:0 0 8px var(--cyan);}
 
+/* MENU "MAIS" */
+.mais-menu{position:fixed;left:0;right:0;bottom:0;z-index:199;display:none;}
+.mais-menu.open{display:block;}
+.mais-menu .mais-item{position:absolute;right:10px;bottom:74px;min-width:180px;background:var(--panel-solid);border:1px solid var(--line);border-radius:12px;padding:13px 16px;display:flex;align-items:center;gap:10px;color:var(--text);font-family:'Rajdhani';font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.5);}
+.mais-item .nav-icon{font-size:18px;}
+
+/* CONVOCACOES */
+.continent-pills{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 16px;-webkit-overflow-scrolling:touch;}
+.continent-pills::-webkit-scrollbar{display:none;}
+.continent-pill{flex:0 0 auto;font-family:'Rajdhani';font-weight:700;font-size:13.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:10px 18px;cursor:pointer;white-space:nowrap;transition:.2s;}
+.continent-pill.active{color:#3a2400;background:linear-gradient(90deg,var(--gold),#ffd27a);border-color:transparent;}
+.country-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:12px;}
+.country-card{display:flex;flex-direction:column;align-items:center;gap:7px;padding:12px 4px;cursor:pointer;transition:.2s;border:1px solid var(--line);border-radius:10px;background:var(--panel);}
+.country-card:hover{border-color:var(--cyan-dim);background:rgba(57,243,255,.04);}
+.country-card .flag{font-size:30px;}
+.country-card .code{font-family:'Orbitron';font-size:11px;color:var(--text);}
+
+.squad-back{font-family:'Orbitron';font-size:12px;color:var(--cyan);background:none;border:none;cursor:pointer;padding:8px 0 14px;letter-spacing:.04em;}
+.squad-header{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.squad-header .flag{font-size:42px;}
+.squad-header h2{font-family:'Orbitron';font-size:20px;margin:0;color:#fff;}
+.squad-header .sub{font-size:12.5px;color:var(--muted);}
+.squad-coach{display:flex;align-items:center;gap:14px;padding:16px 18px;margin-bottom:20px;}
+.squad-coach .avatar{width:58px;height:58px;border-radius:50%;background:var(--panel-solid);border:2px solid var(--gold);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:26px;flex:0 0 auto;}
+.squad-coach .avatar img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.squad-coach .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+.squad-coach .name{font-family:'Orbitron';font-size:15px;color:#fff;margin-top:2px;}
+.squad-pos-title{display:flex;align-items:center;gap:9px;margin:20px 0 10px;}
+.squad-pos-title .bar{width:4px;height:18px;background:var(--cyan);border-radius:2px;}
+.squad-pos-title h3{font-family:'Orbitron';font-size:14px;color:#fff;margin:0;}
+.squad-pos-title .count{font-size:13px;color:var(--muted);}
+.squad-player-row{display:flex;align-items:center;gap:13px;padding:12px 16px;margin-bottom:8px;background:var(--panel);border:1px solid var(--line);border-radius:8px;}
+.squad-player-row .avatar{width:48px;height:48px;border-radius:50%;background:var(--panel-solid);border:2px solid var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:22px;flex:0 0 auto;}
+.squad-player-row .avatar img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.squad-player-row .info{flex:1;min-width:0;}
+.squad-player-row .name{font-weight:700;font-size:15px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.squad-player-row .meta{font-size:12px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;backdrop-filter:blur(8px);}
 section.tabpanel{display:none;}
 section.tabpanel.active{display:block;animation:fade .35s ease;}
@@ -327,7 +365,12 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
     <button data-tab="artilheiros"><span class="nav-icon">🥇</span>Artilheiros</button>
     <button data-tab="estadios"><span class="nav-icon">🏟️</span>Estádios</button>
     <button data-tab="historico"><span class="nav-icon">🏆</span>Histórico</button>
+    <button id="navMaisBtn"><span class="nav-icon">⋯</span>Mais</button>
   </nav>
+
+  <div class="mais-menu" id="maisMenu">
+    <button class="mais-item" data-tab="convocacoes"><span class="nav-icon">👥</span>Convocações</button>
+  </div>
 
   <!-- GRUPOS -->
   <section class="tabpanel active" id="tab-grupos">
@@ -405,9 +448,26 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
     </div>
   </section>
 
+  <!-- CONVOCACOES -->
+  <section class="tabpanel" id="tab-convocacoes">
+    <div id="squadsBrowseView">
+      <h2 class="section-title">Convocação de Jogadores</h2>
+      <p class="section-desc">Seleções convocadas para o torneio — 48 times, 26 jogadores cada. Escolha um continente e depois uma seleção.</p>
+      <div class="continent-pills" id="continentPills"></div>
+      <div class="country-grid" id="countryGrid"></div>
+    </div>
+    <div id="squadDetailView" style="display:none;">
+      <button class="squad-back" id="squadBackBtn">← Voltar</button>
+      <div class="squad-header" id="squadHeader"></div>
+      <div class="squad-coach panel" id="squadCoach"></div>
+      <div id="squadGroups"></div>
+    </div>
+  </section>
+
   <footer>Simulador da Copa 2026 do Hawelligton · não-oficial · Dados de referência coletados em 20/06/2026 · Não afiliado à FIFA</footer>
 </div>
 
+<script src="squads-data.js"></script>
 <script>
 /* ============== DADOS BASE ============== */
 const F = c => `<span class="flag">${c}</span>`;
@@ -1436,13 +1496,126 @@ function renderHistory(){
     </div>`).join('');
 }
 
+/* ============== RENDER: CONVOCACOES ============== */
+const CONTINENTS = {
+  'América do Sul': ['ARG','BRA','PAR','ECU','URU','COL'],
+  'América do Norte': ['CAN','MEX','USA','HAI','CUR','PAN'],
+  'Europa': ['GER','NED','ESP','FRA','ENG','POR','BEL','CRO','SUI','SWE','AUT','NOR','SCO','CZE','BIH','TUR'],
+  'África': ['MAR','RSA','CIV','TUN','EGY','CPV','SEN','ALG','COD','GHA'],
+  'Ásia': ['KOR','QAT','JPN','IRN','KSA','IRQ','JOR','UZB','AUS'],
+  'Oceania': ['NZL'],
+};
+const POS_GROUP_ORDER = ['Goleiro','Defensor','Meio-campista','Atacante'];
+const POS_GROUP_LABEL = {'Goleiro':'Goleiros','Defensor':'Defensores','Meio-campista':'Meio-campistas','Atacante':'Atacantes'};
+let currentContinent = 'América do Sul';
+
+function renderContinentPills(){
+  const el = document.getElementById('continentPills');
+  if(!el) return;
+  el.innerHTML = Object.keys(CONTINENTS).map(c=>
+    `<button class="continent-pill ${c===currentContinent?'active':''}" data-continent="${c}">${c}</button>`
+  ).join('');
+  el.querySelectorAll('.continent-pill').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      currentContinent = btn.dataset.continent;
+      renderContinentPills();
+      renderCountryGrid();
+    });
+  });
+}
+
+function renderCountryGrid(){
+  const el = document.getElementById('countryGrid');
+  if(!el) return;
+  const codes = CONTINENTS[currentContinent] || [];
+  el.innerHTML = codes.map(code=>`
+    <div class="country-card" data-code="${code}">
+      <span class="flag">${F(teamFlag(code))}</span>
+      <span class="code">${code}</span>
+    </div>`).join('');
+  el.querySelectorAll('.country-card').forEach(card=>{
+    card.addEventListener('click', ()=> showSquadDetail(card.dataset.code));
+  });
+}
+
+function showSquadDetail(code){
+  const squad = (typeof SQUADS!=='undefined') ? SQUADS[code] : null;
+  document.getElementById('squadsBrowseView').style.display = 'none';
+  document.getElementById('squadDetailView').style.display = 'block';
+  window.scrollTo(0,0);
+
+  document.getElementById('squadHeader').innerHTML = `
+    <span class="flag">${F(teamFlag(code))}</span>
+    <div><h2>${teamName(code)}</h2><div class="sub">Convocação de Jogadores · Copa 2026</div></div>`;
+
+  if(!squad){
+    document.getElementById('squadCoach').innerHTML = `<div class="label">Dados não disponíveis</div>`;
+    document.getElementById('squadGroups').innerHTML = '';
+    return;
+  }
+
+  document.getElementById('squadCoach').innerHTML = `
+    <div class="avatar">${squad.coachPhoto?`<img src="${squad.coachPhoto}" alt="${squad.coach}" loading="lazy" onerror="this.parentElement.textContent='👔';">`:'👔'}</div>
+    <div><div class="label">Técnico</div><div class="name">${squad.coach||'—'}</div></div>`;
+
+  const byPos = {};
+  (squad.players||[]).forEach(p=>{
+    if(!byPos[p.position]) byPos[p.position] = [];
+    byPos[p.position].push(p);
+  });
+
+  document.getElementById('squadGroups').innerHTML = POS_GROUP_ORDER.filter(pos=>byPos[pos]).map(pos=>{
+    const players = byPos[pos];
+    return `<div class="squad-pos-title"><span class="bar"></span><h3>${POS_GROUP_LABEL[pos]}</h3><span class="count">${players.length}</span></div>
+      ${players.map(p=>`
+        <div class="squad-player-row">
+          <div class="avatar">${p.photo?`<img src="${p.photo}" alt="${p.name}" loading="lazy" data-fb="${teamFlag(code)}" onerror="this.parentElement.textContent=this.dataset.fb;">`:F(teamFlag(code))}</div>
+          <div class="info">
+            <div class="name">${p.name}</div>
+            <div class="meta">${[p.age?p.age+'a':null, p.club].filter(Boolean).join(' · ')||'&nbsp;'}</div>
+          </div>
+        </div>`).join('')}`;
+  }).join('');
+}
+
+function backToSquadsBrowse(){
+  document.getElementById('squadDetailView').style.display = 'none';
+  document.getElementById('squadsBrowseView').style.display = 'block';
+}
+
+document.getElementById('squadBackBtn')?.addEventListener('click', backToSquadsBrowse);
+
+/* menu "Mais" */
+document.getElementById('navMaisBtn')?.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  document.getElementById('maisMenu').classList.toggle('open');
+});
+document.addEventListener('click', (e)=>{
+  const menu = document.getElementById('maisMenu');
+  if(menu && menu.classList.contains('open') && !menu.contains(e.target) && e.target.id!=='navMaisBtn'){
+    menu.classList.remove('open');
+  }
+});
+document.querySelectorAll('.mais-item[data-tab]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.getElementById('maisMenu').classList.remove('open');
+    document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('section.tabpanel').forEach(s=>s.classList.remove('active'));
+    document.getElementById('navMaisBtn').classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    backToSquadsBrowse();
+    window.scrollTo(0,0);
+  });
+});
+
 /* ============== TABS ============== */
-document.querySelectorAll('nav.tabs button').forEach(btn=>{
+document.querySelectorAll('nav.tabs button[data-tab]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
     document.querySelectorAll('section.tabpanel').forEach(s=>s.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    backToSquadsBrowse();
   });
 });
 
@@ -1504,6 +1677,8 @@ renderSchedule();
 setupGamesSubnav();
 renderGamesTab();
 setInterval(()=>{ renderSchedule(); renderGamesTab(); }, 60000); // reavalia a cada minuto status ao vivo/encerrado
+renderContinentPills();
+renderCountryGrid();
 
 </script>
 </body>

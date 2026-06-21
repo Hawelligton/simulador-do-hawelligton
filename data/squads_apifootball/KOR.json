@@ -1,0 +1,210 @@
+[
+  {
+    "id": 2890,
+    "name": "Jo Hyeon-Woo",
+    "age": 34,
+    "number": 21,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/2890.png"
+  },
+  {
+    "id": 2892,
+    "name": "Kim Seung-Gyu",
+    "age": 35,
+    "number": 1,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/2892.png"
+  },
+  {
+    "id": 34374,
+    "name": "Song Bum-Keun",
+    "age": 28,
+    "number": 12,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/34374.png"
+  },
+  {
+    "id": 547307,
+    "name": "Cho Wi-Je",
+    "age": 24,
+    "number": 14,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/547307.png"
+  },
+  {
+    "id": 2897,
+    "name": "Kim Min-Jae",
+    "age": 29,
+    "number": 4,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/2897.png"
+  },
+  {
+    "id": 2912,
+    "name": "Kim Moon-Hwan",
+    "age": 30,
+    "number": 15,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/2912.png"
+  },
+  {
+    "id": 34418,
+    "name": "Kim Tae-Hyeon",
+    "age": 25,
+    "number": 5,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/34418.png"
+  },
+  {
+    "id": 237218,
+    "name": "Lee Han-Beom",
+    "age": 23,
+    "number": 2,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/237218.png"
+  },
+  {
+    "id": 99211,
+    "name": "Park Jin-Seop",
+    "age": 30,
+    "number": 16,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/99211.png"
+  },
+  {
+    "id": 237220,
+    "name": "Lee Tae-Seok",
+    "age": 23,
+    "number": 13,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/237220.png"
+  },
+  {
+    "id": 197985,
+    "name": "Seol Young-Woo",
+    "age": 27,
+    "number": 22,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/197985.png"
+  },
+  {
+    "id": 280358,
+    "name": "J. Castrop",
+    "age": 22,
+    "number": 23,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/280358.png"
+  },
+  {
+    "id": 304951,
+    "name": "Lee Gi-Hyuk",
+    "age": 25,
+    "number": 3,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/304951.png"
+  },
+  {
+    "id": 357286,
+    "name": "Bae Jun-Ho",
+    "age": 22,
+    "number": 17,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/357286.png"
+  },
+  {
+    "id": 237050,
+    "name": "Eom Ji-Sung",
+    "age": 23,
+    "number": 25,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/237050.png"
+  },
+  {
+    "id": 2901,
+    "name": "Hwang In-Beom",
+    "age": 29,
+    "number": 6,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/2901.png"
+  },
+  {
+    "id": 34168,
+    "name": "Kim Jin-Gyu",
+    "age": 28,
+    "number": 24,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/34168.png"
+  },
+  {
+    "id": 34431,
+    "name": "Lee Dong-Gyeong",
+    "age": 28,
+    "number": 26,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/34431.png"
+  },
+  {
+    "id": 2906,
+    "name": "Lee Jae-Sung",
+    "age": 33,
+    "number": 10,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/2906.png"
+  },
+  {
+    "id": 927,
+    "name": "Lee Kang-In",
+    "age": 24,
+    "number": 19,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/927.png"
+  },
+  {
+    "id": 2909,
+    "name": "Paik Seung-Ho",
+    "age": 28,
+    "number": 8,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/2909.png"
+  },
+  {
+    "id": 304958,
+    "name": "Yang Hyun-Jun",
+    "age": 23,
+    "number": 20,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/304958.png"
+  },
+  {
+    "id": 24888,
+    "name": "Hwang Hee-Chan",
+    "age": 29,
+    "number": 11,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/24888.png"
+  },
+  {
+    "id": 34211,
+    "name": "Cho Gue-Sung",
+    "age": 28,
+    "number": 9,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/34211.png"
+  },
+  {
+    "id": 34710,
+    "name": "Oh Hyeon-Gyu",
+    "age": 24,
+    "number": 18,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/34710.png"
+  },
+  {
+    "id": 186,
+    "name": "Son Heung-Min",
+    "age": 33,
+    "number": 7,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/186.png"
+  }
+]

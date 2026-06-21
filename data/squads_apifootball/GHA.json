@@ -1,0 +1,210 @@
+[
+  {
+    "id": 480108,
+    "name": "B. Asare",
+    "age": 33,
+    "number": 16,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/480108.png"
+  },
+  {
+    "id": 144709,
+    "name": "J. Anang",
+    "age": 25,
+    "number": 12,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/144709.png"
+  },
+  {
+    "id": 3412,
+    "name": "L. Zigi",
+    "age": 29,
+    "number": 1,
+    "position": "Goalkeeper",
+    "photo": "https://media.api-sports.io/football/players/3412.png"
+  },
+  {
+    "id": 369425,
+    "name": "J. Adjetey",
+    "age": 22,
+    "number": 4,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/369425.png"
+  },
+  {
+    "id": 25341,
+    "name": "D. Luckassen",
+    "age": 30,
+    "number": 23,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/25341.png"
+  },
+  {
+    "id": 7578,
+    "name": "G. Mensah",
+    "age": 27,
+    "number": 14,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/7578.png"
+  },
+  {
+    "id": 196187,
+    "name": "A. Seidu",
+    "age": 26,
+    "number": 2,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/196187.png"
+  },
+  {
+    "id": 137223,
+    "name": "J. Opoku",
+    "age": 27,
+    "number": 18,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/137223.png"
+  },
+  {
+    "id": 404172,
+    "name": "K. Peprah Oppong",
+    "age": 21,
+    "number": 21,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/404172.png"
+  },
+  {
+    "id": 15900,
+    "name": "A. Mumin",
+    "age": 28,
+    "number": 6,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/15900.png"
+  },
+  {
+    "id": 191240,
+    "name": "M. Senaya",
+    "age": 24,
+    "number": 26,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/191240.png"
+  },
+  {
+    "id": 21996,
+    "name": "A. Baba",
+    "age": 31,
+    "number": 17,
+    "position": "Defender",
+    "photo": "https://media.api-sports.io/football/players/21996.png"
+  },
+  {
+    "id": 21010,
+    "name": "E. Owusu",
+    "age": 28,
+    "number": 15,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/21010.png"
+  },
+  {
+    "id": 49,
+    "name": "T. Partey",
+    "age": 32,
+    "number": 5,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/49.png"
+  },
+  {
+    "id": 3608,
+    "name": "K. Sibo",
+    "age": 27,
+    "number": 8,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/3608.png"
+  },
+  {
+    "id": 475575,
+    "name": "Caleb Marfo Yirenkyi",
+    "age": 19,
+    "number": 3,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/475575.png"
+  },
+  {
+    "id": 19281,
+    "name": "A. Semenyo",
+    "age": 25,
+    "number": 11,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/19281.png"
+  },
+  {
+    "id": 337426,
+    "name": "A. Boakye",
+    "age": 25,
+    "number": 20,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/337426.png"
+  },
+  {
+    "id": 303467,
+    "name": "A. Fatawu",
+    "age": 21,
+    "number": 7,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/303467.png"
+  },
+  {
+    "id": 410016,
+    "name": "P. Adu",
+    "age": 22,
+    "number": 25,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/410016.png"
+  },
+  {
+    "id": 82090,
+    "name": "B. Thomas-Asante",
+    "age": 27,
+    "number": 10,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/82090.png"
+  },
+  {
+    "id": 3428,
+    "name": "J. Ayew",
+    "age": 34,
+    "number": 9,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/3428.png"
+  },
+  {
+    "id": 411800,
+    "name": "C. Bonsu Baah",
+    "age": 21,
+    "number": 13,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/411800.png"
+  },
+  {
+    "id": 47294,
+    "name": "I. Williams",
+    "age": 31,
+    "number": 19,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/47294.png"
+  },
+  {
+    "id": 350856,
+    "name": "E. Nuamah",
+    "age": 22,
+    "number": 24,
+    "position": "Midfielder",
+    "photo": "https://media.api-sports.io/football/players/350856.png"
+  },
+  {
+    "id": 199837,
+    "name": "K. Sulemana",
+    "age": 23,
+    "number": 22,
+    "position": "Attacker",
+    "photo": "https://media.api-sports.io/football/players/199837.png"
+  }
+]
