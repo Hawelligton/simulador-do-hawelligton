@@ -390,6 +390,7 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
 .gc-team .gc-code{font-family:'Orbitron';font-size:14px;color:#fff;letter-spacing:.02em;}
 .gc-team .gc-name{font-size:11.5px;color:var(--muted);}
 .gc-score{display:flex;align-items:center;gap:8px;}
+.gc-score.live-partial .gc-num{border-color:var(--red);color:var(--red);animation:liveBadgePulse 1.4s infinite;}
 .gc-score .gc-num{font-family:'Orbitron';font-size:24px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--line);}
 .gc-score .gc-num.win{border-color:var(--green);color:var(--green);background:rgba(61,255,176,.08);}
 .gc-score .gc-sep{color:var(--muted);}
@@ -659,7 +660,7 @@ H:{teams:['KSA','URU','ESP','CPV'],matches:[
   {r:1,d:'15/06',tm:'13:00',c:'Atlanta',h:'ESP',a:'CPV',hs:0,as:0},
   {r:1,d:'15/06',tm:'19:00',c:'Miami',h:'KSA',a:'URU',hs:1,as:1},
   {r:2,d:'21/06',tm:'13:00',c:'Atlanta',h:'ESP',a:'KSA',hs:4,as:0},
-  {r:2,d:'21/06',tm:'19:00',c:'Miami',h:'URU',a:'CPV',hs:null,as:null},
+  {r:2,d:'21/06',tm:'19:00',c:'Miami',h:'URU',a:'CPV',hs:null,as:null,live:true,liveScore:[2,2]},
   {r:3,d:'26/06',tm:'21:00',c:'Houston',h:'CPV',a:'KSA',hs:null,as:null},
   {r:3,d:'26/06',tm:'21:00',c:'Guadalajara',h:'URU',a:'ESP',hs:null,as:null},
 ]},
@@ -834,6 +835,12 @@ function gameCardHtml(gk, m){
       <div class="gc-sep">:</div>
       <div class="gc-num ${aWin?'win':''}">${m.as}</div>
     </div>`;
+  } else if(status.isLive && m.liveScore){
+    centerHtml = `<div class="gc-score live-partial">
+      <div class="gc-num">${m.liveScore[0]}</div>
+      <div class="gc-sep">:</div>
+      <div class="gc-num">${m.liveScore[1]}</div>
+    </div>`;
   } else {
     centerHtml = `<div class="gc-vs-time">${status.isLive?'VS':m.tm}</div>`;
   }
@@ -935,7 +942,7 @@ const SCORERS = [
  {name:'Ismael Saibari', code:'MAR', goals:2, club:'PSV Eindhoven', photo:'https://media.api-sports.io/football/players/161897.png'},
  {name:'Brian Brobbey', code:'NED', goals:2, club:'Sunderland', photo:'https://media.api-sports.io/football/players/38750.png'},
  {name:'Cody Gakpo', code:'NED', goals:2, club:'Liverpool', photo:'https://media.api-sports.io/football/players/247.png'},
- {name:'Deniz Undav', code:'GER', goals:2, club:'VfB Stuttgart', photo:'https://media.api-sports.io/football/players/26475.png'},
+ {name:'Deniz Undav', code:'GER', goals:3, club:'VfB Stuttgart', photo:'https://media.api-sports.io/football/players/26475.png'},
  {name:'Viktor Gyökeres', code:'SWE', goals:1, club:'Arsenal', photo:'https://media.api-sports.io/football/players/18979.png'},
  {name:'Jamal Musiala', code:'GER', goals:1, club:'Bayern de Munique', photo:'https://media.api-sports.io/football/players/181812.png'},
  {name:'Cyle Larin', code:'CAN', goals:1, club:'Mallorca', photo:'https://media.api-sports.io/football/players/2001.png'},
