@@ -201,16 +201,21 @@ table.standings tr.thirdwatch td:first-child{color:var(--gold);}
 .scorer-goals span{font-size:10px;color:var(--muted);display:block;text-align:right;letter-spacing:.05em;}
 
 /* ESTADIOS */
-.stadium-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
-.stadium-card{padding:18px;display:flex;flex-direction:column;gap:8px;}
-.stadium-card .top{display:flex;justify-content:space-between;align-items:flex-start;}
-.stadium-card h3{font-family:'Orbitron';font-size:14px;margin:0;color:#fff;line-height:1.4;}
-.stadium-card .city{font-size:12.5px;color:var(--cyan);margin-top:3px;}
-.capacity{text-align:right;}
-.capacity b{font-family:'Orbitron';font-size:18px;color:var(--gold);display:block;}
-.capacity span{font-size:9.5px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;}
-.stadium-card p{font-size:13px;color:var(--text);opacity:.85;line-height:1.5;margin:4px 0 0;}
-.stadium-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.stadium-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+.stadium-card{padding:0;overflow:hidden;display:flex;flex-direction:column;}
+.stadium-photo-wrap{position:relative;width:100%;height:170px;background:var(--panel-solid);overflow:hidden;}
+.stadium-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+.stadium-photo-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,9,18,0) 35%,rgba(6,9,18,.92) 100%);}
+.stadium-photo-overlay{position:absolute;left:14px;right:14px;bottom:10px;display:flex;align-items:center;gap:10px;z-index:2;}
+.stadium-photo-overlay .flag{font-size:26px;line-height:1;flex:0 0 auto;}
+.stadium-photo-overlay h3{font-family:'Orbitron';font-size:15px;margin:0;color:#fff;line-height:1.3;}
+.stadium-photo-overlay .city{font-size:12px;color:var(--cyan);}
+.stadium-cap-badge{position:absolute;top:12px;right:12px;z-index:2;background:rgba(8,12,22,.78);backdrop-filter:blur(6px);border:1px solid rgba(255,178,63,.4);border-radius:18px;padding:5px 11px;text-align:center;}
+.stadium-cap-badge b{font-family:'Orbitron';font-size:14px;color:var(--gold);display:block;line-height:1.1;}
+.stadium-cap-badge span{font-size:8px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;}
+.stadium-card .info{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;}
+.stadium-card p{font-size:13px;color:var(--text);opacity:.85;line-height:1.5;margin:0;}
+.stadium-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px;}
 .tag{font-size:10px;border:1px solid var(--line);padding:3px 8px;border-radius:20px;color:var(--muted);}
 
 /* HISTORICO */
@@ -751,22 +756,22 @@ const SCORERS = [
 ].sort((a,b)=>b.goals-a.goals);
 
 const STADIUMS = [
- {name:'MetLife Stadium', city:'East Rutherford (Nova York/Nova Jersey)', code:'USA', cap:'82.500', tag:'Final · 19/07', hist:'Inaugurado em 2010, divide a casa com Giants e Jets da NFL. Construído no terreno do antigo Giants Stadium, palco da Copa de 1994. Recebe a grande final do Mundial.'},
- {name:'AT&T Stadium', city:'Arlington, Texas', code:'USA', cap:'80.000', tag:'9 jogos', hist:'Conhecido como "Jerry World", casa do Dallas Cowboys. É o estádio com mais partidas da Copa 2026, com capacidade expansível para o torneio.'},
- {name:'SoFi Stadium', city:'Inglewood, Los Angeles', code:'USA', cap:'70.000', tag:'Quartas de final', hist:'Inaugurado em 2020, um dos estádios mais modernos do mundo, com cobertura translúcida e telão circular. Sediou o Super Bowl LVI em 2022.'},
- {name:'Mercedes-Benz Stadium', city:'Atlanta, Geórgia', code:'USA', cap:'75.000', tag:'Semifinal', hist:'Teto retrátil em formato de "pétalas" e mais de 90 metros de altura. Um dos palcos mais imponentes da competição, recebendo uma das semifinais.'},
- {name:'Lumen Field', city:'Seattle, Washington', code:'USA', cap:'69.000', tag:'Fase de grupos', hist:'Casa do Seattle Sounders (MLS) e do Seattle Seahawks (NFL), com forte tradição futebolística e torcida reconhecida como uma das mais barulhentas dos EUA.'},
- {name:"Levi's Stadium", city:'Santa Clara, San Francisco', code:'USA', cap:'68.500', tag:'Fase de grupos', hist:'No coração do Vale do Silício, casa do San Francisco 49ers. Já recebeu o Super Bowl 50 e é referência em tecnologia e sustentabilidade.'},
- {name:'Lincoln Financial Field', city:'Filadélfia, Pensilvânia', code:'USA', cap:'69.000', tag:'Fase de grupos e mata-mata', hist:'Apelidado de "The Linc", é a casa do Philadelphia Eagles. A cidade tem forte tradição com o Philadelphia Union, da MLS.'},
- {name:'Arrowhead Stadium', city:'Kansas City, Missouri', code:'USA', cap:'76.000', tag:'Fase de grupos e mata-mata', hist:'Casa do Kansas City Chiefs, já deteve o recorde de estádio mais barulhento do mundo. Estreia como sede de Copa do Mundo em 2026.'},
- {name:'NRG Stadium', city:'Houston, Texas', code:'USA', cap:'72.000', tag:'Fase de grupos e mata-mata', hist:'Casa do Houston Texans, sediou o Super Bowl LI, marcado pela virada histórica do New England Patriots.'},
- {name:'Hard Rock Stadium', city:'Miami Gardens, Flórida', code:'USA', cap:'65.000', tag:'Fase de grupos e mata-mata', hist:'Casa do Miami Dolphins, em região de grande influência latino-americana e caribenha, ideal para a multidão internacional da Copa.'},
- {name:'Gillette Stadium', city:'Foxborough (Boston), Massachusetts', code:'USA', cap:'65.000', tag:'Fase de grupos e mata-mata', hist:'Casa do New England Patriots e do New England Revolution, em uma das regiões mais históricas dos Estados Unidos.'},
- {name:'Estádio Azteca', city:'Cidade do México', code:'MEX', cap:'83.000', tag:'Abertura · 11/06', hist:'O mais lendário estádio do torneio: sediou as finais de 1970 (o "Jogo do Século") e 1986 (o gol do século de Maradona). Em 2026, se torna o primeiro estádio do mundo a receber partidas de três Copas diferentes, recebendo também a abertura do torneio.'},
- {name:'Estádio Akron', city:'Guadalajara', code:'MEX', cap:'48.000', tag:'Fase de grupos', hist:'Casa do Chivas de Guadalajara, inaugurado em 2010 com arquitetura moderna inspirada em um vulcão, refletindo a paixão da torcida rubro-branca local.'},
- {name:'Estádio BBVA', city:'Monterrey', code:'MEX', cap:'53.500', tag:'Fase de grupos', hist:'Casa do CF Monterrey (Rayados), inaugurado em 2015 com vista para a Sierra Madre, é considerado um dos estádios mais bonitos da América Latina.'},
- {name:'BC Place', city:'Vancouver', code:'CAN', cap:'54.500', tag:'Fase de grupos e mata-mata', hist:'Estádio coberto e retrátil que sediou a cerimônia de abertura dos Jogos Olímpicos de Inverno de 2010 e a final da Copa do Mundo Feminina de 2015.'},
- {name:'BMO Field', city:'Toronto', code:'CAN', cap:'45.700', tag:'Fase de grupos', hist:'Casa do Toronto FC, foi ampliado especialmente para a Copa de 2026, consolidando o Canadá como sede de Mundial pela primeira vez na história.'},
+ {name:'MetLife Stadium', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Metlife_stadium_%28Aerial_view%29.jpg/960px-Metlife_stadium_%28Aerial_view%29.jpg', city:'East Rutherford (Nova York/Nova Jersey)', code:'USA', cap:'82.500', tag:'Final · 19/07', hist:'Inaugurado em 2010, divide a casa com Giants e Jets da NFL. Construído no terreno do antigo Giants Stadium, palco da Copa de 1994. Recebe a grande final do Mundial.'},
+ {name:'AT&T Stadium', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Arlington_June_2020_4_%28AT%26T_Stadium%29.jpg/960px-Arlington_June_2020_4_%28AT%26T_Stadium%29.jpg', city:'Arlington, Texas', code:'USA', cap:'80.000', tag:'9 jogos', hist:'Conhecido como "Jerry World", casa do Dallas Cowboys. É o estádio com mais partidas da Copa 2026, com capacidade expansível para o torneio.'},
+ {name:'SoFi Stadium', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/SoFi_Stadium_2023.jpg/960px-SoFi_Stadium_2023.jpg', city:'Inglewood, Los Angeles', code:'USA', cap:'70.000', tag:'Quartas de final', hist:'Inaugurado em 2020, um dos estádios mais modernos do mundo, com cobertura translúcida e telão circular. Sediou o Super Bowl LVI em 2022.'},
+ {name:'Mercedes-Benz Stadium', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Mercedes_Benz_Stadium_time_lapse_capture_2017-08-13.jpg/960px-Mercedes_Benz_Stadium_time_lapse_capture_2017-08-13.jpg', city:'Atlanta, Geórgia', code:'USA', cap:'75.000', tag:'Semifinal', hist:'Teto retrátil em formato de "pétalas" e mais de 90 metros de altura. Um dos palcos mais imponentes da competição, recebendo uma das semifinais.'},
+ {name:'Lumen Field', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/2026_FIFA_World_Cup_-_Belgium_v._Egypt_in_Seattle_-_04.jpg/960px-2026_FIFA_World_Cup_-_Belgium_v._Egypt_in_Seattle_-_04.jpg', city:'Seattle, Washington', code:'USA', cap:'69.000', tag:'Fase de grupos', hist:'Casa do Seattle Sounders (MLS) e do Seattle Seahawks (NFL), com forte tradição futebolística e torcida reconhecida como uma das mais barulhentas dos EUA.'},
+ {name:"Levi's Stadium", photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Levi%27s_Stadium_in_February_2016_prior_to_Super_Bowl_50_%2824398261729%29.jpg/960px-Levi%27s_Stadium_in_February_2016_prior_to_Super_Bowl_50_%2824398261729%29.jpg', city:'Santa Clara, San Francisco', code:'USA', cap:'68.500', tag:'Fase de grupos', hist:'No coração do Vale do Silício, casa do San Francisco 49ers. Já recebeu o Super Bowl 50 e é referência em tecnologia e sustentabilidade.'},
+ {name:'Lincoln Financial Field', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Lincoln_Financial_Field_%28Aerial_view%29.jpg/960px-Lincoln_Financial_Field_%28Aerial_view%29.jpg', city:'Filadélfia, Pensilvânia', code:'USA', cap:'69.000', tag:'Fase de grupos e mata-mata', hist:'Apelidado de "The Linc", é a casa do Philadelphia Eagles. A cidade tem forte tradição com o Philadelphia Union, da MLS.'},
+ {name:'Arrowhead Stadium', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Aerial_view_of_Arrowhead_Stadium_08-31-2013.jpg/960px-Aerial_view_of_Arrowhead_Stadium_08-31-2013.jpg', city:'Kansas City, Missouri', code:'USA', cap:'76.000', tag:'Fase de grupos e mata-mata', hist:'Casa do Kansas City Chiefs, já deteve o recorde de estádio mais barulhento do mundo. Estreia como sede de Copa do Mundo em 2026.'},
+ {name:'NRG Stadium', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Nrg_stadium.jpg/960px-Nrg_stadium.jpg', city:'Houston, Texas', code:'USA', cap:'72.000', tag:'Fase de grupos e mata-mata', hist:'Casa do Houston Texans, sediou o Super Bowl LI, marcado pela virada histórica do New England Patriots.'},
+ {name:'Hard Rock Stadium', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Hard_Rock_Stadium_for_Super_Bowl_LIV_%2849606710103%29.jpg/960px-Hard_Rock_Stadium_for_Super_Bowl_LIV_%2849606710103%29.jpg', city:'Miami Gardens, Flórida', code:'USA', cap:'65.000', tag:'Fase de grupos e mata-mata', hist:'Casa do Miami Dolphins, em região de grande influência latino-americana e caribenha, ideal para a multidão internacional da Copa.'},
+ {name:'Gillette Stadium', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Gillette_Stadium_%28Top_View%29.jpg/960px-Gillette_Stadium_%28Top_View%29.jpg', city:'Foxborough (Boston), Massachusetts', code:'USA', cap:'65.000', tag:'Fase de grupos e mata-mata', hist:'Casa do New England Patriots e do New England Revolution, em uma das regiões mais históricas dos Estados Unidos.'},
+ {name:'Estádio Azteca', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Vista_a%C3%A9rea_del_Estadio_Azteca_-_2026_-_02.jpg/960px-Vista_a%C3%A9rea_del_Estadio_Azteca_-_2026_-_02.jpg', city:'Cidade do México', code:'MEX', cap:'83.000', tag:'Abertura · 11/06', hist:'O mais lendário estádio do torneio: sediou as finais de 1970 (o "Jogo do Século") e 1986 (o gol do século de Maradona). Em 2026, se torna o primeiro estádio do mundo a receber partidas de três Copas diferentes, recebendo também a abertura do torneio.'},
+ {name:'Estádio Akron', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Estadio_Akron_02-07-2022_cabecera_sur_lado_derecho_%283%29.jpg/960px-Estadio_Akron_02-07-2022_cabecera_sur_lado_derecho_%283%29.jpg', city:'Guadalajara', code:'MEX', cap:'48.000', tag:'Fase de grupos', hist:'Casa do Chivas de Guadalajara, inaugurado em 2010 com arquitetura moderna inspirada em um vulcão, refletindo a paixão da torcida rubro-branca local.'},
+ {name:'Estádio BBVA', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Mexico_Guadalupe_Monterrey_Estadio_BBVA_Bancomer_fifa_world_cup_2026_6.JPG/960px-Mexico_Guadalupe_Monterrey_Estadio_BBVA_Bancomer_fifa_world_cup_2026_6.JPG', city:'Monterrey', code:'MEX', cap:'53.500', tag:'Fase de grupos', hist:'Casa do CF Monterrey (Rayados), inaugurado em 2015 com vista para a Sierra Madre, é considerado um dos estádios mais bonitos da América Latina.'},
+ {name:'BC Place', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/BC_Place_2015_Women%27s_FIFA_World_Cup.jpg/960px-BC_Place_2015_Women%27s_FIFA_World_Cup.jpg', city:'Vancouver', code:'CAN', cap:'54.500', tag:'Fase de grupos e mata-mata', hist:'Estádio coberto e retrátil que sediou a cerimônia de abertura dos Jogos Olímpicos de Inverno de 2010 e a final da Copa do Mundo Feminina de 2015.'},
+ {name:'BMO Field', photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Toronto_BMO_Field_in_2024.jpg/960px-Toronto_BMO_Field_in_2024.jpg', city:'Toronto', code:'CAN', cap:'45.700', tag:'Fase de grupos', hist:'Casa do Toronto FC, foi ampliado especialmente para a Copa de 2026, consolidando o Canadá como sede de Mundial pela primeira vez na história.'},
 ];
 
 const HISTORY = [
@@ -1243,15 +1248,21 @@ function renderStadiums(){
   const grid = document.getElementById('stadiumGrid');
   grid.innerHTML = STADIUMS.map(s=>`
     <div class="stadium-card panel">
-      <div class="top">
-        <div>
-          <h3>${F(teamFlag(s.code))} ${s.name}</h3>
-          <div class="city">${s.city}</div>
+      <div class="stadium-photo-wrap">
+        ${s.photo?`<img src="${s.photo}" alt="${s.name}" loading="lazy" onerror="this.style.display='none';">`:''}
+        <div class="stadium-cap-badge"><b>${s.cap}</b><span>lugares</span></div>
+        <div class="stadium-photo-overlay">
+          <span class="flag">${F(teamFlag(s.code))}</span>
+          <div>
+            <h3>${s.name}</h3>
+            <div class="city">${s.city}</div>
+          </div>
         </div>
-        <div class="capacity"><b>${s.cap}</b><span>lugares</span></div>
       </div>
-      <p>${s.hist}</p>
-      <div class="stadium-tags"><span class="tag">${s.tag}</span></div>
+      <div class="info">
+        <p>${s.hist}</p>
+        <div class="stadium-tags"><span class="tag">${s.tag}</span></div>
+      </div>
     </div>`).join('');
 }
 
