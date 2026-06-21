@@ -223,6 +223,47 @@ table.standings tr.thirdwatch td:first-child{color:var(--gold);}
 .finalist .info p{margin:3px 0 0;font-size:12px;color:var(--muted);line-height:1.45;}
 
 footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;letter-spacing:.03em;}
+
+/* JOGOS TAB */
+.games-subnav{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 14px;-webkit-overflow-scrolling:touch;}
+.games-subnav::-webkit-scrollbar{display:none;}
+.games-pill{flex:0 0 auto;font-family:'Rajdhani';font-weight:600;font-size:14px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:11px 18px;cursor:pointer;display:flex;align-items:center;gap:7px;white-space:nowrap;transition:.2s;}
+.games-pill:hover{color:var(--text);}
+.games-pill.active{color:#fff;background:linear-gradient(90deg,#1ea36a,#2f7fd6);border-color:transparent;}
+.live-count{background:var(--red);color:#1a0006;font-size:10.5px;font-weight:800;border-radius:10px;padding:1px 7px;min-width:16px;text-align:center;}
+.date-strip-wrap{overflow-x:auto;padding:14px 8px;margin-bottom:18px;-webkit-overflow-scrolling:touch;}
+.date-strip{display:flex;gap:10px;width:max-content;}
+.date-chip{flex:0 0 auto;width:62px;text-align:center;padding:9px 4px 8px;border-radius:12px;border:1px solid transparent;cursor:pointer;transition:.2s;}
+.date-chip .wd{font-size:10px;color:var(--muted);letter-spacing:.04em;}
+.date-chip .dnum{font-family:'Orbitron';font-size:19px;color:var(--text);margin:2px 0;}
+.date-chip .mo{font-size:9.5px;color:var(--muted);letter-spacing:.04em;}
+.date-chip.active{border-color:var(--cyan);background:rgba(57,243,255,.07);}
+.date-chip.active .wd, .date-chip.active .dnum, .date-chip.active .mo{color:var(--cyan);}
+.date-chip .dot{width:5px;height:5px;border-radius:50%;background:var(--green);margin:3px auto 0;}
+.time-group-header{display:flex;align-items:center;gap:12px;margin:18px 0 10px;}
+.time-pill{font-family:'Orbitron';font-size:13px;color:var(--cyan);background:rgba(57,243,255,.08);border:1px solid var(--line);border-radius:18px;padding:7px 14px;display:flex;align-items:center;gap:6px;flex:0 0 auto;}
+.time-group-header .tg-line{flex:1;height:1px;background:var(--line);}
+.time-group-header .tg-count{font-size:12px;color:var(--muted);flex:0 0 auto;}
+.game-card{padding:14px 16px 16px;margin-bottom:14px;}
+.game-card.is-live{border-color:var(--green);box-shadow:0 0 16px rgba(61,255,176,.12);}
+.gc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.gc-comp{font-size:12px;color:var(--cyan-dim);font-weight:600;}
+.gc-status{font-size:11px;font-weight:700;letter-spacing:.04em;border-radius:14px;padding:4px 11px;border:1px solid var(--line);color:var(--muted);}
+.gc-status.fim{color:var(--text);}
+.gc-status.live{color:var(--green);border-color:rgba(61,255,176,.4);background:rgba(61,255,176,.08);display:flex;align-items:center;gap:5px;}
+.gc-status.live .pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulseDot 1.4s infinite;}
+@keyframes pulseDot{0%,100%{opacity:1;}50%{opacity:.3;}}
+.gc-teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;}
+.gc-team{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;}
+.gc-team .gc-flag{font-size:32px;line-height:1;}
+.gc-team .gc-code{font-family:'Orbitron';font-size:14px;color:#fff;letter-spacing:.02em;}
+.gc-team .gc-name{font-size:11.5px;color:var(--muted);}
+.gc-score{display:flex;align-items:center;gap:8px;}
+.gc-score .gc-num{font-family:'Orbitron';font-size:24px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--line);}
+.gc-score .gc-num.win{border-color:var(--green);color:var(--green);background:rgba(61,255,176,.08);}
+.gc-score .gc-sep{color:var(--muted);}
+.gc-vs-time{font-family:'Orbitron';font-size:15px;color:var(--gold);}
+.gc-venue{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;font-size:11.5px;color:var(--muted);}
 @media(max-width:600px){
   .match-row{grid-template-columns:1fr auto auto auto 1fr;font-size:12px;}
   table.standings{font-size:11.5px;}
@@ -258,6 +299,7 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
 
   <nav class="tabs">
     <button data-tab="grupos" class="active"><span class="nav-icon">⚽</span>Grupos</button>
+    <button data-tab="jogos"><span class="nav-icon">📅</span>Jogos</button>
     <button data-tab="artilheiros"><span class="nav-icon">🥇</span>Artilheiros</button>
     <button data-tab="estadios"><span class="nav-icon">🏟️</span>Estádios</button>
     <button data-tab="historico"><span class="nav-icon">🏆</span>Histórico</button>
@@ -296,6 +338,20 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
     <div class="panel bk-scroll" style="border-radius:0 0 6px 6px;">
       <div id="bracket2"></div>
     </div>
+  </section>
+
+  <!-- JOGOS -->
+  <section class="tabpanel" id="tab-jogos">
+    <div class="games-subnav">
+      <button class="games-pill" id="gpAoVivo">Ao Vivo <span class="live-count" id="liveCount" style="display:none;">0</span></button>
+      <button class="games-pill active" id="gpProximos">Próximos Jogos</button>
+      <button class="games-pill" id="gpGrupos">Fase de Grupos</button>
+      <button class="games-pill" id="gpMataMata">Mata-Mata</button>
+    </div>
+    <div class="date-strip-wrap panel" id="dateStripWrap">
+      <div class="date-strip" id="dateStrip"></div>
+    </div>
+    <div id="gamesList"></div>
   </section>
 
   <!-- ARTILHEIROS -->
@@ -490,6 +546,180 @@ function renderSchedule(){
   }
 }
 let bkLastDims = null;
+
+/* ============== ABA JOGOS (calendário no estilo do app de referência) ============== */
+const WD_PT = ['DOM','SEG','TER','QUA','QUI','SEX','SÁB'];
+const MO_PT = {'01':'JAN','02':'FEV','03':'MAR','04':'ABR','05':'MAI','06':'JUN','07':'JUL','08':'AGO','09':'SET','10':'OUT','11':'NOV','12':'DEZ'};
+let gamesSubFilter = 'proximos'; // 'ao-vivo' | 'proximos'
+let selectedGameDate = null;
+
+function getAllFlatMatches(){
+  const arr = [];
+  Object.entries(GROUPS).forEach(([gk,g])=>{
+    g.matches.forEach(m=> arr.push({gk, m, dt: matchDateTime(m)}));
+  });
+  arr.sort((a,b)=>a.dt-b.dt);
+  return arr;
+}
+
+function isSameLocalDate(dt, now){
+  return dt.getFullYear()===now.getFullYear() && dt.getMonth()===now.getMonth() && dt.getDate()===now.getDate();
+}
+
+function matchLiveStatus(m){
+  if(m.hs!==null && m.as!==null) return {isLive:false, isDone:true};
+  const dt = matchDateTime(m);
+  const now = new Date();
+  const estEnd = new Date(dt.getTime()+2.5*3600*1000);
+  const live = !!m.live || (dt<=now && now<estEnd);
+  return {isLive:live, isDone:false};
+}
+
+function renderDateStrip(allMatches){
+  const stripEl = document.getElementById('dateStrip');
+  if(!stripEl) return;
+  const dates = [...new Set(allMatches.map(x=>x.m.d))];
+  const now = new Date();
+
+  if(!selectedGameDate || !dates.includes(selectedGameDate)){
+    let todayStr = null;
+    allMatches.forEach(x=>{ if(isSameLocalDate(x.dt, now)) todayStr = x.m.d; });
+    if(todayStr) selectedGameDate = todayStr;
+    else {
+      const future = allMatches.find(x=>x.dt > now);
+      selectedGameDate = future ? future.m.d : dates[dates.length-1];
+    }
+  }
+
+  stripEl.innerHTML = dates.map(d=>{
+    const sample = allMatches.find(x=>x.m.d===d).dt;
+    const wd = WD_PT[sample.getDay()];
+    const [day,month] = d.split('/');
+    const isToday = isSameLocalDate(sample, now);
+    const active = d===selectedGameDate;
+    return `<div class="date-chip ${active?'active':''}" data-date="${d}">
+      <div class="wd">${isToday?'HOJE':wd+'.'}</div>
+      <div class="dnum">${day}</div>
+      <div class="mo">${MO_PT[month]||month}</div>
+      ${isToday?'<div class="dot"></div>':''}
+    </div>`;
+  }).join('');
+
+  stripEl.querySelectorAll('.date-chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      selectedGameDate = chip.dataset.date;
+      renderGamesTab();
+    });
+  });
+
+  const activeChip = stripEl.querySelector('.date-chip.active');
+  if(activeChip && activeChip.scrollIntoView) activeChip.scrollIntoView({inline:'center', block:'nearest'});
+}
+
+function gameStatusBadge(m){
+  const st = matchLiveStatus(m);
+  if(st.isDone) return {html:`<span class="gc-status fim">FIM</span>`, isLive:false};
+  if(st.isLive) return {html:`<span class="gc-status live"><span class="pulse-dot"></span>AO VIVO</span>`, isLive:true};
+  return {html:`<span class="gc-status">${m.tm}</span>`, isLive:false};
+}
+
+function gameCardHtml(gk, m){
+  const status = gameStatusBadge(m);
+  const played = m.hs!==null && m.as!==null;
+  const roundLabel = m.r===1?'1ª rodada':m.r===2?'2ª rodada':'3ª rodada';
+  let centerHtml;
+  if(played){
+    const hWin = m.hs>m.as, aWin = m.as>m.hs;
+    centerHtml = `<div class="gc-score">
+      <div class="gc-num ${hWin?'win':''}">${m.hs}</div>
+      <div class="gc-sep">:</div>
+      <div class="gc-num ${aWin?'win':''}">${m.as}</div>
+    </div>`;
+  } else {
+    centerHtml = `<div class="gc-vs-time">${status.isLive?'VS':m.tm}</div>`;
+  }
+  return `<div class="panel game-card ${status.isLive?'is-live':''}">
+    <div class="gc-top">
+      <div class="gc-comp">Grupo ${gk} · ${roundLabel}</div>
+      ${status.html}
+    </div>
+    <div class="gc-teams">
+      <div class="gc-team"><span class="gc-flag">${F(teamFlag(m.h))}</span><span class="gc-code">${m.h}</span><span class="gc-name">${teamName(m.h)}</span></div>
+      ${centerHtml}
+      <div class="gc-team"><span class="gc-flag">${F(teamFlag(m.a))}</span><span class="gc-code">${m.a}</span><span class="gc-name">${teamName(m.a)}</span></div>
+    </div>
+    <div class="gc-venue">🏟️ ${m.c} · ${m.tm} (Brasília)</div>
+  </div>`;
+}
+
+function renderGamesList(allMatches){
+  const listEl = document.getElementById('gamesList');
+  const stripWrap = document.getElementById('dateStripWrap');
+  if(!listEl) return;
+  let filtered;
+  if(gamesSubFilter==='ao-vivo'){
+    filtered = allMatches.filter(x=>gameStatusBadge(x.m).isLive);
+    if(stripWrap) stripWrap.style.display='none';
+    if(filtered.length===0){
+      listEl.innerHTML = `<div class="panel" style="padding:34px 20px;text-align:center;color:var(--muted);">⚽ Nenhum jogo ao vivo no momento.<br>Confira em "Próximos Jogos".</div>`;
+      return;
+    }
+  } else {
+    if(stripWrap) stripWrap.style.display='';
+    filtered = allMatches.filter(x=>x.m.d===selectedGameDate);
+  }
+
+  const byTime = {};
+  filtered.forEach(x=>{
+    if(!byTime[x.m.tm]) byTime[x.m.tm]=[];
+    byTime[x.m.tm].push(x);
+  });
+  const times = Object.keys(byTime).sort();
+  listEl.innerHTML = times.map(t=>{
+    const group = byTime[t];
+    return `<div class="time-group-header"><span class="time-pill">🕐 ${t}</span><span class="tg-line"></span><span class="tg-count">${group.length} jogo${group.length>1?'s':''}</span></div>
+      ${group.map(x=>gameCardHtml(x.gk, x.m)).join('')}`;
+  }).join('');
+}
+
+function updateLiveCount(allMatches){
+  const liveMatches = allMatches.filter(x=>gameStatusBadge(x.m).isLive);
+  const badge = document.getElementById('liveCount');
+  if(!badge) return;
+  if(liveMatches.length>0){ badge.style.display='inline-block'; badge.textContent = liveMatches.length; }
+  else badge.style.display='none';
+}
+
+function renderGamesTab(){
+  const all = getAllFlatMatches();
+  updateLiveCount(all);
+  if(gamesSubFilter!=='ao-vivo') renderDateStrip(all);
+  renderGamesList(all);
+}
+
+function setupGamesSubnav(){
+  const goGrupos = ()=> document.querySelector('nav.tabs button[data-tab="grupos"]').click();
+  document.getElementById('gpAoVivo').addEventListener('click', function(){
+    gamesSubFilter='ao-vivo';
+    document.querySelectorAll('.games-pill').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    renderGamesTab();
+  });
+  document.getElementById('gpProximos').addEventListener('click', function(){
+    gamesSubFilter='proximos';
+    document.querySelectorAll('.games-pill').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    renderGamesTab();
+  });
+  document.getElementById('gpGrupos').addEventListener('click', goGrupos);
+  document.getElementById('gpMataMata').addEventListener('click', ()=>{
+    goGrupos();
+    setTimeout(()=>{
+      const el = document.getElementById('bracket2');
+      if(el && el.scrollIntoView) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 150);
+  });
+}
 
 const SCORERS = [
  {name:'Lionel Messi', code:'ARG', goals:3, club:'Inter Miami'},
@@ -688,6 +918,7 @@ function renderGroups(){
       requestAnimationFrame(refocus);
 
       renderSchedule();
+      renderGamesTab();
     });
   });
 }
@@ -705,6 +936,7 @@ function simulateRandom(){
   renderGroups();
   renderTicker();
   renderSchedule();
+  renderGamesTab();
 }
 
 function resetData(){
@@ -716,6 +948,7 @@ function resetData(){
   document.getElementById('bracket2').innerHTML = '<p style="color:var(--muted);padding:20px;">Clique em "Gerar / Atualizar Mata-Mata" para montar o chaveamento com a classificação atual.</p>';
   document.getElementById('thirdsBox').innerHTML = '';
   renderSchedule();
+  renderGamesTab();
 }
 
 /* ============== RENDER: BRACKET (estrutura oficial FIFA) ============== */
@@ -1100,7 +1333,9 @@ renderScorers();
 renderStadiums();
 renderHistory();
 renderSchedule();
-setInterval(renderSchedule, 60000); // reavalia a cada minuto se algum jogo já deveria ter terminado
+setupGamesSubnav();
+renderGamesTab();
+setInterval(()=>{ renderSchedule(); renderGamesTab(); }, 60000); // reavalia a cada minuto status ao vivo/encerrado
 
 </script>
 </body>
