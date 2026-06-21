@@ -1,35 +1,34 @@
-# Rotina de busca de fotos (Wikimedia)
+# Rotinas de busca de fotos dos artilheiros
 
-`fetch_player_photos.py` consulta a API da Wikipedia/Wikimedia (que serve as imagens
-diretamente do Wikimedia Commons, em `upload.wikimedia.org`) para cada artilheiro
-cadastrado e retorna a URL da melhor foto disponível.
+Duas rotinas disponíveis para preencher `data/player_photos*.json` (o app lê
+apenas a URL da foto desses arquivos — nunca a imagem em si):
 
-## Por que via Wikipedia e não busca direta no Commons?
+## 1. `fetch_player_photos_apifootball.py` (fonte ativa no app)
 
-A busca textual direta na API do Commons (`action=query&generator=search` no namespace
-de arquivos) é ruidosa: para nomes comuns ela pode retornar fotos de outras pessoas,
-times, ou arquivos sem relação alguma (ex.: já aconteceu de devolver uma foto de luta
-livre para "Jonathan David"). Por isso a rotina usa o endpoint `pageimages` da própria
-Wikipedia, que devolve a foto de capa (infobox) **curada pelos editores** para o artigo
-daquela pessoa — e essa imagem já está hospedada nos servidores do Wikimedia Commons.
-Antes de aceitar o resultado, o texto inicial do artigo é checado em busca de palavras
-como "footballer"/"midfielder"/"forward" etc., para confirmar que é mesmo a pessoa certa
-(evita pegar um homônimo).
+Consulta `GET /players/profiles?search=<sobrenome>` na API do api-football
+(api-sports.io). Esse endpoint não tem a restrição de temporada que os jogos
+têm no plano Free (que só libera 2022–2024) — perfil e foto do jogador
+funcionam mesmo no plano gratuito. Como a busca por sobrenome pode trazer
+homônimos, o resultado é filtrado pela nacionalidade esperada de cada
+artilheiro. Requer uma chave de API (`x-apisports-key`) — configure em
+`API_KEY` no topo do script.
+
+## 2. `fetch_player_photos.py` (fonte alternativa)
+
+Consulta a API da Wikipedia (que serve fotos hospedadas no Wikimedia
+Commons). Não exige chave/cadastro. O texto inicial do artigo é checado em
+busca de palavras como "footballer" antes de aceitar a foto, pra evitar
+pegar um homônimo.
 
 ## Como rodar
 
 ```bash
+python3 fetch_player_photos_apifootball.py
+# ou
 python3 fetch_player_photos.py
 ```
 
-Gera `results2.json` com `{ "Nome do Jogador": { "photo": "url...", "wiki_title": "..." } }`.
-O resultado consolidado de todos os 24 artilheiros está em `data/player_photos.json`,
-na raiz do repositório — é o "banco de dados" usado pelo app: apenas a URL da imagem é
-armazenada, nunca o arquivo em si.
-
 ## Licença das imagens
 
-Todas as imagens vêm do Wikimedia Commons, que só hospeda conteúdo de uso livre
-(domínio público ou licenças Creative Commons). Ainda assim, ao reutilizar este projeto
-publicamente, vale checar a página de cada arquivo (`wiki_title`) para conferir o crédito
-exigido pela licença específica.
+- api-football: fotos de uso editorial dentro dos termos do serviço da API.
+- Wikimedia Commons: domínio público ou licenças Creative Commons.
