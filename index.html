@@ -217,6 +217,20 @@ table.standings tr.thirdwatch td:first-child{color:var(--gold);}
 .stadium-card p{font-size:13px;color:var(--text);opacity:.85;line-height:1.5;margin:0;}
 .stadium-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px;}
 .tag{font-size:10px;border:1px solid var(--line);padding:3px 8px;border-radius:20px;color:var(--muted);}
+.stadium-toggle{cursor:pointer;text-align:center;padding:11px 0 9px;color:var(--cyan);font-size:12.5px;font-weight:700;letter-spacing:.03em;display:flex;align-items:center;justify-content:center;gap:6px;border-top:1px solid var(--line);margin-top:4px;background:none;border-left:none;border-right:none;border-bottom:none;width:100%;}
+.stadium-toggle:hover{background:rgba(57,243,255,.05);}
+.stadium-games{padding:2px 16px 14px;display:none;}
+.stadium-games.open{display:block;}
+.sgr-row{display:grid;grid-template-columns:42px 32px 1fr auto 1fr;align-items:center;gap:8px;padding:10px 2px;border-bottom:1px solid rgba(255,255,255,.05);}
+.sgr-row:last-child{border-bottom:none;}
+.sgr-time{font-size:10px;color:var(--muted);text-align:center;line-height:1.5;}
+.sgr-time b{display:block;color:var(--text);font-size:12px;font-weight:700;}
+.sgr-badge{font-size:10px;font-weight:800;text-align:center;background:rgba(57,243,255,.1);border:1px solid var(--cyan-dim);color:var(--cyan);border-radius:8px;padding:5px 0;font-family:'Orbitron';}
+.sgr-team{display:flex;align-items:center;gap:6px;font-weight:700;font-size:12.5px;white-space:nowrap;}
+.sgr-team.away{justify-content:flex-end;}
+.sgr-team .flag{font-size:15px;}
+.sgr-score{font-family:'Orbitron';font-size:12.5px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:5px 10px;text-align:center;color:var(--text);white-space:nowrap;}
+.sgr-score.done{color:var(--green);border-color:rgba(61,255,176,.35);background:rgba(61,255,176,.08);}
 
 /* HISTORICO */
 .history-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;}
@@ -926,6 +940,7 @@ function renderGroups(){
 
       renderSchedule();
       renderGamesTab();
+      renderStadiums();
     });
   });
 }
@@ -944,6 +959,7 @@ function simulateRandom(){
   renderTicker();
   renderSchedule();
   renderGamesTab();
+  renderStadiums();
 }
 
 function resetData(){
@@ -956,6 +972,7 @@ function resetData(){
   document.getElementById('thirdsBox').innerHTML = '';
   renderSchedule();
   renderGamesTab();
+  renderStadiums();
 }
 
 /* ============== RENDER: BRACKET (estrutura oficial FIFA) ============== */
@@ -1244,10 +1261,44 @@ function renderScorers(){
 }
 
 /* ============== RENDER: ESTADIOS ============== */
+/* mapa cidade (campo m.c dos jogos) -> nome do estádio */
+const CITY_TO_STADIUM = {
+  'Nova York':'MetLife Stadium', 'Dallas':'AT&T Stadium', 'Los Angeles':'SoFi Stadium',
+  'Atlanta':'Mercedes-Benz Stadium', 'Seattle':'Lumen Field', 'São Francisco':"Levi's Stadium",
+  'Filadélfia':'Lincoln Financial Field', 'Kansas City':'Arrowhead Stadium', 'Houston':'NRG Stadium',
+  'Miami':'Hard Rock Stadium', 'Boston':'Gillette Stadium', 'Cidade do México':'Estádio Azteca',
+  'Guadalajara':'Estádio Akron', 'Monterrey':'Estádio BBVA', 'Vancouver':'BC Place', 'Toronto':'BMO Field',
+};
+let expandedStadiums = new Set();
+
+function getStadiumMatches(stadiumName){
+  const cityKey = Object.keys(CITY_TO_STADIUM).find(c=>CITY_TO_STADIUM[c]===stadiumName);
+  if(!cityKey) return [];
+  const arr = [];
+  Object.entries(GROUPS).forEach(([gk,g])=>{
+    g.matches.forEach(m=>{ if(m.c===cityKey) arr.push({gk, m, dt: matchDateTime(m)}); });
+  });
+  arr.sort((a,b)=>a.dt-b.dt);
+  return arr;
+}
+
+function stadiumGameRowHtml(gk, m){
+  const played = m.hs!==null && m.as!==null;
+  return `<div class="sgr-row">
+    <div class="sgr-time"><b>${m.d}</b>${m.tm}</div>
+    <div class="sgr-badge">${gk}</div>
+    <div class="sgr-team">${F(teamFlag(m.h))}<span>${m.h}</span></div>
+    <div class="sgr-score ${played?'done':''}">${played?`${m.hs} - ${m.as}`:'VS'}</div>
+    <div class="sgr-team away"><span>${m.a}</span>${F(teamFlag(m.a))}</div>
+  </div>`;
+}
+
 function renderStadiums(){
   const grid = document.getElementById('stadiumGrid');
-  grid.innerHTML = STADIUMS.map(s=>`
-    <div class="stadium-card panel">
+  grid.innerHTML = STADIUMS.map(s=>{
+    const matches = getStadiumMatches(s.name);
+    const isOpen = expandedStadiums.has(s.name);
+    return `<div class="stadium-card panel">
       <div class="stadium-photo-wrap">
         ${s.photo?`<img src="${s.photo}" alt="${s.name}" loading="lazy" onerror="this.style.display='none';">`:''}
         <div class="stadium-cap-badge"><b>${s.cap}</b><span>lugares</span></div>
@@ -1263,7 +1314,21 @@ function renderStadiums(){
         <p>${s.hist}</p>
         <div class="stadium-tags"><span class="tag">${s.tag}</span></div>
       </div>
-    </div>`).join('');
+      ${matches.length>0?`
+        <button class="stadium-toggle" data-stadium="${s.name}">${isOpen?'Ocultar jogos ▲':`Ver ${matches.length} jogo${matches.length>1?'s':''} ▼`}</button>
+        <div class="stadium-games ${isOpen?'open':''}">${matches.map(x=>stadiumGameRowHtml(x.gk, x.m)).join('')}</div>
+      `:''}
+    </div>`;
+  }).join('');
+
+  grid.querySelectorAll('.stadium-toggle').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const name = btn.dataset.stadium;
+      if(expandedStadiums.has(name)) expandedStadiums.delete(name);
+      else expandedStadiums.add(name);
+      renderStadiums();
+    });
+  });
 }
 
 /* ============== RENDER: HISTORICO ============== */
