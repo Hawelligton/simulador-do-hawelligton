@@ -1,4 +1,4 @@
-# Simulador do Hawelligton — Copa do Mundo 2026
+# Simulador da Copa 2026 do Hawelligton
 
 Simulador interativo da Copa do Mundo 2026 (EUA, México e Canadá): fase de grupos com simulação de placares,
 chaveamento do mata-mata seguindo as regras oficiais da FIFA, artilharia, estádios e histórico das últimas Copas.
