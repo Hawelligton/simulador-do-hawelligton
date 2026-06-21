@@ -1228,8 +1228,8 @@ function renderScorers(){
     <div class="scorer-row">
       <div class="scorer-rank">${i+1}</div>
       <div class="scorer-avatar">${s.photo
-        ? `<img src="${s.photo}" alt="${s.name}" loading="lazy" onerror="this.parentElement.innerHTML='${F(teamFlag(s.code))}';">`
-        : F(teamFlag(s.code))}</div>
+        ? `<img src="${s.photo}" alt="${s.name}" loading="lazy" data-fallback="${teamFlag(s.code)}" onerror="this.parentElement.textContent=this.dataset.fallback;">`
+        : teamFlag(s.code)}</div>
       <div>
         <div class="scorer-name">${s.name}</div>
         <div class="scorer-club">${s.club} · ${teamName(s.code)}</div>
