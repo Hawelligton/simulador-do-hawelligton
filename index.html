@@ -104,9 +104,9 @@ nav.tabs button.active .nav-icon{filter:none;text-shadow:0 0 14px rgba(57,243,25
 nav.tabs button.active::before{content:'';position:absolute;top:0;left:18%;right:18%;height:2px;background:var(--cyan);border-radius:2px;box-shadow:0 0 8px var(--cyan);}
 
 /* MENU "MAIS" */
-.mais-menu{position:fixed;left:0;right:0;bottom:0;z-index:199;display:none;}
-.mais-menu.open{display:block;}
-.mais-menu .mais-item{position:absolute;right:10px;bottom:74px;min-width:180px;background:var(--panel-solid);border:1px solid var(--line);border-radius:12px;padding:13px 16px;display:flex;align-items:center;gap:10px;color:var(--text);font-family:'Rajdhani';font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.5);}
+.mais-menu{position:fixed;right:10px;bottom:74px;z-index:199;display:none;flex-direction:column;gap:8px;}
+.mais-menu.open{display:flex;}
+.mais-menu .mais-item{min-width:190px;background:var(--panel-solid);border:1px solid var(--line);border-radius:12px;padding:13px 16px;display:flex;align-items:center;gap:10px;color:var(--text);font-family:'Rajdhani';font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.5);}
 .mais-item .nav-icon{font-size:18px;}
 
 /* CONVOCACOES */
@@ -140,6 +140,37 @@ nav.tabs button.active::before{content:'';position:absolute;top:0;left:18%;right
 .squad-player-row .info{flex:1;min-width:0;}
 .squad-player-row .name{font-weight:700;font-size:15px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .squad-player-row .meta{font-size:12px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* RANKING FIFA */
+.rk-info{padding:0;margin-bottom:16px;overflow:hidden;}
+.rk-info-toggle{width:100%;text-align:left;background:none;border:none;color:var(--text);font-family:'Rajdhani';font-weight:700;font-size:14px;padding:15px 18px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;}
+.rk-info-toggle:hover{color:var(--cyan);}
+#rkInfoChevron{transition:transform .2s;color:var(--muted);font-size:11px;}
+.rk-info-body{max-height:0;overflow:hidden;transition:max-height .25s ease;padding:0 18px;}
+.rk-info-body.open{max-height:600px;padding-bottom:18px;}
+.rk-info-body p{font-size:13px;color:var(--text);opacity:.9;line-height:1.55;margin:0 0 10px;}
+.rk-formula{font-family:'Orbitron';font-size:15px;color:var(--gold);text-align:center;background:rgba(255,178,63,.08);border:1px solid rgba(255,178,63,.3);border-radius:8px;padding:14px;margin-bottom:12px;letter-spacing:.03em;}
+.rk-info-body ul{margin:0 0 12px;padding-left:18px;}
+.rk-info-body li{font-size:12.5px;color:var(--muted);line-height:1.6;}
+.rk-info-body li b{color:var(--text);}
+.rk-source{font-size:11px !important;color:var(--cyan-dim) !important;font-style:italic;}
+
+.rk-table-wrap{padding:6px 0;}
+.rk-row{display:grid;grid-template-columns:50px 36px 1fr auto;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.05);}
+.rk-row:last-child{border-bottom:none;}
+.rk-row.rk-head{font-family:'Orbitron';font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:10px 16px;border-bottom:1px solid var(--line);}
+.rk-row:not(.rk-head):hover{background:rgba(57,243,255,.04);}
+.rk-row.rk-self{background:rgba(57,243,255,.07);border-left:2px solid var(--cyan);}
+.rk-col-pos{font-family:'Orbitron';font-size:15px;color:var(--text);}
+.rk-col-move{font-size:11px;font-weight:700;display:flex;align-items:center;gap:1px;}
+.rk-col-move.up{color:var(--green);}
+.rk-col-move.down{color:var(--red);}
+.rk-col-move.same{color:var(--muted);}
+.rk-col-team{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14.5px;min-width:0;}
+.rk-col-team .flag{font-size:20px;flex:0 0 auto;}
+.rk-col-team span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rk-col-pts{font-family:'Orbitron';font-size:14px;color:var(--gold);text-align:right;white-space:nowrap;}
+.rk-empty{padding:30px;text-align:center;color:var(--muted);font-size:13px;}
 
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;backdrop-filter:blur(8px);}
 section.tabpanel{display:none;}
@@ -388,6 +419,7 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
 
   <div class="mais-menu" id="maisMenu">
     <button class="mais-item" data-tab="convocacoes"><span class="nav-icon">👥</span>Convocações</button>
+    <button class="mais-item" data-tab="ranking"><span class="nav-icon">📊</span>Ranking FIFA</button>
   </div>
 
   <!-- GRUPOS -->
@@ -482,10 +514,44 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
     </div>
   </section>
 
+  <!-- RANKING FIFA -->
+  <section class="tabpanel" id="tab-ranking">
+    <h2 class="section-title">Ranking Mundial FIFA</h2>
+    <p class="section-desc">Ranking Mundial Masculino FIFA/Coca-Cola, atualizado em 11/06/2026. Próxima atualização oficial: 20/07/2026.</p>
+
+    <div class="panel rk-info">
+      <button class="rk-info-toggle" id="rkInfoToggle">ℹ️ Como o ranking é calculado <span id="rkInfoChevron">▼</span></button>
+      <div class="rk-info-body" id="rkInfoBody">
+        <p>Desde 2018 a FIFA usa o método <b>"SUM"</b>, inspirado no sistema Elo (o mesmo do xadrez): cada seleção soma ou perde pontos a cada partida oficial, sem médias de período.</p>
+        <div class="rk-formula">P = P<sub>anterior</sub> + I × (W − W<sub>e</sub>)</div>
+        <ul>
+          <li><b>P anterior</b> — pontuação da seleção antes do jogo</li>
+          <li><b>I</b> — importância da partida (de 5, amistoso, até 60, fase final de Copa do Mundo)</li>
+          <li><b>W</b> — resultado real (1 vitória · 0,5 empate · 0 derrota)</li>
+          <li><b>We</b> — resultado esperado, calculado pela diferença de pontos entre as duas seleções</li>
+        </ul>
+        <p class="rk-source">Fonte: Procedimentos oficiais do Ranking FIFA/Coca-Cola (documento técnico da FIFA).</p>
+      </div>
+    </div>
+
+    <div class="continent-pills" id="rkConfPills"></div>
+
+    <div class="panel rk-table-wrap">
+      <div class="rk-row rk-head">
+        <div class="rk-col-pos">RK</div>
+        <div class="rk-col-move"></div>
+        <div class="rk-col-team">Seleção</div>
+        <div class="rk-col-pts">Pontos</div>
+      </div>
+      <div id="rkList"></div>
+    </div>
+  </section>
+
   <footer>Simulador da Copa 2026 do Hawelligton · não-oficial · Dados de referência coletados em 20/06/2026 · Não afiliado à FIFA</footer>
 </div>
 
 <script src="squads-data.js"></script>
+<script src="fifa-ranking-data.js"></script>
 <script>
 /* ============== DADOS BASE ============== */
 const F = c => `<span class="flag">${c}</span>`;
@@ -1757,6 +1823,67 @@ document.querySelectorAll('.mais-item[data-tab]').forEach(btn=>{
   });
 });
 
+/* ============== RENDER: RANKING FIFA ============== */
+const RK_CONFS = ['Todos','CONMEBOL','UEFA','CAF','AFC','CONCACAF','OFC'];
+let rkConfFilter = 'Todos';
+// codigos das 48 selecoes da Copa 2026, pra destacar na lista
+const WC2026_NAMES = new Set(['Argentina','Brasil','Canadá','México','Estados Unidos','Marrocos','Haiti','Escócia',
+  'Austrália','Turquia','Paraguai','Alemanha','Curaçao','Costa do Marfim','Equador','Holanda','Japão','Suécia',
+  'Tunísia','Bélgica','Egito','Irã','Nova Zelândia','Espanha','Cabo Verde','Arábia Saudita','Uruguai','França',
+  'Senegal','Noruega','Iraque','Argélia','Áustria','Jordânia','Portugal','RD Congo','Uzbequistão','Colômbia',
+  'Inglaterra','Croácia','Gana','Panamá','África do Sul','Coreia do Sul','Tchéquia','Suíça','Bósnia e Herzegovina','Catar']);
+
+function renderRankingConfPills(){
+  const el = document.getElementById('rkConfPills');
+  if(!el || typeof FIFA_RANKING==='undefined') return;
+  el.innerHTML = RK_CONFS.map(c=>`<button class="continent-pill ${c===rkConfFilter?'active':''}" data-conf="${c}">${c}</button>`).join('');
+  el.querySelectorAll('.continent-pill').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      rkConfFilter = btn.dataset.conf;
+      renderRankingConfPills();
+      renderRankingList();
+    });
+  });
+}
+
+function renderRankingList(){
+  const el = document.getElementById('rkList');
+  if(!el || typeof FIFA_RANKING==='undefined') return;
+  const rows = rkConfFilter==='Todos' ? FIFA_RANKING : FIFA_RANKING.filter(t=>t.conf===rkConfFilter);
+  if(rows.length===0){
+    el.innerHTML = `<div class="rk-empty">Nenhuma seleção encontrada.</div>`;
+    return;
+  }
+  el.innerHTML = rows.map(t=>{
+    let moveHtml;
+    if(t.move>0) moveHtml = `<span class="rk-col-move up">▲${t.move}</span>`;
+    else if(t.move<0) moveHtml = `<span class="rk-col-move down">▼${Math.abs(t.move)}</span>`;
+    else moveHtml = `<span class="rk-col-move same">—</span>`;
+    const isWC = WC2026_NAMES.has(t.name) ? 'rk-self' : '';
+    return `<div class="rk-row ${isWC}">
+      <div class="rk-col-pos">${t.rank}</div>
+      ${moveHtml}
+      <div class="rk-col-team"><span class="flag">${t.flag}</span><span>${t.name}</span></div>
+      <div class="rk-col-pts">${t.pts.toFixed(2)}</div>
+    </div>`;
+  }).join('');
+}
+
+function setupRankingInfo(){
+  const toggle = document.getElementById('rkInfoToggle');
+  const body = document.getElementById('rkInfoBody');
+  const chevron = document.getElementById('rkInfoChevron');
+  toggle?.addEventListener('click', ()=>{
+    body.classList.toggle('open');
+    chevron.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+  });
+}
+
+function renderRanking(){
+  renderRankingConfPills();
+  renderRankingList();
+}
+
 /* ============== TABS ============== */
 document.querySelectorAll('nav.tabs button[data-tab]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
@@ -1887,6 +2014,8 @@ initEngagement();
 setInterval(()=>{ renderSchedule(); renderGamesTab(); }, 60000); // reavalia a cada minuto status ao vivo/encerrado
 renderContinentPills();
 renderCountryGrid();
+setupRankingInfo();
+renderRanking();
 
 </script>
 </body>
