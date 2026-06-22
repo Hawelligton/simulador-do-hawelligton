@@ -384,7 +384,9 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
 .gc-team .gc-code{font-family:'Orbitron';font-size:14px;color:#fff;letter-spacing:.02em;}
 .gc-team .gc-name{font-size:11.5px;color:var(--muted);}
 .gc-score{display:flex;align-items:center;gap:8px;}
-.gc-score.live-partial .gc-num{border-color:var(--red);color:var(--red);animation:liveBadgePulse 1.4s infinite;}
+.gc-status.susp{color:var(--gold);border-color:rgba(255,178,63,.4);background:rgba(255,178,63,.08);}
+.gc-score.susp-partial .gc-num{color:var(--gold);}
+.gc-ht-label{font-size:9px;color:var(--muted);text-align:center;margin-top:2px;letter-spacing:.03em;}
 .gc-score .gc-num{font-family:'Orbitron';font-size:24px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--line);}
 .gc-score .gc-num.win{border-color:var(--green);color:var(--green);background:rgba(61,255,176,.08);}
 .gc-score .gc-sep{color:var(--muted);}
@@ -649,7 +651,7 @@ H:{teams:['KSA','URU','ESP','CPV'],matches:[
 I:{teams:['NOR','FRA','SEN','IRQ'],matches:[
   {r:1,d:'16/06',tm:'16:00',c:'Nova York',h:'FRA',a:'SEN',hs:3,as:1},
   {r:1,d:'16/06',tm:'19:00',c:'Boston',h:'IRQ',a:'NOR',hs:1,as:4},
-  {r:2,d:'22/06',tm:'18:00',c:'Filadélfia',h:'FRA',a:'IRQ',hs:null,as:null},
+  {r:2,d:'22/06',tm:'18:00',c:'Filadélfia',h:'FRA',a:'IRQ',hs:null,as:null,susp:true,liveScore:[1,0]},
   {r:2,d:'22/06',tm:'21:00',c:'Nova York',h:'NOR',a:'SEN',hs:null,as:null},
   {r:3,d:'26/06',tm:'16:00',c:'Boston',h:'NOR',a:'FRA',hs:null,as:null},
   {r:3,d:'26/06',tm:'16:00',c:'Toronto',h:'SEN',a:'IRQ',hs:null,as:null},
@@ -800,9 +802,10 @@ function renderDateStrip(allMatches){
 
 function gameStatusBadge(m){
   const st = matchLiveStatus(m);
-  if(st.isDone) return {html:`<span class="gc-status fim">FIM</span>`, isLive:false};
-  if(st.isLive) return {html:`<span class="gc-status live"><span class="pulse-dot"></span>AO VIVO</span>`, isLive:true};
-  return {html:`<span class="gc-status">${m.tm}</span>`, isLive:false};
+  if(st.isDone) return {html:`<span class="gc-status fim">FIM</span>`, isLive:false, isSusp:false};
+  if(m.susp)    return {html:`<span class="gc-status susp">⚡ SUSPENSO</span>`, isLive:false, isSusp:true};
+  if(st.isLive) return {html:`<span class="gc-status live"><span class="pulse-dot"></span>AO VIVO</span>`, isLive:true, isSusp:false};
+  return {html:`<span class="gc-status">${m.tm}</span>`, isLive:false, isSusp:false};
 }
 
 function gameCardHtml(gk, m){
@@ -816,6 +819,15 @@ function gameCardHtml(gk, m){
       <div class="gc-num ${hWin?'win':''}">${m.hs}</div>
       <div class="gc-sep">:</div>
       <div class="gc-num ${aWin?'win':''}">${m.as}</div>
+    </div>`;
+  } else if(status.isSusp && m.liveScore){
+    centerHtml = `<div>
+      <div class="gc-score susp-partial">
+        <div class="gc-num">${m.liveScore[0]}</div>
+        <div class="gc-sep">:</div>
+        <div class="gc-num">${m.liveScore[1]}</div>
+      </div>
+      <div class="gc-ht-label">INTERVALO</div>
     </div>`;
   } else if(status.isLive && m.liveScore){
     centerHtml = `<div class="gc-score live-partial">
@@ -912,7 +924,7 @@ function setupGamesSubnav(){
 const SCORERS = [
  {name:'Lionel Messi', code:'ARG', goals:5, club:'Inter Miami', photo:'https://media.api-sports.io/football/players/154.png'},
  {name:'Jonathan David', code:'CAN', goals:3, club:'Juventus', photo:'https://media.api-sports.io/football/players/8489.png'},
- {name:'Kylian Mbappé', code:'FRA', goals:2, club:'Real Madrid', photo:'https://media.api-sports.io/football/players/278.png'},
+ {name:'Kylian Mbappé', code:'FRA', goals:3, club:'Real Madrid', photo:'https://media.api-sports.io/football/players/278.png'},
  {name:'Erling Haaland', code:'NOR', goals:2, club:'Manchester City', photo:'https://media.api-sports.io/football/players/1100.png'},
  {name:'Kai Havertz', code:'GER', goals:2, club:'Arsenal', photo:'https://media.api-sports.io/football/players/978.png'},
  {name:'Harry Kane', code:'ENG', goals:2, club:'Bayern de Munique', photo:'https://media.api-sports.io/football/players/184.png'},
