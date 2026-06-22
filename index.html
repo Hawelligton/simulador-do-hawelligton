@@ -652,7 +652,7 @@ G:{teams:['IRN','NZL','BEL','EGY'],matches:[
   {r:1,d:'15/06',tm:'16:00',c:'Seattle',h:'BEL',a:'EGY',hs:1,as:1},
   {r:1,d:'15/06',tm:'22:00',c:'Los Angeles',h:'IRN',a:'NZL',hs:2,as:2},
   {r:2,d:'21/06',tm:'16:00',c:'Los Angeles',h:'BEL',a:'IRN',hs:0,as:0},
-  {r:2,d:'21/06',tm:'22:00',c:'Vancouver',h:'NZL',a:'EGY',hs:null,as:null,live:true,liveScore:[1,3]},
+  {r:2,d:'21/06',tm:'22:00',c:'Vancouver',h:'NZL',a:'EGY',hs:1,as:3},
   {r:3,d:'27/06',tm:'00:00',c:'Seattle',h:'EGY',a:'IRN',hs:null,as:null},
   {r:3,d:'27/06',tm:'00:00',c:'Vancouver',h:'NZL',a:'BEL',hs:null,as:null},
 ]},
@@ -675,7 +675,7 @@ I:{teams:['NOR','FRA','SEN','IRQ'],matches:[
 J:{teams:['ARG','AUT','JOR','ALG'],matches:[
   {r:1,d:'16/06',tm:'22:00',c:'Kansas City',h:'ARG',a:'ALG',hs:3,as:0},
   {r:1,d:'17/06',tm:'01:00',c:'São Francisco',h:'AUT',a:'JOR',hs:3,as:1},
-  {r:2,d:'22/06',tm:'14:00',c:'Dallas',h:'ARG',a:'AUT',hs:null,as:null},
+  {r:2,d:'22/06',tm:'14:00',c:'Dallas',h:'ARG',a:'AUT',hs:null,as:null,live:true,liveScore:[0,0]},
   {r:2,d:'23/06',tm:'00:00',c:'São Francisco',h:'JOR',a:'ALG',hs:null,as:null},
   {r:3,d:'27/06',tm:'23:00',c:'Kansas City',h:'ALG',a:'AUT',hs:null,as:null},
   {r:3,d:'27/06',tm:'23:00',c:'Dallas',h:'JOR',a:'ARG',hs:null,as:null},
@@ -964,6 +964,7 @@ const SCORERS = [
  {name:'Mohamed Salah', code:'EGY', goals:1, club:'Al Qadsiah'},
  {name:'Mostafa Zico', code:'EGY', goals:1, club:'Zamalek'},
  {name:'Trezeguet', code:'EGY', goals:1, club:'Trabzonspor'},
+ {name:'Finn Surman', code:'NZL', goals:1, club:'Motherwell'},
 ].sort((a,b)=>b.goals-a.goals);
 
 const STADIUMS = [
