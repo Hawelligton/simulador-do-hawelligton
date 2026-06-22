@@ -242,9 +242,9 @@ table.standings tr.thirdwatch td:first-child{color:var(--gold);}
 #bkZoomSizer{position:relative;overflow:hidden;}
 #bkZoomInner{position:absolute;top:0;left:0;}
 .bk-heads{display:flex;position:relative;}
-.bk-head-pill{flex:0 0 var(--bw);width:var(--bw);text-align:center;font-family:'Orbitron';font-size:11px;letter-spacing:.08em;color:var(--text);background:rgba(34,52,84,.7);border:1px solid var(--line);border-radius:20px;padding:7px 0;margin-right:var(--cg);}
-.bk-head-pill:last-child{margin-right:0;}
-.bk-head-pill.final{background:linear-gradient(90deg,#c4204a,#7a1230);border-color:#c4204a;color:#fff;}
+.bk2-head{position:absolute;text-align:center;font-family:'Orbitron';font-size:10px;letter-spacing:.06em;color:var(--text);background:rgba(34,52,84,.75);border:1px solid var(--line);border-radius:18px;padding:5px 0;}
+.bk2-head[data-cls="final"]{background:linear-gradient(90deg,#c4204a,#7a1230);border-color:#c4204a;color:#fff;}
+.bk2-center-label{position:absolute;font-size:10px;color:var(--muted);letter-spacing:.04em;text-align:center;font-weight:700;}
 .bk-stage{position:relative;}
 .bk-svg{position:absolute;top:0;left:0;}
 .bk-line{stroke:var(--cyan-dim);stroke-width:1.6;opacity:.85;}
@@ -1368,9 +1368,9 @@ function getMatchByNumber(num){
 }
 const PAIR_R32_TO_R16 = [[1,4],[0,2],[3,5],[6,7],[10,11],[8,9],[13,15],[12,14]]; // jogos 89-96
 const PAIR_R16_TO_QF  = [[0,1],[2,3],[4,5],[6,7]];
-// qf[0]=Jogo97 qf[1]=Jogo99 qf[2]=Jogo98 qf[3]=Jogo100 (ordem de criação) -
-// mas oficialmente Jogo101=Jogo97xJogo98 e Jogo102=Jogo99xJogo100, daí o pareamento [0,2] e [1,3]:
-const PAIR_QF_TO_SF   = [[0,2],[1,3]];
+// qf[0],qf[1] = left half (de R16[0-3]); qf[2],qf[3] = right half (de R16[4-7])
+// Para o chaveamento visual convergente: semi-esquerda = qf[0]×qf[1], semi-direita = qf[2]×qf[3]
+const PAIR_QF_TO_SF   = [[0,1],[2,3]];
 const PAIR_SF_TO_F    = [[0,1]];
 
 function assignThirds(best8groupsInOrder, slots){
@@ -1469,9 +1469,7 @@ function propagateBracket(){
 }
 
 /* Layout: árvore com linhas conectoras, igual ao modelo de referência */
-const BK_DISPLAY_ORDER = [1,4,0,2,3,5,6,7,10,11,8,9,13,15,12,14]; // posição visual -> índice original do R32
-const BK_BOX_W = 188, BK_BOX_H = 52, BK_ROW_GAP = 12, BK_COL_GAP = 60;
-const BK_UNIT = BK_BOX_H + BK_ROW_GAP;
+// removidos: BK_DISPLAY_ORDER, BK_BOX_W, BK_BOX_H, BK_ROW_GAP, BK_COL_GAP, BK_UNIT (substituídos pelo BK2 no novo layout)
 
 function applyBkZoom(){
   const inner = document.getElementById('bkZoomInner');
@@ -1485,14 +1483,38 @@ function applyBkZoom(){
   sizer.style.height = (bkLastDims.h*bkZoom)+'px';
 }
 
+/* ============ NOVO CHAVEAMENTO SIMÉTRICO – CONVERGE AO CENTRO ============
+   Metade esquerda: R32→R16→QF→SF  (leitura esquerda→direita)
+   Centro: 3º Lugar + Final + Campeão
+   Metade direita: SF←QF←R16←R32  (leitura direita→esquerda)
+   BK_DISPLAY_ORDER:
+     visual 0-7  → half esquerda: R32 índices [1,4,0,2,3,5,6,7]
+     visual 8-15 → half direita:  R32 índices [10,11,8,9,13,15,12,14]
+=======================================================================*/
+
+const BK_DISPLAY_ORDER = [1,4,0,2,3,5,6,7,10,11,8,9,13,15,12,14];
+const BK2 = { W:120, H:44, RGAP:10, CGAP:44, get UNIT(){ return this.H+this.RGAP; } };
+
 function bkLayout(){
-  const yR32 = BK_DISPLAY_ORDER.map((_,i)=> i*BK_UNIT + BK_BOX_H/2);
-  const yR16 = Array.from({length:8},(_,i)=> (yR32[2*i]+yR32[2*i+1])/2);
-  const yQF  = Array.from({length:4},(_,i)=> (yR16[2*i]+yR16[2*i+1])/2);
-  const ySF  = Array.from({length:2},(_,i)=> (yQF[2*i]+yQF[2*i+1])/2);
-  const yMid = (ySF[0]+ySF[1])/2;
-  const X = [0,1,2,3,4,5].map(c=>c*(BK_BOX_W+BK_COL_GAP));
-  return {yR32,yR16,yQF,ySF,yThird:yMid,yFinal:yMid,X};
+  const {W,H,UNIT,CGAP} = BK2;
+  const CG = 40; // gap entre SF e Final
+  // colunas esquerda (esq→dir)
+  const xL = [0, W+CGAP, 2*(W+CGAP), 3*(W+CGAP)]; // R32, R16, QF, SF
+  const xCen = xL[3] + W + CG;                       // Final (centro)
+  // colunas direita (simetria espelhada)
+  const xR = [ xCen+W+CG, xCen+W+CG+(W+CGAP), xCen+W+CG+2*(W+CGAP), xCen+W+CG+3*(W+CGAP) ];
+  // R32 direita = xR[3] (mais à direita)
+
+  const yR32 = Array.from({length:8}, (_,i) => i*UNIT + H/2);
+  const yR16  = Array.from({length:4}, (_,i) => (yR32[2*i]+yR32[2*i+1])/2);
+  const yQFL  = [(yR16[0]+yR16[1])/2, (yR16[2]+yR16[3])/2]; // qf[0], qf[1] – metade esq
+  const yQFR  = [...yQFL];                                      // qf[2], qf[3] – mesmas Y
+  const ySF   = (yQFL[0]+yQFL[1])/2;                           // semi – centro da metade
+  const yFinal = ySF;
+  const y3rd   = ySF + UNIT + 20;
+  const totalW = xR[3] + W;
+  const totalH = 8*UNIT + UNIT*2 + 40;
+  return {xL, xCen, xR, yR32, yR16, yQFL, yQFR, ySF, yFinal, y3rd, totalW, totalH};
 }
 
 function bkConnector(xStart,y1,y2,yT,xEnd){
@@ -1528,7 +1550,8 @@ function bkRowHtml(match, side, roundKey, idx, originSpec){
 }
 
 function bkMatchHtml(match, roundKey, idx, x, y, originA, originB, extraClass){
-  return `<div class="bmatch ${extraClass||''}" style="width:${BK_BOX_W}px;height:${BK_BOX_H}px;left:${x}px;top:${y-BK_BOX_H/2}px;">
+  const W = BK2.W, H = BK2.H;
+  return `<div class="bmatch ${extraClass||''}" style="width:${W}px;height:${H}px;left:${x}px;top:${y-H/2}px;">
     ${bkRowHtml(match,'a',roundKey,idx,originA)}
     ${bkRowHtml(match,'b',roundKey,idx,originB)}
   </div>`;
@@ -1542,59 +1565,110 @@ function getMatch(roundKey, idx){
 
 function renderBracket(){
   propagateBracket();
-
-  // preserva a posição de rolagem (painel do chaveamento + página) para não "pular" ao clicar
   const scrollEl = document.querySelector('.bk-scroll');
   const savedLeft = scrollEl ? scrollEl.scrollLeft : 0;
-  const savedTop = scrollEl ? scrollEl.scrollTop : 0;
+  const savedTop  = scrollEl ? scrollEl.scrollTop : 0;
   const savedWinX = window.scrollX, savedWinY = window.scrollY;
 
   const L = bkLayout();
-  const totalW = L.X[5] + BK_BOX_W + 170;
-  const totalH = BK_DISPLAY_ORDER.length * BK_UNIT;
+  const W = BK2.W, H = BK2.H;
 
-  let svg = `<svg class="bk-svg" width="${totalW}" height="${totalH}">`;
-  for(let i=0;i<8;i++) svg += bkConnector(L.X[0]+BK_BOX_W, L.yR32[2*i], L.yR32[2*i+1], L.yR16[i], L.X[1]);
-  for(let i=0;i<4;i++) svg += bkConnector(L.X[1]+BK_BOX_W, L.yR16[2*i], L.yR16[2*i+1], L.yQF[i], L.X[2]);
-  for(let i=0;i<2;i++) svg += bkConnector(L.X[2]+BK_BOX_W, L.yQF[2*i], L.yQF[2*i+1], L.ySF[i], L.X[3]);
-  svg += bkConnector(L.X[3]+BK_BOX_W, L.ySF[0], L.ySF[1], L.yThird, L.X[4]);
-  svg += bkConnector(L.X[3]+BK_BOX_W, L.ySF[0], L.ySF[1], L.yFinal, L.X[5]);
+  /* ---- SVG connectors ---- */
+  let svg = `<svg class="bk-svg" width="${L.totalW}" height="${L.totalH}">`;
+
+  // Metade ESQUERDA (xStart < xEnd → vai para a direita)
+  // R32 → R16
+  for(let i=0;i<4;i++) svg += bkConnector(L.xL[0]+W, L.yR32[2*i], L.yR32[2*i+1], L.yR16[i], L.xL[1]);
+  // R16 → QF (qf[0] e qf[1])
+  svg += bkConnector(L.xL[1]+W, L.yR16[0], L.yR16[1], L.yQFL[0], L.xL[2]);
+  svg += bkConnector(L.xL[1]+W, L.yR16[2], L.yR16[3], L.yQFL[1], L.xL[2]);
+  // QF → SF esquerda
+  svg += bkConnector(L.xL[2]+W, L.yQFL[0], L.yQFL[1], L.ySF, L.xL[3]);
+  // SF esquerda → Final (linha horizontal)
+  svg += `<line class="bk-line" x1="${L.xL[3]+W}" y1="${L.ySF}" x2="${L.xCen}" y2="${L.yFinal}"/>
+          <circle class="bk-dot" cx="${L.xL[3]+W}" cy="${L.ySF}" r="3"/>`;
+
+  // Metade DIREITA (xStart > xEnd → vai para a esquerda)
+  // R32 → R16
+  for(let i=0;i<4;i++) svg += bkConnector(L.xR[3], L.yR32[2*i], L.yR32[2*i+1], L.yR16[i], L.xR[2]+W);
+  // R16 → QF (qf[2] e qf[3])
+  svg += bkConnector(L.xR[2], L.yR16[0], L.yR16[1], L.yQFR[0], L.xR[1]+W);
+  svg += bkConnector(L.xR[2], L.yR16[2], L.yR16[3], L.yQFR[1], L.xR[1]+W);
+  // QF → SF direita
+  svg += bkConnector(L.xR[1], L.yQFR[0], L.yQFR[1], L.ySF, L.xR[0]+W);
+  // SF direita → Final (linha horizontal)
+  svg += `<line class="bk-line" x1="${L.xR[0]}" y1="${L.ySF}" x2="${L.xCen+W}" y2="${L.yFinal}"/>
+          <circle class="bk-dot" cx="${L.xR[0]}" cy="${L.ySF}" r="3"/>`;
+
   svg += `</svg>`;
 
+  /* ---- Caixas de partida ---- */
   let boxes = '';
-  BK_DISPLAY_ORDER.forEach((origIdx, visI)=>{
+
+  // R32 esquerda
+  [0,1,2,3,4,5,6,7].forEach((visI)=>{
+    const origIdx = BK_DISPLAY_ORDER[visI];
     const m = bracketState.r32[origIdx];
-    boxes += bkMatchHtml(m, 'r32', origIdx, L.X[0], L.yR32[visI], m.spec.a, m.spec.b);
+    boxes += bkMatchHtml(m,'r32',origIdx, L.xL[0], L.yR32[visI], m.spec.a, m.spec.b);
   });
-  bracketState.r16.forEach((m,i)=> boxes += bkMatchHtml(m,'r16',i,L.X[1],L.yR16[i]));
-  bracketState.qf.forEach((m,i)=> boxes += bkMatchHtml(m,'qf',i,L.X[2],L.yQF[i]));
-  bracketState.sf.forEach((m,i)=> boxes += bkMatchHtml(m,'sf',i,L.X[3],L.ySF[i]));
-  boxes += bkMatchHtml(bracketState.third,'third',0,L.X[4],L.yThird);
-  boxes += bkMatchHtml(bracketState.final,'final',0,L.X[5],L.yFinal,null,null,'bmatch-final');
+  // R16 esquerda
+  [0,1,2,3].forEach(i=> boxes += bkMatchHtml(bracketState.r16[i],'r16',i, L.xL[1], L.yR16[i]));
+  // QF esquerda (qf[0] e qf[1])
+  boxes += bkMatchHtml(bracketState.qf[0],'qf',0, L.xL[2], L.yQFL[0]);
+  boxes += bkMatchHtml(bracketState.qf[1],'qf',1, L.xL[2], L.yQFL[1]);
+  // SF esquerda
+  boxes += bkMatchHtml(bracketState.sf[0],'sf',0, L.xL[3], L.ySF);
 
-  const champion = bracketState.final.winner;
-  const thirdPlace = bracketState.third.winner;
-  boxes += `<div class="bk-thirdlabel" style="left:${L.X[4]}px;top:${L.yThird-BK_BOX_H/2-16}px;width:${BK_BOX_W}px;">DISPUTA DE 3º LUGAR</div>`;
-  boxes += `<div class="bk-champion" style="left:${L.X[5]}px;top:${L.yFinal+BK_BOX_H/2+16}px;width:${BK_BOX_W}px;">
-      <div class="cup">🏆</div>
-      <div class="name">${champion? F(teamFlag(champion.code))+' '+teamName(champion.code) : 'A definir'}</div>
-      ${thirdPlace?`<div style="font-size:10px;color:var(--muted);">3º lugar: ${F(teamFlag(thirdPlace.code))} ${teamName(thirdPlace.code)}</div>`:''}
-    </div>`;
+  // Final (centro)
+  boxes += `<div class="bk2-center-label" style="left:${L.xCen}px;top:${L.yFinal-H/2-22}px;width:${W}px;">🏆 FINAL</div>`;
+  boxes += bkMatchHtml(bracketState.final,'final',0, L.xCen, L.yFinal, null, null, 'bmatch-final');
 
-  const headsHtml = ['R32','R16','Quartas','Semi','3º Lugar','Final'].map((lbl,i)=>
-    `<div class="bk-head-pill ${i===5?'final':''}" style="--bw:${BK_BOX_W}px;--cg:${BK_COL_GAP}px;">${lbl}</div>`).join('');
+  // Disputa de 3º lugar (centro, abaixo da final)
+  boxes += `<div class="bk2-center-label" style="left:${L.xCen}px;top:${L.y3rd-H/2-22}px;width:${W}px;">🥉 3º LUGAR</div>`;
+  boxes += bkMatchHtml(bracketState.third,'third',0, L.xCen, L.y3rd);
+
+  // SF direita
+  boxes += bkMatchHtml(bracketState.sf[1],'sf',1, L.xR[0], L.ySF);
+  // QF direita (qf[2] e qf[3])
+  boxes += bkMatchHtml(bracketState.qf[2],'qf',2, L.xR[1], L.yQFR[0]);
+  boxes += bkMatchHtml(bracketState.qf[3],'qf',3, L.xR[1], L.yQFR[1]);
+  // R16 direita
+  [4,5,6,7].forEach(i=> boxes += bkMatchHtml(bracketState.r16[i],'r16',i, L.xR[2], L.yR16[i-4]));
+  // R32 direita
+  [8,9,10,11,12,13,14,15].forEach((visI)=>{
+    const origIdx = BK_DISPLAY_ORDER[visI];
+    const m = bracketState.r32[origIdx];
+    boxes += bkMatchHtml(m,'r32',origIdx, L.xR[3], L.yR32[visI-8], m.spec.a, m.spec.b);
+  });
+
+  // Campeão
+  const champion   = bracketState.final.winner;
+  const thirdWin   = bracketState.third.winner;
+  boxes += `<div class="bk-champion" style="left:${L.xCen}px;top:${L.y3rd+H/2+14}px;width:${W}px;">
+    <div class="cup">🏆</div>
+    <div class="name">${champion ? F(teamFlag(champion.code))+' '+teamName(champion.code) : 'CAMPEÃO'}</div>
+    ${thirdWin?`<div style="font-size:10px;color:var(--muted);margin-top:3px;">🥉 ${teamName(thirdWin.code)}</div>`:''}
+  </div>`;
+
+  /* ---- Cabeçalhos ---- */
+  const cols = [
+    {x:L.xL[0],lbl:'R32'}, {x:L.xL[1],lbl:'R16'}, {x:L.xL[2],lbl:'Quartas'}, {x:L.xL[3],lbl:'Semi'},
+    {x:L.xCen,lbl:'Final',cls:'final'},
+    {x:L.xR[0],lbl:'Semi'}, {x:L.xR[1],lbl:'Quartas'}, {x:L.xR[2],lbl:'R16'}, {x:L.xR[3],lbl:'R32'},
+  ];
+  const headsHtml = cols.map(c=>
+    `<div class="bk2-head" style="left:${c.x}px;width:${W}px;" ${c.cls?`data-cls="${c.cls}"`:''}>${c.lbl}</div>`
+  ).join('');
 
   document.getElementById('bracket2').innerHTML = `
     <div id="bkZoomSizer">
-      <div id="bkZoomInner" style="width:${totalW}px;">
-        <div class="bk-heads" style="width:${totalW}px;">${headsHtml}</div>
-        <div class="bk-stage" style="width:${totalW}px;height:${totalH+90}px;">${svg}${boxes}</div>
+      <div id="bkZoomInner" style="width:${L.totalW}px;">
+        <div class="bk2-heads" style="position:relative;width:${L.totalW}px;height:36px;margin-bottom:8px;">${headsHtml}</div>
+        <div class="bk-stage" style="width:${L.totalW}px;height:${L.totalH}px;">${svg}${boxes}</div>
       </div>
     </div>`;
 
-  const headsEl = document.querySelector('#bracket2 .bk-heads');
-  const headsH = headsEl ? headsEl.offsetHeight : 46;
-  bkLastDims = {w: totalW, h: totalH+90+headsH};
+  bkLastDims = {w: L.totalW, h: L.totalH+60};
   applyBkZoom();
 
   document.querySelectorAll('#bracket2 .bmrow[data-round]').forEach(node=>{
