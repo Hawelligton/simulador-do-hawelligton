@@ -150,6 +150,30 @@ nav.tabs button.active::before{content:'';position:absolute;top:0;left:18%;right
 .rk-source{font-size:11px !important;color:var(--cyan-dim) !important;font-style:italic;}
 
 .rk-table-wrap{padding:6px 0;}
+/* ── RECORDES ── */
+.rec-grid{display:flex;flex-direction:column;gap:14px;}
+.rec-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+.rec-card-head{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);}
+.rec-card-head .icon{font-size:18px;}
+.rec-card-head .title{font-family:'Orbitron';font-size:11px;letter-spacing:.06em;color:var(--text);text-transform:uppercase;}
+.rec-card-head.gold{background:linear-gradient(90deg,rgba(255,178,63,.18),transparent);}
+.rec-card-head.cyan{background:linear-gradient(90deg,rgba(57,243,255,.12),transparent);}
+.rec-card-head.green{background:linear-gradient(90deg,rgba(61,255,176,.12),transparent);}
+.rec-card-head.red{background:linear-gradient(90deg,rgba(255,93,108,.12),transparent);}
+.rec-card-head.mag{background:linear-gradient(90deg,rgba(255,61,166,.12),transparent);}
+.rec-body{padding:4px 0 8px;}
+.rec-row{display:flex;align-items:center;gap:10px;padding:9px 16px;border-top:1px solid rgba(255,255,255,.05);}
+.rec-row:first-child{border-top:none;}
+.rec-rank{font-family:'Orbitron';font-size:11px;color:var(--muted);width:20px;text-align:center;flex:0 0 auto;}
+.rec-info{flex:1;min-width:0;}
+.rec-name{font-size:13.5px;font-weight:700;color:var(--text);}
+.rec-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.rec-val{font-family:'Orbitron';font-size:13px;color:var(--cyan);white-space:nowrap;}
+.rec-val.gold{color:var(--gold);}
+.rec-row.hl{background:rgba(255,178,63,.06);}
+.rec-badge{font-family:'Orbitron';font-size:9px;color:var(--bg);background:var(--gold);border-radius:8px;padding:2px 7px;margin-left:6px;vertical-align:middle;}
+.rec-badge.live{background:var(--green);color:var(--bg);}
+/* ── RANKING FIFA ── */
 .rk-row{display:grid;grid-template-columns:50px 36px 1fr auto;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.05);}
 .rk-row:last-child{border-bottom:none;}
 .rk-row.rk-head{font-family:'Orbitron';font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:10px 16px;border-bottom:1px solid var(--line);}
@@ -433,6 +457,7 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
   <div class="mais-menu" id="maisMenu">
     <button class="mais-item" data-tab="convocacoes"><span class="nav-icon">👥</span>Convocações</button>
     <button class="mais-item" data-tab="ranking"><span class="nav-icon">📊</span>Ranking FIFA</button>
+    <button class="mais-item" data-tab="recordes"><span class="nav-icon">🏅</span>Recordes</button>
   </div>
 
   <!-- GRUPOS -->
@@ -557,6 +582,14 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
         <div class="rk-col-pts">Pontos</div>
       </div>
       <div id="rkList"></div>
+    </div>
+  </section>
+
+  <section class="tabpanel" id="tab-recordes">
+    <div class="inner">
+      <h2 class="section-h">🏅 Recordes das Copas</h2>
+      <p class="section-desc">Marcas históricas do maior torneio do planeta — Copa 2026 ainda em disputa!</p>
+      <div id="recordesGrid"></div>
     </div>
   </section>
 
@@ -2077,6 +2110,87 @@ function setupRankingInfo(){
   });
 }
 
+/* ============ RECORDES DAS COPAS ============ */
+function renderRecordes(){
+  const el = document.getElementById('recordesGrid');
+  if(!el) return;
+
+  const card = (colorClass, icon, title, rows) => `
+    <div class="rec-card">
+      <div class="rec-card-head ${colorClass}">
+        <span class="icon">${icon}</span>
+        <span class="title">${title}</span>
+      </div>
+      <div class="rec-body">${rows}</div>
+    </div>`;
+
+  const row = (rank, flag, name, sub, val, opts={}) => `
+    <div class="rec-row${opts.hl?' hl':''}">
+      <div class="rec-rank">${rank}</div>
+      <div style="font-size:22px;line-height:1">${flag}</div>
+      <div class="rec-info">
+        <div class="rec-name">${name}${opts.badge?`<span class="rec-badge${opts.badgeLive?' live':''}">${opts.badge}</span>`:''}</div>
+        ${sub?`<div class="rec-sub">${sub}</div>`:''}
+      </div>
+      <div class="rec-val${opts.gold?' gold':''}">${val}</div>
+    </div>`;
+
+  const section = card('gold','🏆','Países mais campeões',[
+    row('🥇','🇧🇷','Brasil','1958, 1962, 1970, 1994, 2002','5 títulos',{hl:true,gold:true}),
+    row('🥈','🇩🇪','Alemanha','1954, 1974, 1990, 2014','4 títulos'),
+    row('🥈','🇮🇹','Itália','1934, 1938, 1982, 2006','4 títulos'),
+    row('4','🇦🇷','Argentina','1978, 1986, 2022','3 títulos'),
+    row('5','🇫🇷','França','1998, 2018','2 títulos'),
+    row('5','🇺🇾','Uruguai','1930, 1950','2 títulos'),
+    row('7','🏴','Inglaterra','1966','1 título'),
+    row('7','🇪🇸','Espanha','2010','1 título'),
+  ].join(''));
+
+  const artilheiros = card('cyan','⚽','Artilheiros históricos — todas as Copas',[
+    row('1','🇩🇪','Miroslav Klose','2002–2014 · 24 partidas','16 gols',{hl:true,gold:true}),
+    row('2','🇧🇷','Ronaldo','1998–2006 · 19 partidas','15 gols'),
+    row('3','🇩🇪','Gerd Müller','1970–1974 · 13 partidas','14 gols'),
+    row('4','🇫🇷','Just Fontaine','1958 · 6 partidas','13 gols',{badge:'1 edição'}),
+    row('5','🇧🇷','Pelé','1958–1970 · 14 partidas','12 gols'),
+    row('6','🇩🇪','Jürgen Klinsmann','1990–1998 · 17 partidas','11 gols'),
+    row('6','🇭🇺','Sándor Kocsis','1954 · 5 partidas','11 gols'),
+    row('8','🇫🇷','Kylian Mbappé','2018–2026 · em atividade','12+ gols',{badge:'ATIVO',badgeLive:true}),
+  ].join(''));
+
+  const edicao = card('green','📊','Recordes por edição',[
+    row('','⚽','Mais gols em uma edição','França 1998 — 171 gols / 64 jogos (2,67 média)','171',{gold:true}),
+    row('','🇦🇹','Maior placar da história','Áustria 7 × 5 Suíça — 1954 · 12 gols em 1 jogo','7 × 5'),
+    row('','🇹🇷','Gol mais rápido','Hakan Şükür — TUR × KOR · 2002 · 11 segundos','11\"',{hl:true}),
+    row('','🇫🇷','Mais gols em uma única Copa','Just Fontaine (FRA) — 13 gols · 1958','13 gols',{badge:'recorde'}),
+    row('','🇷🇺','Mais gols em uma partida','Oleg Salenko (RUS) — 5 gols vs CMR · 1994','5 gols'),
+    row('','🇩🇪','Maior público na final','Brasil × Uruguai (Maracanã) — 1950 · estimativa','~173.850'),
+    row('','🌏','Mais países-sede','Japão & Coreia do Sul — 2002 (2 países)','2 países'),
+  ].join(''));
+
+  const individual = card('mag','👤','Recordes individuais',[
+    row('','🇩🇪','Mais partidas em Copas','Lothar Matthäus (ALE) — 1982–1998','25 jogos',{gold:true,hl:true}),
+    row('','🇧🇷','Mais títulos como jogador','Pelé (BRA) — 1958, 1962, 1970','3 títulos'),
+    row('','🇧🇷','Primeiro a marcar em 5 Copas','Ronaldo (POR) — 2002 a 2022','5 Copas'),
+    row('','🇵🇹','Primeiro a marcar em 6 Copas','Cristiano Ronaldo (POR) — 2002 a 2026','6 Copas',{badge:'2026',badgeLive:true}),
+    row('','🇧🇷','Gol mais jovem na história','Pelé (BRA) — 17 anos · 1958 vs GAL','17 anos'),
+    row('','🇸🇪','Gol mais rápido em uma final','Johan Dahl (SUE) — 1 min · 1994? / Peters 1966',''),
+    row('','🇦🇷','Mais gols em um único torneio por capitão','Diego Maradona (ARG) — 1986','Lenda'),
+    row('','🇩🇪','Treinador com mais títulos','Vittorio Pozzo (ITA) — 2 Copas (1934 e 1938)','2 títulos'),
+  ].join(''));
+
+  const copa2026 = card('red','🔴','Recordes da Copa 2026 <em style="font-size:9px;font-family:Rajdhani;letter-spacing:0;">(em andamento)</em>',[
+    row('','🇦🇷','Artilheiro','Lionel Messi (ARG) · Grupos A–J','5 gols',{gold:true,hl:true}),
+    row('','🇳🇴','2º artilheiro','Erling Haaland (NOR)','4 gols'),
+    row('','🇫🇷','2º artilheiro','Kylian Mbappé (FRA)','4 gols'),
+    row('','🇩🇪','Maior goleada','Alemanha 7 × 1 Curaçao — Grupo E','7 × 1',{badge:'recorde 2026'}),
+    row('','🇨🇦','Maior goleada','Canadá 6 × 0 Catar — Grupo B','6 × 0'),
+    row('','🇵🇹','Gol em 6 Copas diferentes','Cristiano Ronaldo (POR) vs UZB · história','Inédito',{badge:'NOVO',badgeLive:true}),
+    row('','🇩🇪','Melhor ataque (fase de grupos)','Alemanha — 9 gols em 2 jogos','9 gols'),
+  ].join(''));
+
+  el.innerHTML = `<div class="rec-grid">${section}${artilheiros}${edicao}${individual}${copa2026}</div>`;
+}
+
 function renderRanking(){
   renderRankingConfPills();
   renderRankingList();
@@ -2218,6 +2332,7 @@ renderContinentPills();
 renderCountryGrid();
 setupRankingInfo();
 renderRanking();
+renderRecordes();
 
 </script>
 </body>
