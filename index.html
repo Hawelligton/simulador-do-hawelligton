@@ -776,10 +776,11 @@ function renderDateStrip(allMatches){
   }
 
   stripEl.innerHTML = dates.map(d=>{
-    const sample = allMatches.find(x=>x.m.d===d).dt;
-    const wd = WD_PT[sample.getDay()];
+    // usa meio-dia horário de Brasília para evitar virada de data em outros fusos
     const [day,month] = d.split('/');
-    const isToday = isSameLocalDate(sample, now);
+    const refDate = new Date(`2026-${month}-${day}T12:00:00-03:00`);
+    const wd = WD_PT[refDate.getDay()];
+    const isToday = isSameLocalDate(new Date(`2026-${month}-${day}T12:00:00-03:00`), now);
     const active = d===selectedGameDate;
     return `<div class="date-chip ${active?'active':''}" data-date="${d}">
       <div class="wd">${isToday?'HOJE':wd+'.'}</div>
@@ -796,8 +797,11 @@ function renderDateStrip(allMatches){
     });
   });
 
-  const activeChip = stripEl.querySelector('.date-chip.active');
-  if(activeChip && activeChip.scrollIntoView) activeChip.scrollIntoView({inline:'center', block:'nearest'});
+  // centraliza no chip ativo após o layout estabilizar
+  requestAnimationFrame(()=>{
+    const activeChip = stripEl.querySelector('.date-chip.active');
+    if(activeChip) activeChip.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
+  });
 }
 
 function gameStatusBadge(m){
@@ -2082,6 +2086,11 @@ document.querySelectorAll('nav.tabs button[data-tab]').forEach(btn=>{
     btn.classList.add('active');
     document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
     backToSquadsBrowse();
+    // ao abrir a aba jogos, reinicia a seleção de data para hoje e centraliza
+    if(btn.dataset.tab === 'jogos'){
+      selectedGameDate = null;
+      renderGamesTab();
+    }
   });
 });
 
