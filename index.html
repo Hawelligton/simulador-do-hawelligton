@@ -394,6 +394,9 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
 .time-group-header .tg-count{font-size:12px;color:var(--muted);flex:0 0 auto;}
 .game-card{padding:14px 16px 16px;margin-bottom:14px;}
 .game-card.is-live{border-color:var(--green);box-shadow:0 0 16px rgba(61,255,176,.12);}
+.game-card-ko{border-color:rgba(255,178,63,.25);background:linear-gradient(135deg,rgba(255,178,63,.04),var(--panel));}
+.game-card-ko .gc-comp{color:var(--gold);}
+.gc-team-tbd{opacity:.75;}
 .gc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
 .gc-comp{font-size:12px;color:var(--cyan-dim);font-weight:600;}
 .gc-status{font-size:11px;font-weight:700;letter-spacing:.04em;border-radius:14px;padding:4px 11px;border:1px solid var(--line);color:var(--muted);}
@@ -762,6 +765,107 @@ function renderSchedule(){
 }
 let bkLastDims = null;
 
+/* ============ MATA-MATA NA ABA JOGOS ============ */
+// Resultados reais do mata-mata (preenchido conforme jogos acontecem)
+const KNOCKOUT_RESULTS = {
+  // num: {hs, as}  — exemplo: 73: {hs:2, as:1}
+};
+
+const KO_ROUND_LABEL = {
+  'R32':'Rodada de 32','R16':'Oitavas de Final','QF':'Quartas de Final',
+  'SF':'Semifinais','3º':'3º Lugar','FINAL':'🏆 Final'
+};
+
+function computeRealStandings(gk){
+  const g = INITIAL_GROUPS[gk];
+  const stats = {};
+  g.teams.forEach(t=>stats[t]={code:t,j:0,v:0,e:0,d:0,gp:0,gc:0,pts:0});
+  g.matches.forEach(m=>{
+    if(m.hs===null||m.as===null||m.hs===''||m.as==='') return;
+    const hs=+m.hs, as=+m.as;
+    const H=stats[m.h], A=stats[m.a];
+    H.j++;A.j++;H.gp+=hs;H.gc+=as;A.gp+=as;A.gc+=hs;
+    if(hs>as){H.v++;H.pts+=3;A.d++;}
+    else if(hs<as){A.v++;A.pts+=3;H.d++;}
+    else{H.e++;A.e++;H.pts++;A.pts++;}
+  });
+  const arr=Object.values(stats).map(s=>({...s,sg:s.gp-s.gc}));
+  arr.sort((a,b)=>b.pts-a.pts||b.sg-a.sg||b.gp-a.gp||teamName(a.code).localeCompare(teamName(b.code)));
+  return arr;
+}
+
+function isGroupComplete(gk){
+  return INITIAL_GROUPS[gk].matches.every(m=>m.hs!==null&&m.as!==null);
+}
+
+function koSpecLabel(spec){
+  if(!spec) return '?';
+  if(spec.t==='w') return `1º ${spec.g}`;
+  if(spec.t==='r') return `2º ${spec.g}`;
+  if(spec.t==='b3') return `Mel. 3º`;
+  if(spec.t==='wm') return `V.J${spec.n}`;
+  if(spec.t==='lm') return `P.J${spec.n}`;
+  return '?';
+}
+
+function koResolveTeamCode(spec, realStandingsCache){
+  if(!spec) return null;
+  if(spec.t==='w'){
+    if(!isGroupComplete(spec.g)) return null;
+    return (realStandingsCache[spec.g]||computeRealStandings(spec.g))[0]?.code||null;
+  }
+  if(spec.t==='r'){
+    if(!isGroupComplete(spec.g)) return null;
+    return (realStandingsCache[spec.g]||computeRealStandings(spec.g))[1]?.code||null;
+  }
+  if(spec.t==='b3') return null; // complex — deixa TBD
+  if(spec.t==='wm'){
+    const res=KNOCKOUT_RESULTS[spec.n];
+    return res?.winner||null;
+  }
+  if(spec.t==='lm'){
+    const res=KNOCKOUT_RESULTS[spec.n];
+    return res?.loser||null;
+  }
+  return null;
+}
+
+function getAllKnockoutMatches(){
+  const arr=[];
+  const cache={};
+  Object.keys(INITIAL_GROUPS).forEach(gk=>{ cache[gk]=computeRealStandings(gk); });
+
+  KNOCKOUT_SCHEDULE.forEach(ks=>{
+    let h=null, a=null;
+    // Para R32: resolve dos R32_SLOTS
+    if(ks.num>=73&&ks.num<=88){
+      const slot=R32_SLOTS[ks.num-73];
+      h=koResolveTeamCode(slot.a, cache);
+      a=koResolveTeamCode(slot.b, cache);
+    } else {
+      // Para R16+: resolve do spec no KNOCKOUT_SCHEDULE
+      h=koResolveTeamCode(ks.a, cache);
+      a=koResolveTeamCode(ks.b, cache);
+    }
+    const res=KNOCKOUT_RESULTS[ks.num]||{};
+    const m={
+      d:ks.d, tm:ks.tm, c:ks.city,
+      h, a,
+      hs:res.hs!==undefined?res.hs:null,
+      as:res.as!==undefined?res.as:null,
+      isKO:true,
+      koRound:ks.round,
+      koNum:ks.num,
+      koSpec:ks,
+      // slots para label quando time é null
+      slotA:ks.num>=73&&ks.num<=88?R32_SLOTS[ks.num-73]?.a:ks.a,
+      slotB:ks.num>=73&&ks.num<=88?R32_SLOTS[ks.num-73]?.b:ks.b,
+    };
+    arr.push({gk:null, m, dt:matchDateTime(m)});
+  });
+  return arr;
+}
+
 /* ============== ABA JOGOS (calendário no estilo do app de referência) ============== */
 const WD_PT = ['DOM','SEG','TER','QUA','QUI','SEX','SÁB'];
 const MO_PT = {'01':'JAN','02':'FEV','03':'MAR','04':'ABR','05':'MAI','06':'JUN','07':'JUL','08':'AGO','09':'SET','10':'OUT','11':'NOV','12':'DEZ'};
@@ -775,6 +879,8 @@ function getAllFlatMatches(){
   Object.entries(INITIAL_GROUPS).forEach(([gk,g])=>{
     g.matches.forEach(m=> arr.push({gk, m, dt: matchDateTime(m)}));
   });
+  // Inclui jogos do mata-mata
+  getAllKnockoutMatches().forEach(x=> arr.push(x));
   arr.sort((a,b)=>a.dt-b.dt);
   return arr;
 }
@@ -848,7 +954,19 @@ function gameStatusBadge(m){
 function gameCardHtml(gk, m){
   const status = gameStatusBadge(m);
   const played = m.hs!==null && m.as!==null;
-  const roundLabel = m.r===1?'1ª rodada':m.r===2?'2ª rodada':'3ª rodada';
+  const isKO = !!m.isKO;
+  const roundLabel = isKO
+    ? `${KO_ROUND_LABEL[m.koRound]||m.koRound} · Jogo ${m.koNum}`
+    : (m.r===1?'1ª rodada':m.r===2?'2ª rodada':'3ª rodada');
+  const compLabel = isKO ? '⚔️ Mata-mata' : `Grupo ${gk}`;
+
+  // helper para renderizar um time (pode ser null → TBD)
+  const teamHtml = (code, slot) => {
+    if(code) return `<div class="gc-team"><span class="gc-flag">${F(teamFlag(code))}</span><span class="gc-code">${code}</span><span class="gc-name">${teamName(code)}</span></div>`;
+    const lbl = koSpecLabel(slot);
+    return `<div class="gc-team gc-team-tbd"><span class="gc-flag" style="font-size:16px;opacity:.5">🏳️</span><span class="gc-code" style="color:var(--muted)">${lbl}</span><span class="gc-name" style="color:var(--muted);font-size:10px">A definir</span></div>`;
+  };
+
   let centerHtml;
   if(played){
     const hWin = m.hs>m.as, aWin = m.as>m.hs;
@@ -875,15 +993,15 @@ function gameCardHtml(gk, m){
   } else {
     centerHtml = `<div class="gc-vs-time">${status.isLive?'VS':m.tm}</div>`;
   }
-  return `<div class="panel game-card ${status.isLive?'is-live':''}">
+  return `<div class="panel game-card ${status.isLive?'is-live':''} ${isKO?'game-card-ko':''}">
     <div class="gc-top">
-      <div class="gc-comp">Grupo ${gk} · ${roundLabel}</div>
+      <div class="gc-comp">${compLabel} · ${roundLabel}</div>
       ${status.html}
     </div>
     <div class="gc-teams">
-      <div class="gc-team"><span class="gc-flag">${F(teamFlag(m.h))}</span><span class="gc-code">${m.h}</span><span class="gc-name">${teamName(m.h)}</span></div>
+      ${isKO ? teamHtml(m.h, m.slotA) : `<div class="gc-team"><span class="gc-flag">${F(teamFlag(m.h))}</span><span class="gc-code">${m.h}</span><span class="gc-name">${teamName(m.h)}</span></div>`}
       ${centerHtml}
-      <div class="gc-team"><span class="gc-flag">${F(teamFlag(m.a))}</span><span class="gc-code">${m.a}</span><span class="gc-name">${teamName(m.a)}</span></div>
+      ${isKO ? teamHtml(m.a, m.slotB) : `<div class="gc-team"><span class="gc-flag">${F(teamFlag(m.a))}</span><span class="gc-code">${m.a}</span><span class="gc-name">${teamName(m.a)}</span></div>`}
     </div>
     <div class="gc-venue">🏟️ ${m.c} · ${m.tm} (Brasília)</div>
   </div>`;
