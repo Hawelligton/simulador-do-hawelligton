@@ -657,8 +657,8 @@ E:{teams:['GER','CIV','ECU','CUR'],matches:[
   {r:1,d:'14/06',tm:'20:00',c:'Filadélfia',h:'CIV',a:'ECU',hs:1,as:0},
   {r:2,d:'20/06',tm:'17:00',c:'Toronto',h:'GER',a:'CIV',hs:2,as:1},
   {r:2,d:'20/06',tm:'21:00',c:'Kansas City',h:'ECU',a:'CUR',hs:0,as:0},
-  {r:3,d:'25/06',tm:'17:00',c:'Filadélfia',h:'CUR',a:'CIV',hs:null,as:null},
-  {r:3,d:'25/06',tm:'17:00',c:'Nova York',h:'ECU',a:'GER',hs:null,as:null},
+  {r:3,d:'25/06',tm:'17:00',c:'Filadélfia',h:'CUR',a:'CIV',hs:0,as:2},
+  {r:3,d:'25/06',tm:'17:00',c:'Nova York',h:'ECU',a:'GER',hs:2,as:1},
 ]},
 F:{teams:['SWE','NED','JPN','TUN'],matches:[
   {r:1,d:'14/06',tm:'17:00',c:'Dallas',h:'NED',a:'JPN',hs:2,as:2},
@@ -1143,6 +1143,10 @@ const SCORERS = [
  {name:'Álvaro Fidalgo', code:'MEX', goals:1, club:'Club América'},
  {name:'Luis Romo', code:'MEX', goals:1, club:'Chivas'},
  {name:'Thapelo Maseko', code:'RSA', goals:1, club:'SuperSport United'},
+ {name:'Nilson Angulo', code:'ECU', goals:1, club:'Club Brugge'},
+ {name:'Gonzalo Plata', code:'ECU', goals:1, club:'Al-Qadsiah'},
+ {name:'Leroy Sané', code:'GER', goals:1, club:'Bayern Munich'},
+ {name:'Nicolas Pépé', code:'CIV', goals:2, club:'Al-Khelaifi'},
 ].sort((a,b)=>b.goals-a.goals);
 
 const STADIUMS = [
