@@ -622,8 +622,8 @@ A:{teams:['MEX','KOR','CZE','RSA'],matches:[
   {r:1,d:'11/06',tm:'23:00',c:'Guadalajara',h:'KOR',a:'CZE',hs:2,as:1},
   {r:2,d:'18/06',tm:'13:00',c:'Atlanta',h:'CZE',a:'RSA',hs:1,as:1},
   {r:2,d:'18/06',tm:'22:00',c:'Guadalajara',h:'MEX',a:'KOR',hs:1,as:0},
-  {r:3,d:'24/06',tm:'22:00',c:'Cidade do México',h:'CZE',a:'MEX',hs:null,as:null},
-  {r:3,d:'24/06',tm:'22:00',c:'Monterrey',h:'RSA',a:'KOR',hs:null,as:null},
+  {r:3,d:'24/06',tm:'22:00',c:'Cidade do México',h:'CZE',a:'MEX',hs:0,as:3},
+  {r:3,d:'24/06',tm:'22:00',c:'Monterrey',h:'RSA',a:'KOR',hs:1,as:0},
 ]},
 B:{teams:['CAN','SUI','BIH','QAT'],matches:[
   {r:1,d:'12/06',tm:'16:00',c:'Toronto',h:'CAN',a:'BIH',hs:1,as:1},
@@ -1020,6 +1020,11 @@ const SCORERS = [
  {name:'Kerim Alajbegovic', code:'BIH', goals:1, club:'Schalke 04'},
  {name:'Ermin Mahmic', code:'BIH', goals:2, club:'Augsburg'},
  {name:'Hassan Al-Haydos', code:'QAT', goals:1, club:'Al Sadd'},
+ {name:'Julián Quiñones', code:'MEX', goals:2, club:'Al Qadsiah'},
+ {name:'Mateo Chávez', code:'MEX', goals:1, club:'AZ Alkmaar'},
+ {name:'Álvaro Fidalgo', code:'MEX', goals:1, club:'Club América'},
+ {name:'Luis Romo', code:'MEX', goals:1, club:'Chivas'},
+ {name:'Thapelo Maseko', code:'RSA', goals:1, club:'SuperSport United'},
 ].sort((a,b)=>b.goals-a.goals);
 
 const STADIUMS = [
