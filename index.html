@@ -397,26 +397,29 @@ footer{text-align:center;margin-top:50px;color:var(--muted);font-size:11.5px;let
 .game-card-ko{border-color:rgba(255,178,63,.25);background:linear-gradient(135deg,rgba(255,178,63,.04),var(--panel));}
 .game-card-ko .gc-comp{color:var(--gold);}
 .gc-team-tbd{opacity:.75;}
-/* ── ESCALAÇÕES EXPANSÍVEIS ── */
+/* ── ESCALAÇÕES — CAMPO VISUAL ── */
 .lu-toggle{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;cursor:pointer;border-top:1px solid var(--line);color:var(--muted);font-size:11.5px;user-select:none;transition:background .15s;}
 .lu-toggle:hover{background:rgba(57,243,255,.05);}
-.lu-toggle span:first-child{display:flex;align-items:center;gap:6px;}
 .lu-arr{font-size:10px;transition:transform .25s;display:inline-block;}
 .lu-toggle.open .lu-arr{transform:rotate(180deg);}
-.lu-panel{display:none;border-top:1px solid var(--line);background:rgba(0,0,0,.22);}
+.lu-panel{display:none;border-top:1px solid var(--line);}
 .lu-panel.open{display:block;}
-.lu-cols{display:flex;}
-.lu-col{flex:1;min-width:0;padding:10px 12px;}
-.lu-col:first-child{border-right:1px solid var(--line);}
-.lu-col-head{display:flex;align-items:center;gap:5px;font-family:'Orbitron';font-size:9px;color:var(--cyan);letter-spacing:.04em;padding-bottom:7px;margin-bottom:6px;border-bottom:1px solid var(--line);}
-.lu-row{display:flex;align-items:center;gap:4px;padding:2px 0;line-height:1.3;}
-.lu-badge{font-family:'Orbitron';font-size:7.5px;color:#000;border-radius:3px;padding:1px 3px;flex:0 0 auto;min-width:24px;text-align:center;}
-.lu-badge.gr{background:#3dffc5;}.lu-badge.def{background:#39f3ff;}.lu-badge.med{background:#ffb23f;}.lu-badge.ata{background:#ff3d6a;}
-.lu-name{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);}
-.lu-div{display:flex;align-items:center;gap:5px;margin:5px 0 3px;font-size:8.5px;color:var(--muted);font-family:'Orbitron';letter-spacing:.05em;}
-.lu-div::before,.lu-div::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.1);}
-.lu-bench .lu-name{color:var(--muted);}
-.lu-coach{font-size:10px;color:var(--muted);margin-top:5px;padding-top:4px;border-top:1px solid var(--line);}
+/* CAMPO */
+.lu-pitch-wrap{position:relative;width:100%;padding-bottom:145%;background:#2e7d32;overflow:hidden;}
+.lu-pitch-svg{position:absolute;inset:0;width:100%;height:100%;}
+.lu-pnode{position:absolute;transform:translate(-50%,-50%);text-align:center;width:46px;z-index:2;}
+.lu-pball{width:34px;height:34px;border-radius:50%;margin:0 auto;border:2px solid rgba(255,255,255,.7);overflow:hidden;background:#555;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;}
+.lu-pball img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.lu-pname{font-size:7.5px;color:#fff;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 3px rgba(0,0,0,.9);font-weight:600;}
+.lu-badge-pos{font-size:6.5px;font-family:'Orbitron';color:#000;border-radius:2px;padding:0 3px;display:inline-block;margin-top:1px;}
+/* BANCO */
+.lu-bench-section{background:rgba(0,0,0,.25);padding:8px 12px;}
+.lu-bench-hdr{display:flex;justify-content:space-between;font-family:'Orbitron';font-size:8.5px;color:var(--muted);letter-spacing:.05em;margin-bottom:5px;}
+.lu-bench-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px;}
+.lu-bench-item{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:1.5px 0;}
+.lu-bench-item.home{color:rgba(255,255,255,.7);}
+.lu-coach-line{font-size:9.5px;color:var(--muted);margin-top:6px;padding-top:5px;border-top:1px solid var(--line);display:flex;gap:16px;}
+.lu-coach-line span{display:flex;align-items:center;gap:4px;}
 .gc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
 .gc-comp{font-size:12px;color:var(--cyan-dim);font-weight:600;}
 .gc-status{font-size:11px;font-weight:700;letter-spacing:.04em;border-radius:14px;padding:4px 11px;border:1px solid var(--line);color:var(--muted);}
@@ -978,42 +981,132 @@ function toggleLineup(id){
   const open=panel.classList.toggle('open');
   if(tgl) tgl.classList.toggle('open',open);
   if(open && !panel.dataset.loaded){
-    const h=panel.dataset.h, a=panel.dataset.a;
-    panel.innerHTML=`<div class="lu-cols">
-      <div class="lu-col"><div class="lu-col-head">${F(teamFlag(h))} ${h}</div>${buildLineupHtml(h)}</div>
-      <div class="lu-col"><div class="lu-col-head">${F(teamFlag(a))} ${a}</div>${buildLineupHtml(a)}</div>
-    </div>`;
+    panel.innerHTML=buildPitchPanel(panel.dataset.h, panel.dataset.a);
     panel.dataset.loaded='1';
   }
 }
 
-function buildLineupHtml(code){
-  if(typeof SQUADS==='undefined'||!SQUADS[code]) return '<div style="font-size:11px;color:var(--muted);padding:6px 0">Dados não disponíveis</div>';
-  const sq=SQUADS[code];
-  const grp={gr:[],def:[],med:[],ata:[]};
-  sq.players.forEach(p=>{
-    if(p.position==='Goleiro') grp.gr.push(p);
-    else if(p.position==='Defensor') grp.def.push(p);
-    else if(p.position==='Meio-campista') grp.med.push(p);
-    else grp.ata.push(p);
+function buildPitchPanel(h, a){
+  const sqH=typeof SQUADS!=='undefined'&&SQUADS[h]?SQUADS[h]:null;
+  const sqA=typeof SQUADS!=='undefined'&&SQUADS[a]?SQUADS[a]:null;
+
+  function getSquadRows(sq){
+    if(!sq) return {rows:[[],[],[],[]],bench:[],coach:null};
+    const gr=sq.players.filter(p=>p.position==='Goleiro');
+    const def=sq.players.filter(p=>p.position==='Defensor');
+    const med=sq.players.filter(p=>p.position==='Meio-campista');
+    const ata=sq.players.filter(p=>p.position==='Atacante');
+    const starters=[...gr.slice(0,1),...def.slice(0,4),...med.slice(0,4),...ata.slice(0,2)];
+    const sSet=new Set(starters.map(p=>p.name));
+    return {
+      rows:[gr.slice(0,1),def.slice(0,4),med.slice(0,4),ata.slice(0,2)],
+      bench:sq.players.filter(p=>!sSet.has(p.name)),
+      coach:sq.coach
+    };
+  }
+
+  const rH=getSquadRows(sqH), rA=getSquadRows(sqA);
+
+  // X spread: distribute N players evenly across pitch width
+  function xs(n){if(n===0)return[];if(n===1)return[50];return Array.from({length:n},(_,i)=>Math.round(12+i*76/(n-1)));}
+
+  // Short player name display
+  function sn(p){
+    const nm=p.name||'';
+    if(nm.length<=10) return nm;
+    const pts=nm.trim().split(' ');
+    if(pts.length===1) return nm.slice(0,10);
+    const last=pts[pts.length-1];
+    return pts[0].length<=2?pts[0]+'. '+last:last;
+  }
+
+  // Position badge color
+  const posColor={gr:'#00bcd4',def:'#1565c0',med:'#f57f17',ata:'#c62828'};
+  const posKey=(p)=>p.position==='Goleiro'?'gr':p.position==='Defensor'?'def':p.position==='Meio-campista'?'med':'ata';
+
+  // Player node HTML
+  function pnode(p, x, y, bColor){
+    const ph=p&&p.photo?`<img src="${p.photo}" onerror="this.style.display='none';this.nextSibling.style.display='flex'" loading="lazy"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:9px;font-weight:800;">${p?p.name.charAt(0):''}</span>`
+      :`<span style="font-size:9px;font-weight:800;">${p?p.name.charAt(0):''}</span>`;
+    const bc=bColor||posColor[posKey(p)]||'#555';
+    return `<div class="lu-pnode" style="left:${x}%;top:${y}%">
+      <div class="lu-pball" style="border-color:${bc}80;background:#333">${ph}</div>
+      <div class="lu-pname">${p?sn(p):''}</div>
+    </div>`;
+  }
+
+  // Home team: GK at top (6%), DEF(20%), MID(34%), FWD(46%)
+  const homeY=[6,20,34,46];
+  // Away team: FWD at (54%), MID(66%), DEF(80%), GK(94%)
+  const awayY=[54,66,80,94];
+  const homeColor='#ffb300';
+  const awayColor='#e53935';
+
+  let nodes='';
+  rH.rows.forEach((row,ri)=>{
+    const ys=xs(row.length);
+    row.forEach((p,i)=>{nodes+=pnode(p,ys[i],homeY[ri],homeColor);});
   });
-  const starters=[
-    ...grp.gr.slice(0,1).map(p=>({...p,badge:'gr',lbl:'GR'})),
-    ...grp.def.slice(0,4).map(p=>({...p,badge:'def',lbl:'DEF'})),
-    ...grp.med.slice(0,4).map(p=>({...p,badge:'med',lbl:'MED'})),
-    ...grp.ata.slice(0,2).map(p=>({...p,badge:'ata',lbl:'ATA'})),
-  ];
-  const sSet=new Set(starters.map(p=>p.name));
-  const bench=sq.players.filter(p=>!sSet.has(p.name)).map(p=>({...p,
-    badge:p.position==='Goleiro'?'gr':p.position==='Defensor'?'def':p.position==='Meio-campista'?'med':'ata',
-    lbl:p.position==='Goleiro'?'GR':p.position==='Defensor'?'DEF':p.position==='Meio-campista'?'MED':'ATA'
-  }));
-  const row=(p,b)=>`<div class="lu-row${b?' lu-bench':''}"><span class="lu-badge ${p.badge}">${p.lbl}</span><span class="lu-name">${p.name}</span></div>`;
-  const coachLine=sq.coach?`<div class="lu-coach">🧑‍💼 ${sq.coach}</div>`:'';
-  return starters.map(p=>row(p,false)).join('')
-    +'<div class="lu-div">BANCO</div>'
-    +'<div class="lu-bench">'+bench.map(p=>row(p,true)).join('')+'</div>'
-    +coachLine;
+  // Away team is shown bottom (rows reversed)
+  [rA.rows[2],rA.rows[1],rA.rows[3],rA.rows[0]]; // FWD, MID, DEF, GK
+  const awayOrder=[rA.rows[2],rA.rows[1],rA.rows[0].slice().reverse(),rA.rows[3]]; // [FWD, MID, DEF, GK top→bottom]
+  // Actually: away top to bottom = FWD → MID → DEF → GK
+  const awayRows=[rA.rows[3].slice(),rA.rows[2].slice().reverse(),rA.rows[1].slice().reverse(),rA.rows[0].slice()];
+  // wait, let me just do it cleanly:
+  // rows: index 0=GK,1=DEF,2=MED,3=ATA
+  // away displayed top to bottom: ATA(54%), MED(66%), DEF(80%), GK(94%)
+  [[rA.rows[3],54],[rA.rows[2],66],[rA.rows[1],80],[rA.rows[0],94]].forEach(([row,y])=>{
+    const ys=xs(row.length);
+    row.forEach((p,i)=>{nodes+=pnode(p,ys[i],y,awayColor);});
+  });
+
+  // Team labels on pitch
+  const flagH=teamFlag(h)||'', flagA=teamFlag(a)||'';
+
+  // Bench
+  const bH=rH.bench, bA=rA.bench;
+  const maxB=Math.max(bH.length,bA.length);
+  let benchRows='';
+  for(let i=0;i<maxB;i++){
+    benchRows+=`<div class="lu-bench-item home">${bH[i]?'↑ '+sn(bH[i]):''}</div>`;
+    benchRows+=`<div class="lu-bench-item">${bA[i]?'↑ '+sn(bA[i]):''}</div>`;
+  }
+
+  const coachH=sqH?.coach||'', coachA=sqA?.coach||'';
+
+  return `<div class="lu-pitch-wrap">
+    <svg class="lu-pitch-svg" viewBox="0 0 100 145" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- grass stripes -->
+      ${Array.from({length:9},(_,i)=>`<rect x="0" y="${i*16}" width="100" height="8" fill="${i%2?'rgba(0,0,0,.08)':'rgba(255,255,255,.04)'}"/>`).join('')}
+      <!-- border -->
+      <rect x="3" y="2" width="94" height="141" fill="none" stroke="rgba(255,255,255,.45)" stroke-width=".7"/>
+      <!-- halfway line -->
+      <line x1="3" y1="72.5" x2="97" y2="72.5" stroke="rgba(255,255,255,.45)" stroke-width=".6"/>
+      <!-- center circle -->
+      <circle cx="50" cy="72.5" r="12" fill="none" stroke="rgba(255,255,255,.45)" stroke-width=".6"/>
+      <circle cx="50" cy="72.5" r="1" fill="rgba(255,255,255,.6)"/>
+      <!-- home goal area top -->
+      <rect x="30" y="2" width="40" height="16" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".5"/>
+      <rect x="40" y="2" width="20" height="6" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".5"/>
+      <circle cx="50" cy="13" r=".9" fill="rgba(255,255,255,.5)"/>
+      <!-- away goal area bottom -->
+      <rect x="30" y="127" width="40" height="16" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".5"/>
+      <rect x="40" y="137" width="20" height="6" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".5"/>
+      <circle cx="50" cy="132" r=".9" fill="rgba(255,255,255,.5)"/>
+    </svg>
+    <!-- team labels -->
+    <div style="position:absolute;top:1%;left:50%;transform:translateX(-50%);font-family:'Orbitron';font-size:8px;color:rgba(255,255,255,.7);background:rgba(0,0,0,.35);padding:1px 6px;border-radius:8px;white-space:nowrap;">${F(teamFlag(h))} ${h}</div>
+    <div style="position:absolute;bottom:1%;left:50%;transform:translateX(-50%);font-family:'Orbitron';font-size:8px;color:rgba(255,255,255,.7);background:rgba(0,0,0,.35);padding:1px 6px;border-radius:8px;white-space:nowrap;">${F(teamFlag(a))} ${a}</div>
+    ${nodes}
+  </div>
+  <div class="lu-bench-section">
+    <div class="lu-bench-hdr">
+      <span>${F(teamFlag(h))} BANCO ${h}</span>
+      <span>BANCO ${a} ${F(teamFlag(a))}</span>
+    </div>
+    <div class="lu-bench-grid">${benchRows}</div>
+    ${(coachH||coachA)?`<div class="lu-coach-line"><span>🧑‍💼 <b>${coachH||'—'}</b></span><span>🧑‍💼 <b>${coachA||'—'}</b></span></div>`:''}
+  </div>`;
 }
 
 function gameCardHtml(gk, m){
