@@ -1715,8 +1715,8 @@ function getMatchByNumber(num){
   if(num>=73 && num<=88) return bracketState.r32[num-73];
   if(num>=89 && num<=96) return bracketState.r16[num-89];
   if(num===97) return bracketState.qf[0];
-  if(num===99) return bracketState.qf[1];
-  if(num===98) return bracketState.qf[2];
+  if(num===98) return bracketState.qf[1];
+  if(num===99) return bracketState.qf[2];
   if(num===100) return bracketState.qf[3];
   if(num===101) return bracketState.sf[0];
   if(num===102) return bracketState.sf[1];
@@ -1725,7 +1725,7 @@ function getMatchByNumber(num){
   return null;
 }
 const PAIR_R32_TO_R16 = [[0,2],[1,4],[3,5],[6,7],[10,11],[8,9],[13,15],[12,14]]; // jogos 89-96
-const PAIR_R16_TO_QF  = [[0,1],[2,3],[4,5],[6,7]];
+const PAIR_R16_TO_QF  = [[0,1],[4,5],[2,3],[6,7]];
 // qf[0],qf[1] = left half (de R16[0-3]); qf[2],qf[3] = right half (de R16[4-7])
 // Para o chaveamento visual convergente: semi-esquerda = qf[0]×qf[1], semi-direita = qf[2]×qf[3]
 const PAIR_QF_TO_SF   = [[0,1],[2,3]];
@@ -1850,7 +1850,7 @@ function applyBkZoom(){
      visual 8-15 → half direita:  R32 índices [10,11,8,9,13,15,12,14]
 =======================================================================*/
 
-const BK_DISPLAY_ORDER = [0,2,1,4,3,5,6,7,10,11,8,9,13,15,12,14];
+const BK_DISPLAY_ORDER = [0,2,1,4,10,11,8,9,3,5,6,7,13,15,12,14];
 const BK2 = { W:120, H:44, RGAP:10, CGAP:44, get UNIT(){ return this.H+this.RGAP; } };
 
 function bkLayout(){
@@ -1969,8 +1969,8 @@ function renderBracket(){
     const m = bracketState.r32[origIdx];
     boxes += bkMatchHtml(m,'r32',origIdx, L.xL[0], L.yR32[visI], m.spec.a, m.spec.b);
   });
-  // R16 esquerda
-  [0,1,2,3].forEach(i=> boxes += bkMatchHtml(bracketState.r16[i],'r16',i, L.xL[1], L.yR16[i]));
+  // R16 esquerda (Part A: M89,M90,M93,M94)
+  [0,1,4,5].forEach((r16Idx,visPos)=> boxes += bkMatchHtml(bracketState.r16[r16Idx],'r16',r16Idx, L.xL[1], L.yR16[visPos]));
   // QF esquerda (qf[0] e qf[1])
   boxes += bkMatchHtml(bracketState.qf[0],'qf',0, L.xL[2], L.yQFL[0]);
   boxes += bkMatchHtml(bracketState.qf[1],'qf',1, L.xL[2], L.yQFL[1]);
@@ -1990,8 +1990,8 @@ function renderBracket(){
   // QF direita (qf[2] e qf[3])
   boxes += bkMatchHtml(bracketState.qf[2],'qf',2, L.xR[1], L.yQFR[0]);
   boxes += bkMatchHtml(bracketState.qf[3],'qf',3, L.xR[1], L.yQFR[1]);
-  // R16 direita
-  [4,5,6,7].forEach(i=> boxes += bkMatchHtml(bracketState.r16[i],'r16',i, L.xR[2], L.yR16[i-4]));
+  // R16 direita (Part B: M91,M92,M95,M96)
+  [2,3,6,7].forEach((r16Idx,visPos)=> boxes += bkMatchHtml(bracketState.r16[r16Idx],'r16',r16Idx, L.xR[2], L.yR16[visPos]));
   // R32 direita
   [8,9,10,11,12,13,14,15].forEach((visI)=>{
     const origIdx = BK_DISPLAY_ORDER[visI];
