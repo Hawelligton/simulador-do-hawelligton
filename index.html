@@ -1653,59 +1653,59 @@ function resetData(){
 // Tabela oficial da Rodada de 32 divulgada pela FIFA (jogos 73 a 88).
 // w = 1º colocado do grupo · r = 2º colocado do grupo · b3 = melhor 3º colocado dentre os grupos listados
 const R32_SLOTS = [
-  {a:{t:'r',g:'A'}, b:{t:'r',g:'B'}},                              // 73
-  {a:{t:'w',g:'E'}, b:{t:'b3',gs:['A','B','C','D','F']}},          // 74
-  {a:{t:'w',g:'F'}, b:{t:'r',g:'C'}},                              // 75
-  {a:{t:'w',g:'C'}, b:{t:'r',g:'F'}},                              // 76  -> 1ºC x 2ºF
-  {a:{t:'w',g:'I'}, b:{t:'b3',gs:['C','D','F','G','H']}},          // 77
-  {a:{t:'r',g:'E'}, b:{t:'r',g:'I'}},                              // 78
-  {a:{t:'w',g:'A'}, b:{t:'b3',gs:['C','E','F','H','I']}},          // 79
-  {a:{t:'w',g:'L'}, b:{t:'b3',gs:['E','H','I','J','K']}},          // 80
-  {a:{t:'w',g:'D'}, b:{t:'b3',gs:['B','E','F','I','J']}},          // 81
-  {a:{t:'w',g:'G'}, b:{t:'b3',gs:['A','E','H','I','J']}},          // 82
-  {a:{t:'r',g:'K'}, b:{t:'r',g:'L'}},                              // 83
-  {a:{t:'w',g:'H'}, b:{t:'r',g:'J'}},                              // 84
-  {a:{t:'w',g:'B'}, b:{t:'b3',gs:['E','F','G','I','J']}},          // 85
-  {a:{t:'w',g:'J'}, b:{t:'r',g:'H'}},                              // 86
-  {a:{t:'w',g:'K'}, b:{t:'b3',gs:['D','E','I','J','L']}},          // 87
-  {a:{t:'r',g:'D'}, b:{t:'r',g:'G'}},                              // 88
+  {a:{t:'r',g:'A'}, b:{t:'r',g:'B'}},                              // 0→M73 Los Angeles: 2ºA x 2ºB ✓
+  {a:{t:'w',g:'C'}, b:{t:'r',g:'F'}},                              // 1→M74 Houston:     1ºC x 2ºF
+  {a:{t:'w',g:'E'}, b:{t:'b3',gs:['A','B','C','D','F']}},          // 2→M75 Boston:      1ºE x 3ºABCDF
+  {a:{t:'w',g:'F'}, b:{t:'r',g:'C'}},                              // 3→M76 Monterrey:   1ºF x 2ºC
+  {a:{t:'r',g:'E'}, b:{t:'r',g:'I'}},                              // 4→M77 Dallas:      2ºE x 2ºI
+  {a:{t:'w',g:'I'}, b:{t:'b3',gs:['C','D','F','G','H']}},          // 5→M78 Nova York:   1ºI x 3ºCDFGH
+  {a:{t:'w',g:'A'}, b:{t:'b3',gs:['C','E','F','H','I']}},          // 6→M79 Cd.México:   1ºA x 3ºCEFHI ✓
+  {a:{t:'w',g:'L'}, b:{t:'b3',gs:['E','H','I','J','K']}},          // 7→M80 Atlanta:     1ºL x 3ºEHIJK ✓
+  {a:{t:'w',g:'G'}, b:{t:'b3',gs:['A','E','H','I','J']}},          // 8→M81 Seattle:     1ºG x 3ºAEHIJ
+  {a:{t:'w',g:'D'}, b:{t:'b3',gs:['B','E','F','I','J']}},          // 9→M82 S.Francisco: 1ºD x 3ºBEFIJ
+  {a:{t:'w',g:'H'}, b:{t:'r',g:'J'}},                              // 10→M83 L.Angeles:  1ºH x 2ºJ
+  {a:{t:'r',g:'K'}, b:{t:'r',g:'L'}},                              // 11→M84 Toronto:    2ºK x 2ºL
+  {a:{t:'w',g:'B'}, b:{t:'b3',gs:['E','F','G','I','J']}},          // 12→M85 Vancouver:  1ºB x 3ºEFGIJ ✓
+  {a:{t:'r',g:'D'}, b:{t:'r',g:'G'}},                              // 13→M86 Dallas:     2ºD x 2ºG
+  {a:{t:'w',g:'J'}, b:{t:'r',g:'H'}},                              // 14→M87 Miami:      1ºJ x 2ºH
+  {a:{t:'w',g:'K'}, b:{t:'b3',gs:['D','E','I','J','L']}},          // 15→M88 Ks.City:    1ºK x 3ºDEIJL
 ];
-const B3_SLOT_INDEXES = [1,4,6,7,8,9,12,14]; // posições (0-indexed) que recebem um "melhor 3º"
+const B3_SLOT_INDEXES = [2,5,6,7,8,9,12,15]; // posições (0-indexed) que recebem um "melhor 3º"
 
 /* Calendário oficial completo do mata-mata (jogos 73 a 104): data, horário (Brasília) e sede de cada jogo */
 const KNOCKOUT_SCHEDULE = [
   {num:73, round:'R32', d:'28/06', tm:'16:00', city:'Los Angeles'},
-  {num:74, round:'R32', d:'29/06', tm:'17:30', city:'Boston'},
-  {num:75, round:'R32', d:'29/06', tm:'22:00', city:'Monterrey'},
-  {num:76, round:'R32', d:'29/06', tm:'14:00', city:'Houston'},
-  {num:77, round:'R32', d:'30/06', tm:'18:00', city:'Nova York'},
-  {num:78, round:'R32', d:'30/06', tm:'14:00', city:'Dallas'},
+  {num:74, round:'R32', d:'29/06', tm:'17:30', city:'Houston'},
+  {num:75, round:'R32', d:'29/06', tm:'22:00', city:'Boston'},
+  {num:76, round:'R32', d:'29/06', tm:'14:00', city:'Monterrey'},
+  {num:77, round:'R32', d:'30/06', tm:'18:00', city:'Dallas'},
+  {num:78, round:'R32', d:'30/06', tm:'14:00', city:'Nova York'},
   {num:79, round:'R32', d:'30/06', tm:'22:00', city:'Cidade do México'},
   {num:80, round:'R32', d:'01/07', tm:'13:00', city:'Atlanta'},
-  {num:81, round:'R32', d:'01/07', tm:'21:00', city:'São Francisco'},
-  {num:82, round:'R32', d:'01/07', tm:'17:00', city:'Seattle'},
-  {num:83, round:'R32', d:'02/07', tm:'20:00', city:'Toronto'},
-  {num:84, round:'R32', d:'02/07', tm:'16:00', city:'Los Angeles'},
+  {num:81, round:'R32', d:'01/07', tm:'21:00', city:'Seattle'},
+  {num:82, round:'R32', d:'01/07', tm:'17:00', city:'São Francisco'},
+  {num:83, round:'R32', d:'02/07', tm:'20:00', city:'Los Angeles'},
+  {num:84, round:'R32', d:'02/07', tm:'16:00', city:'Toronto'},
   {num:85, round:'R32', d:'03/07', tm:'00:00', city:'Vancouver'},
-  {num:86, round:'R32', d:'03/07', tm:'19:00', city:'Miami'},
-  {num:87, round:'R32', d:'03/07', tm:'22:30', city:'Kansas City'},
-  {num:88, round:'R32', d:'03/07', tm:'15:00', city:'Dallas'},
-  {num:89, round:'R16', d:'04/07', tm:'18:00', city:'Filadélfia', a:{t:'wm',n:74}, b:{t:'wm',n:77}},
-  {num:90, round:'R16', d:'04/07', tm:'14:00', city:'Houston', a:{t:'wm',n:73}, b:{t:'wm',n:75}},
+  {num:86, round:'R32', d:'03/07', tm:'19:00', city:'Dallas'},
+  {num:87, round:'R32', d:'03/07', tm:'22:30', city:'Miami'},
+  {num:88, round:'R32', d:'04/07', tm:'01:00', city:'Kansas City'},
+  {num:89, round:'R16', d:'04/07', tm:'18:00', city:'Houston', a:{t:'wm',n:73}, b:{t:'wm',n:75}},
+  {num:90, round:'R16', d:'04/07', tm:'14:00', city:'Filadélfia', a:{t:'wm',n:74}, b:{t:'wm',n:77}},
   {num:91, round:'R16', d:'05/07', tm:'17:00', city:'Nova York', a:{t:'wm',n:76}, b:{t:'wm',n:78}},
   {num:92, round:'R16', d:'05/07', tm:'21:00', city:'Cidade do México', a:{t:'wm',n:79}, b:{t:'wm',n:80}},
   {num:93, round:'R16', d:'06/07', tm:'16:00', city:'Dallas', a:{t:'wm',n:83}, b:{t:'wm',n:84}},
   {num:94, round:'R16', d:'06/07', tm:'21:00', city:'Seattle', a:{t:'wm',n:81}, b:{t:'wm',n:82}},
   {num:95, round:'R16', d:'07/07', tm:'13:00', city:'Atlanta', a:{t:'wm',n:86}, b:{t:'wm',n:88}},
   {num:96, round:'R16', d:'07/07', tm:'17:00', city:'Vancouver', a:{t:'wm',n:85}, b:{t:'wm',n:87}},
-  {num:97, round:'QF', d:'09/07', tm:'17:00', city:'Boston', a:{t:'wm',n:89}, b:{t:'wm',n:90}},
-  {num:98, round:'QF', d:'10/07', tm:'16:00', city:'Los Angeles', a:{t:'wm',n:93}, b:{t:'wm',n:94}},
-  {num:99, round:'QF', d:'11/07', tm:'18:00', city:'Miami', a:{t:'wm',n:91}, b:{t:'wm',n:92}},
-  {num:100, round:'QF', d:'11/07', tm:'22:00', city:'Kansas City', a:{t:'wm',n:95}, b:{t:'wm',n:96}},
-  {num:101, round:'SF', d:'14/07', tm:'16:00', city:'Dallas', a:{t:'wm',n:97}, b:{t:'wm',n:98}},
-  {num:102, round:'SF', d:'15/07', tm:'16:00', city:'Atlanta', a:{t:'wm',n:99}, b:{t:'wm',n:100}},
-  {num:103, round:'3º', d:'18/07', tm:'18:00', city:'Miami', a:{t:'lm',n:101}, b:{t:'lm',n:102}},
-  {num:104, round:'FINAL', d:'19/07', tm:'16:00', city:'Nova York', a:{t:'wm',n:101}, b:{t:'wm',n:102}},
+  {num:97, round:'QF',  d:'09/07', tm:'17:00', city:'Boston', a:{t:'wm',n:89}, b:{t:'wm',n:90}},
+  {num:98, round:'QF',  d:'10/07', tm:'16:00', city:'Los Angeles', a:{t:'wm',n:93}, b:{t:'wm',n:94}},
+  {num:99, round:'QF',  d:'11/07', tm:'18:00', city:'Miami', a:{t:'wm',n:91}, b:{t:'wm',n:92}},
+  {num:100,round:'QF',  d:'11/07', tm:'22:00', city:'Kansas City', a:{t:'wm',n:95}, b:{t:'wm',n:96}},
+  {num:101,round:'SF',  d:'14/07', tm:'16:00', city:'Dallas', a:{t:'wm',n:97}, b:{t:'wm',n:98}},
+  {num:102,round:'SF',  d:'15/07', tm:'16:00', city:'Atlanta', a:{t:'wm',n:99}, b:{t:'wm',n:100}},
+  {num:103,round:'3º',  d:'18/07', tm:'18:00', city:'Miami', a:{t:'lm',n:101}, b:{t:'lm',n:102}},
+  {num:104,round:'FINAL',d:'19/07', tm:'16:00', city:'Nova York', a:{t:'wm',n:101}, b:{t:'wm',n:102}},
 ];
 // os 16 primeiros jogos (R32) herdam a origem (1º/2º/3º de grupo) direto de R32_SLOTS
 KNOCKOUT_SCHEDULE.slice(0,16).forEach((entry,i)=>{ entry.a = R32_SLOTS[i].a; entry.b = R32_SLOTS[i].b; });
@@ -1724,7 +1724,7 @@ function getMatchByNumber(num){
   if(num===104) return bracketState.final;
   return null;
 }
-const PAIR_R32_TO_R16 = [[1,4],[0,2],[3,5],[6,7],[10,11],[8,9],[13,15],[12,14]]; // jogos 89-96
+const PAIR_R32_TO_R16 = [[0,2],[1,4],[3,5],[6,7],[10,11],[8,9],[13,15],[12,14]]; // jogos 89-96
 const PAIR_R16_TO_QF  = [[0,1],[2,3],[4,5],[6,7]];
 // qf[0],qf[1] = left half (de R16[0-3]); qf[2],qf[3] = right half (de R16[4-7])
 // Para o chaveamento visual convergente: semi-esquerda = qf[0]×qf[1], semi-direita = qf[2]×qf[3]
