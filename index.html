@@ -721,7 +721,7 @@ J:{teams:['ARG','AUT','JOR','ALG'],matches:[
   {r:2,d:'22/06',tm:'14:00',c:'Dallas',h:'ARG',a:'AUT',hs:2,as:0},
   {r:2,d:'23/06',tm:'00:00',c:'São Francisco',h:'JOR',a:'ALG',hs:1,as:2},
   {r:3,d:'27/06',tm:'23:00',c:'Kansas City',h:'ALG',a:'AUT',hs:null,as:null},
-  {r:3,d:'27/06',tm:'23:00',c:'Dallas',h:'JOR',a:'ARG',hs:null,as:null},
+  {r:3,d:'27/06',tm:'23:00',c:'Dallas',h:'JOR',a:'ARG',hs:0,as:2},
 ]},
 K:{teams:['COL','POR','COD','UZB'],matches:[
   {r:1,d:'17/06',tm:'14:00',c:'Houston',h:'POR',a:'COD',hs:1,as:1},
@@ -736,8 +736,8 @@ L:{teams:['ENG','GHA','PAN','CRO'],matches:[
   {r:1,d:'17/06',tm:'20:00',c:'Toronto',h:'GHA',a:'PAN',hs:1,as:0},
   {r:2,d:'23/06',tm:'17:00',c:'Boston',h:'ENG',a:'GHA',hs:0,as:0},
   {r:2,d:'23/06',tm:'20:00',c:'Toronto',h:'PAN',a:'CRO',hs:0,as:1},
-  {r:3,d:'27/06',tm:'18:00',c:'Nova York',h:'PAN',a:'ENG',hs:null,as:null},
-  {r:3,d:'27/06',tm:'18:00',c:'Filadélfia',h:'CRO',a:'GHA',hs:null,as:null},
+  {r:3,d:'27/06',tm:'18:00',c:'Nova York',h:'PAN',a:'ENG',hs:0,as:2},
+  {r:3,d:'27/06',tm:'18:00',c:'Filadélfia',h:'CRO',a:'GHA',hs:2,as:1},
 ]},
 };
 
@@ -1324,6 +1324,11 @@ const SCORERS = [
  {name:'Kaan Ayhan', code:'TUR', goals:1, club:'Galatasaray'},
  {name:'Trusty', code:'USA', goals:1, club:'Arsenal'},
  {name:'Sebastian Berhalter', code:'USA', goals:1, club:'Colorado Rapids'},
+ {name:'Jude Bellingham', code:'ENG', goals:1, club:'Real Madrid'},
+ {name:'Harry Kane', code:'ENG', goals:1, club:'Bayern Munich'},
+ {name:'Petar Sucic', code:'CRO', goals:1, club:'RB Leipzig'},
+ {name:'Nikola Vlasic', code:'CRO', goals:1, club:'Torino'},
+ {name:'Derrick Luckassen', code:'GHA', goals:1, club:'Ajax'},
 ].sort((a,b)=>b.goals-a.goals);
 
 const STADIUMS = [
