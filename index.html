@@ -1676,38 +1676,38 @@ const B3_SLOT_INDEXES = [2,5,6,7,8,9,12,15]; // posições (0-indexed) que receb
 
 /* Calendário oficial completo do mata-mata (jogos 73 a 104): data, horário (Brasília) e sede de cada jogo */
 const KNOCKOUT_SCHEDULE = [
-  {num:73, round:'R32', d:'28/06', tm:'16:00', city:'Los Angeles'},
-  {num:74, round:'R32', d:'29/06', tm:'17:30', city:'Houston'},
-  {num:75, round:'R32', d:'29/06', tm:'22:00', city:'Boston'},
-  {num:76, round:'R32', d:'29/06', tm:'14:00', city:'Monterrey'},
-  {num:77, round:'R32', d:'30/06', tm:'18:00', city:'Dallas'},
-  {num:78, round:'R32', d:'30/06', tm:'14:00', city:'Nova York'},
-  {num:79, round:'R32', d:'30/06', tm:'22:00', city:'Cidade do México'},
-  {num:80, round:'R32', d:'01/07', tm:'13:00', city:'Atlanta'},
-  {num:81, round:'R32', d:'01/07', tm:'21:00', city:'Seattle'},
-  {num:82, round:'R32', d:'01/07', tm:'17:00', city:'São Francisco'},
-  {num:83, round:'R32', d:'02/07', tm:'20:00', city:'Los Angeles'},
-  {num:84, round:'R32', d:'02/07', tm:'16:00', city:'Toronto'},
-  {num:85, round:'R32', d:'03/07', tm:'00:00', city:'Vancouver'},
-  {num:86, round:'R32', d:'03/07', tm:'19:00', city:'Dallas'},
-  {num:87, round:'R32', d:'03/07', tm:'22:30', city:'Miami'},
-  {num:88, round:'R32', d:'04/07', tm:'01:00', city:'Kansas City'},
-  {num:89, round:'R16', d:'04/07', tm:'18:00', city:'Houston', a:{t:'wm',n:73}, b:{t:'wm',n:75}},
-  {num:90, round:'R16', d:'04/07', tm:'14:00', city:'Filadélfia', a:{t:'wm',n:74}, b:{t:'wm',n:77}},
-  {num:91, round:'R16', d:'05/07', tm:'17:00', city:'Nova York', a:{t:'wm',n:76}, b:{t:'wm',n:78}},
-  {num:92, round:'R16', d:'05/07', tm:'21:00', city:'Cidade do México', a:{t:'wm',n:79}, b:{t:'wm',n:80}},
-  {num:93, round:'R16', d:'06/07', tm:'16:00', city:'Dallas', a:{t:'wm',n:83}, b:{t:'wm',n:84}},
-  {num:94, round:'R16', d:'06/07', tm:'21:00', city:'Seattle', a:{t:'wm',n:81}, b:{t:'wm',n:82}},
-  {num:95, round:'R16', d:'07/07', tm:'13:00', city:'Atlanta', a:{t:'wm',n:86}, b:{t:'wm',n:88}},
-  {num:96, round:'R16', d:'07/07', tm:'17:00', city:'Vancouver', a:{t:'wm',n:85}, b:{t:'wm',n:87}},
-  {num:97, round:'QF',  d:'09/07', tm:'17:00', city:'Boston', a:{t:'wm',n:89}, b:{t:'wm',n:90}},
-  {num:98, round:'QF',  d:'10/07', tm:'16:00', city:'Los Angeles', a:{t:'wm',n:93}, b:{t:'wm',n:94}},
-  {num:99, round:'QF',  d:'11/07', tm:'18:00', city:'Miami', a:{t:'wm',n:91}, b:{t:'wm',n:92}},
-  {num:100,round:'QF',  d:'11/07', tm:'22:00', city:'Kansas City', a:{t:'wm',n:95}, b:{t:'wm',n:96}},
-  {num:101,round:'SF',  d:'14/07', tm:'16:00', city:'Dallas', a:{t:'wm',n:97}, b:{t:'wm',n:98}},
-  {num:102,round:'SF',  d:'15/07', tm:'16:00', city:'Atlanta', a:{t:'wm',n:99}, b:{t:'wm',n:100}},
-  {num:103,round:'3º',  d:'18/07', tm:'18:00', city:'Miami', a:{t:'lm',n:101}, b:{t:'lm',n:102}},
-  {num:104,round:'FINAL',d:'19/07', tm:'16:00', city:'Nova York', a:{t:'wm',n:101}, b:{t:'wm',n:102}},
+  {num:73, round:'R32', d:'28/06', tm:'15:00', city:'Los Angeles'},    // RSA vs CAN
+  {num:74, round:'R32', d:'29/06', tm:'13:00', city:'Houston'},         // BRA vs JPN
+  {num:75, round:'R32', d:'29/06', tm:'16:30', city:'Boston'},          // GER vs 3ºABCDF
+  {num:76, round:'R32', d:'29/06', tm:'21:00', city:'Monterrey'},       // NED vs MAR
+  {num:77, round:'R32', d:'30/06', tm:'13:00', city:'Dallas'},          // CIV vs 2ºI
+  {num:78, round:'R32', d:'30/06', tm:'17:00', city:'Nova York'},       // FRA vs 3ºCDFGH
+  {num:79, round:'R32', d:'30/06', tm:'21:00', city:'Cidade do México'},// MEX vs 3ºCEFHI
+  {num:80, round:'R32', d:'01/07', tm:'12:00', city:'Atlanta'},         // 1ºL vs 3ºEHIJK
+  {num:81, round:'R32', d:'01/07', tm:'16:00', city:'Seattle'},         // BEL vs 3ºAHIJ
+  {num:82, round:'R32', d:'01/07', tm:'20:00', city:'São Francisco'},   // USA vs 3ºBEFIJ
+  {num:83, round:'R32', d:'02/07', tm:'15:00', city:'Los Angeles'},     // 1ºH vs 2ºJ
+  {num:84, round:'R32', d:'02/07', tm:'19:00', city:'Toronto'},         // 2ºK vs 2ºL
+  {num:85, round:'R32', d:'02/07', tm:'23:00', city:'Vancouver'},       // SUI vs 3ºEFGIJ
+  {num:86, round:'R32', d:'03/07', tm:'14:00', city:'Dallas'},          // AUS vs 2ºG
+  {num:87, round:'R32', d:'03/07', tm:'18:00', city:'Miami'},           // ARG vs 2ºH
+  {num:88, round:'R32', d:'03/07', tm:'21:30', city:'Kansas City'},     // 1ºK vs 3ºDEIJL
+  {num:89, round:'R16', d:'05/07', tm:'13:00', city:'Houston',        a:{t:'wm',n:73}, b:{t:'wm',n:76}},
+  {num:90, round:'R16', d:'05/07', tm:'17:00', city:'Boston',         a:{t:'wm',n:75}, b:{t:'wm',n:78}},
+  {num:91, round:'R16', d:'06/07', tm:'20:00', city:'São Francisco',  a:{t:'wm',n:81}, b:{t:'wm',n:82}},
+  {num:92, round:'R16', d:'06/07', tm:'15:00', city:'Dallas',         a:{t:'wm',n:83}, b:{t:'wm',n:84}},
+  {num:93, round:'R16', d:'04/07', tm:'16:00', city:'Filadélfia',    a:{t:'wm',n:74}, b:{t:'wm',n:77}},
+  {num:94, round:'R16', d:'04/07', tm:'20:00', city:'Cidade do México',a:{t:'wm',n:79}, b:{t:'wm',n:80}},
+  {num:95, round:'R16', d:'07/07', tm:'16:00', city:'Vancouver',      a:{t:'wm',n:85}, b:{t:'wm',n:88}},
+  {num:96, round:'R16', d:'07/07', tm:'12:00', city:'Miami',          a:{t:'wm',n:86}, b:{t:'wm',n:87}},
+  {num:97, round:'QF',  d:'10/07', tm:'17:00', city:'Los Angeles',    a:{t:'wm',n:89}, b:{t:'wm',n:90}},
+  {num:98, round:'QF',  d:'11/07', tm:'16:00', city:'Kansas City',    a:{t:'wm',n:91}, b:{t:'wm',n:92}},
+  {num:99, round:'QF',  d:'09/07', tm:'17:00', city:'Boston',         a:{t:'wm',n:93}, b:{t:'wm',n:94}},
+  {num:100,round:'QF',  d:'11/07', tm:'21:00', city:'Seattle',        a:{t:'wm',n:95}, b:{t:'wm',n:96}},
+  {num:101,round:'SF',  d:'14/07', tm:'16:00', city:'Dallas',         a:{t:'wm',n:97}, b:{t:'wm',n:98}},
+  {num:102,round:'SF',  d:'15/07', tm:'16:00', city:'Atlanta',        a:{t:'wm',n:99}, b:{t:'wm',n:100}},
+  {num:103,round:'3º',  d:'18/07', tm:'18:00', city:'Miami',          a:{t:'lm',n:101}, b:{t:'lm',n:102}},
+  {num:104,round:'FINAL',d:'19/07', tm:'16:00', city:'Nova York',     a:{t:'wm',n:101}, b:{t:'wm',n:102}},
 ];
 // os 16 primeiros jogos (R32) herdam a origem (1º/2º/3º de grupo) direto de R32_SLOTS
 KNOCKOUT_SCHEDULE.slice(0,16).forEach((entry,i)=>{ entry.a = R32_SLOTS[i].a; entry.b = R32_SLOTS[i].b; });
@@ -1726,8 +1726,8 @@ function getMatchByNumber(num){
   if(num===104) return bracketState.final;
   return null;
 }
-const PAIR_R32_TO_R16 = [[0,2],[1,4],[3,5],[6,7],[10,11],[8,9],[13,15],[12,14]]; // jogos 89-96
-const PAIR_R16_TO_QF  = [[0,1],[4,5],[2,3],[6,7]];
+const PAIR_R32_TO_R16 = [[0,3],[2,5],[8,9],[10,11],[1,4],[6,7],[12,15],[13,14]]; // jogos 89-96
+const PAIR_R16_TO_QF  = [[0,1],[2,3],[4,5],[6,7]];
 // qf[0],qf[1] = left half (de R16[0-3]); qf[2],qf[3] = right half (de R16[4-7])
 // Para o chaveamento visual convergente: semi-esquerda = qf[0]×qf[1], semi-direita = qf[2]×qf[3]
 const PAIR_QF_TO_SF   = [[0,1],[2,3]];
@@ -1852,7 +1852,7 @@ function applyBkZoom(){
      visual 8-15 → half direita:  R32 índices [10,11,8,9,13,15,12,14]
 =======================================================================*/
 
-const BK_DISPLAY_ORDER = [0,2,1,4,10,11,8,9,3,5,6,7,13,15,12,14];
+const BK_DISPLAY_ORDER = [0,3,2,5,8,9,10,11,1,4,6,7,12,15,13,14];
 const BK2 = { W:120, H:44, RGAP:10, CGAP:44, get UNIT(){ return this.H+this.RGAP; } };
 
 function bkLayout(){
@@ -1971,8 +1971,8 @@ function renderBracket(){
     const m = bracketState.r32[origIdx];
     boxes += bkMatchHtml(m,'r32',origIdx, L.xL[0], L.yR32[visI], m.spec.a, m.spec.b);
   });
-  // R16 esquerda (Part A: M89,M90,M93,M94)
-  [0,1,4,5].forEach((r16Idx,visPos)=> boxes += bkMatchHtml(bracketState.r16[r16Idx],'r16',r16Idx, L.xL[1], L.yR16[visPos]));
+  // R16 esquerda (M89,M90,M91,M92) — lado de NED/MAR/GER/FRA/BEL/USA/ESP/POR
+  [0,1,2,3].forEach((r16Idx,visPos)=> boxes += bkMatchHtml(bracketState.r16[r16Idx],'r16',r16Idx, L.xL[1], L.yR16[visPos]));
   // QF esquerda (qf[0] e qf[1])
   boxes += bkMatchHtml(bracketState.qf[0],'qf',0, L.xL[2], L.yQFL[0]);
   boxes += bkMatchHtml(bracketState.qf[1],'qf',1, L.xL[2], L.yQFL[1]);
@@ -1992,8 +1992,8 @@ function renderBracket(){
   // QF direita (qf[2] e qf[3])
   boxes += bkMatchHtml(bracketState.qf[2],'qf',2, L.xR[1], L.yQFR[0]);
   boxes += bkMatchHtml(bracketState.qf[3],'qf',3, L.xR[1], L.yQFR[1]);
-  // R16 direita (Part B: M91,M92,M95,M96)
-  [2,3,6,7].forEach((r16Idx,visPos)=> boxes += bkMatchHtml(bracketState.r16[r16Idx],'r16',r16Idx, L.xR[2], L.yR16[visPos]));
+  // R16 direita (M93,M94,M95,M96) — lado de BRA/JPN/CIV/MEX/ENG/SUI/COL/AUS/ARG
+  [4,5,6,7].forEach((r16Idx,visPos)=> boxes += bkMatchHtml(bracketState.r16[r16Idx],'r16',r16Idx, L.xR[2], L.yR16[visPos]));
   // R32 direita
   [8,9,10,11,12,13,14,15].forEach((visI)=>{
     const origIdx = BK_DISPLAY_ORDER[visI];
