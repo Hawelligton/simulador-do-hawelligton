@@ -2109,9 +2109,11 @@ function stadiumGameRowHtml(gk, m){
 
 function stadiumKnockoutRowHtml(entry){
   const m = getMatchByNumber(entry.num);
-  const teamA = m ? m.a : null;
-  const teamB = m ? m.b : null;
-  const winner = m ? m.winner : null;
+  // Só mostra times reais em R32 (vindos da fase de grupos) ou jogos já disputados
+  const hasRealResult = entry.round === 'R32' || !!(KNOCKOUT_RESULTS && KNOCKOUT_RESULTS[entry.num]);
+  const teamA = (m && hasRealResult) ? m.a : null;
+  const teamB = (m && hasRealResult) ? m.b : null;
+  const winner = (m && hasRealResult) ? m.winner : null;
   const teamAHtml = teamA ? `${F(teamFlag(teamA.code))}<span>${teamA.code}</span>` : `<span class="sgr-tbd">${bkOriginLabel(entry.a)}</span>`;
   const teamBHtml = teamB ? `<span>${teamB.code}</span>${F(teamFlag(teamB.code))}` : `<span class="sgr-tbd">${bkOriginLabel(entry.b)}</span>`;
   const scoreHtml = (winner && teamA && teamB)
