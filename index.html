@@ -791,9 +791,9 @@ let bkLastDims = null;
 /* ============ MATA-MATA NA ABA JOGOS ============ */
 // Resultados reais do mata-mata (preenchido conforme jogos acontecem)
 const KNOCKOUT_RESULTS = {
-  // num: {hs, as}  — exemplo: 73: {hs:2, as:1}
-  73: {hs:0, as:1},  // RSA 0x1 CAN — Eustáquio 90+1'
-  74: {hs:2, as:1},  // BRA 2x1 JPN — Casemiro 56', Martinelli 90+'; Sano 1T
+  // num: {hs, as, winner, loser}
+  73: {hs:0, as:1, winner:'CAN', loser:'RSA'},  // RSA 0x1 CAN — Eustáquio 90+1'
+  74: {hs:2, as:1, winner:'BRA', loser:'JPN'},  // BRA 2x1 JPN — Casemiro 56', Martinelli 90+'
 };
 
 const KO_ROUND_LABEL = {
@@ -1825,6 +1825,19 @@ function buildBracket(){
     r32, r16: makeEmptyRound(8), qf: makeEmptyRound(4), sf: makeEmptyRound(2),
     third: {a:null,b:null,winner:null}, final: {a:null,b:null,winner:null},
   };
+
+  // Aplica vencedores reais do KNOCKOUT_RESULTS nos slots R32
+  Object.keys(KNOCKOUT_RESULTS).forEach(numStr => {
+    const n = parseInt(numStr);
+    if(n >= 73 && n <= 88) {
+      const res = KNOCKOUT_RESULTS[n];
+      const slot = bracketState.r32[n - 73];
+      if(slot && res?.winner) {
+        slot.winner = (slot.a?.code === res.winner) ? slot.a : slot.b;
+      }
+    }
+  });
+
   renderBracket();
 }
 function makeEmptyRound(n){return Array.from({length:n},()=>({a:null,b:null,winner:null}));}
