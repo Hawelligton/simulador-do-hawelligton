@@ -836,7 +836,7 @@ function koSpecLabel(spec){
   return '?';
 }
 
-function koResolveTeamCode(spec, realStandingsCache){
+function koResolveTeamCode(spec, realStandingsCache, slotIdx){
   if(!spec) return null;
   if(spec.t==='w'){
     if(!isGroupComplete(spec.g)) return null;
@@ -846,7 +846,11 @@ function koResolveTeamCode(spec, realStandingsCache){
     if(!isGroupComplete(spec.g)) return null;
     return (realStandingsCache[spec.g]||computeRealStandings(spec.g))[1]?.code||null;
   }
-  if(spec.t==='b3') return null; // complex — deixa TBD
+  if(spec.t==='b3'){
+    const g = (slotIdx!==undefined) ? REAL_B3_ASSIGNMENT[slotIdx] : null;
+    if(!g || !isGroupComplete(g)) return null;
+    return (realStandingsCache[g]||computeRealStandings(g))[2]?.code||null;
+  }
   if(spec.t==='wm'){
     const res=KNOCKOUT_RESULTS[spec.n];
     return res?.winner||null;
@@ -868,8 +872,9 @@ function getAllKnockoutMatches(){
     // Para R32: resolve dos R32_SLOTS
     if(ks.num>=73&&ks.num<=88){
       const slot=R32_SLOTS[ks.num-73];
-      h=koResolveTeamCode(slot.a, cache);
-      a=koResolveTeamCode(slot.b, cache);
+      const slotIdx = ks.num-73;
+      h=koResolveTeamCode(slot.a, cache, slotIdx);
+      a=koResolveTeamCode(slot.b, cache, slotIdx);
     } else {
       // Para R16+: resolve do spec no KNOCKOUT_SCHEDULE
       h=koResolveTeamCode(ks.a, cache);
