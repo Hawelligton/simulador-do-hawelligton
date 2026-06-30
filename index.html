@@ -1783,11 +1783,24 @@ function assignThirds(best8groupsInOrder, slots){
 
 function teamObj(s, g){ return {code:s.code, group:g, pts:s.pts, sg:s.sg, gp:s.gp}; }
 
+// Atribuição REAL (oficial FIFA) dos 8 melhores terceiros aos jogos da Rodada de 32.
+// Usado como override pois critérios de desempate oficiais podem divergir do cálculo simulado.
+const REAL_B3_ASSIGNMENT = {
+  2: 'D',   // M75: GER x PAR (Paraguai, 3º do Grupo D)
+  5: 'F',   // M78: FRA x SWE (Suécia, 3º do Grupo F)
+  6: 'E',   // M79: MEX x ECU (Equador, 3º do Grupo E)
+  7: 'K',   // M80: ENG x COD (RD Congo, 3º do Grupo K)
+  8: 'I',   // M81: BEL x SEN (Senegal, 3º do Grupo I)
+  9: 'B',   // M82: USA x BIH (Bósnia, 3º do Grupo B)
+  12: 'J',  // M85: SUI x ALG (Argélia, 3º do Grupo J)
+  15: 'L',  // M88: COL x GHA (Gana, 3º do Grupo L)
+};
+
 function resolveSlotTeam(spec, slotIdx, standingsMap, thirdAssignment){
   if(spec.t==='w') return teamObj(standingsMap[spec.g][0], spec.g);
   if(spec.t==='r') return teamObj(standingsMap[spec.g][1], spec.g);
   if(spec.t==='b3'){
-    const g = thirdAssignment[slotIdx];
+    const g = REAL_B3_ASSIGNMENT[slotIdx] || thirdAssignment[slotIdx];
     if(!g) return null;
     return teamObj(standingsMap[g][2], g);
   }
@@ -1813,7 +1826,7 @@ function buildBracket(){
       const isQ = i<8;
       let matchInfo = '—';
       if(isQ){
-        const slotIdx = Object.keys(thirdAssignment).find(k=>thirdAssignment[k]===t.group);
+        const slotIdx = Object.keys(REAL_B3_ASSIGNMENT).find(k=>REAL_B3_ASSIGNMENT[k]===t.group) ?? Object.keys(thirdAssignment).find(k=>thirdAssignment[k]===t.group);
         if(slotIdx!==undefined) matchInfo = `Jogo ${matchNumberOf(+slotIdx)}`;
       }
       return `<tr class="${isQ?'qualified':''}"><td>${t.group}</td><td><div class="team-cell">${F(teamFlag(t.code))} ${teamName(t.code)} ${isQ?'<span class="qbadge q">classificado</span>':''}</div></td><td>${t.pts}</td><td>${t.sg}</td><td>${t.gp}</td><td>${matchInfo}</td></tr>`;
