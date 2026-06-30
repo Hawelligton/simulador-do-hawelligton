@@ -791,9 +791,11 @@ let bkLastDims = null;
 /* ============ MATA-MATA NA ABA JOGOS ============ */
 // Resultados reais do mata-mata (preenchido conforme jogos acontecem)
 const KNOCKOUT_RESULTS = {
-  // num: {hs, as, winner, loser}
+  // num: {hs, as, winner, loser, pen}
   73: {hs:0, as:1, winner:'CAN', loser:'RSA'},  // RSA 0x1 CAN — Eustáquio 90+1'
   74: {hs:2, as:1, winner:'BRA', loser:'JPN'},  // BRA 2x1 JPN — Casemiro 56', Martinelli 90+'
+  75: {hs:1, as:1, pen:'3 x 4', winner:'PAR', loser:'GER'},  // GER 1x1 PAR (3x4 pen) — Havertz; Enciso
+  76: {hs:1, as:1, pen:'2 x 3', winner:'MAR', loser:'NED'},  // NED 1x1 MAR (2x3 pen) — Diop; Gakpo
 };
 
 const KO_ROUND_LABEL = {
@@ -1255,7 +1257,7 @@ const SCORERS = [
  {name:'Erling Haaland', code:'NOR', goals:4, club:'Manchester City', photo:'https://media.api-sports.io/football/players/1100.png'},
  {name:'Marcus Pedersen', code:'NOR', goals:1, club:'Feyenoord'},
  {name:'Ismaïla Sarr', code:'SEN', goals:2, club:'Crystal Palace'},
- {name:'Kai Havertz', code:'GER', goals:2, club:'Arsenal', photo:'https://media.api-sports.io/football/players/978.png'},
+ {name:'Kai Havertz', code:'GER', goals:3, club:'Arsenal', photo:'https://media.api-sports.io/football/players/978.png'},
  {name:'Harry Kane', code:'ENG', goals:2, club:'Bayern de Munique', photo:'https://media.api-sports.io/football/players/184.png'},
  {name:'Folarin Balogun', code:'USA', goals:2, club:'AS Monaco', photo:'https://media.api-sports.io/football/players/138835.png'},
  {name:'Elijah Just', code:'NZL', goals:2, club:'Kawasaki Frontale', photo:'https://media.api-sports.io/football/players/94333.png'},
@@ -1266,7 +1268,7 @@ const SCORERS = [
  {name:'Soufiane Rahimi', code:'MAR', goals:1, club:'Al-Ain'},
  {name:'Gessime Yassine', code:'MAR', goals:1, club:'Al Ittihad'},
  {name:'Brian Brobbey', code:'NED', goals:3, club:'Sunderland', photo:'https://media.api-sports.io/football/players/38750.png'},
- {name:'Cody Gakpo', code:'NED', goals:2, club:'Liverpool', photo:'https://media.api-sports.io/football/players/247.png'},
+ {name:'Cody Gakpo', code:'NED', goals:6, club:'Liverpool', photo:'https://media.api-sports.io/football/players/247.png'},
  {name:'Deniz Undav', code:'GER', goals:3, club:'VfB Stuttgart', photo:'https://media.api-sports.io/football/players/26475.png'},
  {name:'Viktor Gyökeres', code:'SWE', goals:1, club:'Arsenal', photo:'https://media.api-sports.io/football/players/18979.png'},
  {name:'Jamal Musiala', code:'GER', goals:1, club:'Bayern de Munique', photo:'https://media.api-sports.io/football/players/181812.png'},
@@ -1312,6 +1314,8 @@ const SCORERS = [
  {name:'Marcel Sabitzer', code:'AUT', goals:1, club:'Borussia Dortmund'},
  {name:'Stephen Eustáquio', code:'CAN', goals:1, club:'FC Porto'},
  {name:'Casemiro', code:'BRA', goals:1, club:'Manchester United'},
+ {name:'Julio Enciso', code:'PAR', goals:1, club:'Ipswich Town'},
+ {name:'Issa Diop', code:'NED', goals:1, club:'West Ham United'},
  {name:'Gabriel Martinelli', code:'BRA', goals:1, club:'Arsenal'},
  {name:'Kaishu Sano', code:'JPN', goals:1, club:'Werder Bremen'},
  {name:'Sasa Kalajdzic', code:'AUT', goals:1, club:'Eintracht Frankfurt'},
