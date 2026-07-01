@@ -284,17 +284,32 @@ table.standings tr.thirdwatch td:first-child{color:var(--gold);}
 .bk-thirdlabel{position:absolute;font-size:10px;color:var(--muted);letter-spacing:.04em;text-align:center;width:160px;}
 
 /* ARTILHEIROS */
-.scorers-list{display:flex;flex-direction:column;gap:8px;}
-.scorer-row{display:grid;grid-template-columns:34px 44px 1fr auto;align-items:center;gap:13px;padding:11px 16px;border-radius:5px;background:rgba(255,255,255,.02);border:1px solid transparent;transition:.2s;}
-.scorer-row:hover{border-color:var(--line);background:rgba(57,243,255,.04);}
+.scorers-list{display:flex;flex-direction:column;gap:0;}
+.scorer-card{border-radius:8px;overflow:hidden;margin-bottom:8px;border:1px solid transparent;transition:.2s;}
+.scorer-card:hover{border-color:var(--line);}
+.scorer-card.open{border-color:var(--cyan-dim);}
+.scorer-row{display:grid;grid-template-columns:34px 44px 1fr auto 22px;align-items:center;gap:13px;padding:11px 16px;background:rgba(255,255,255,.02);cursor:pointer;user-select:none;}
+.scorer-row:hover{background:rgba(57,243,255,.04);}
 .scorer-rank{font-family:'Orbitron';font-size:15px;color:var(--cyan-dim);text-align:center;}
-.scorer-row:nth-child(1) .scorer-rank{color:var(--gold);}
+.scorer-card:nth-child(1) .scorer-rank{color:var(--gold);}
+.scorer-card:nth-child(2) .scorer-rank, .scorer-card:nth-child(3) .scorer-rank{color:#c0c0c0;}
 .scorer-avatar{width:44px;height:44px;border-radius:50%;background:var(--panel-solid);border:2px solid var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:20px;flex:0 0 auto;}
 .scorer-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center;}
 .scorer-name{font-weight:700;font-size:15.5px;display:flex;align-items:center;gap:9px;}
 .scorer-club{font-size:12px;color:var(--muted);margin-top:2px;}
 .scorer-goals{font-family:'Orbitron';font-size:20px;color:var(--cyan);text-align:right;}
 .scorer-goals span{font-size:10px;color:var(--muted);display:block;text-align:right;letter-spacing:.05em;}
+.scorer-arrow{color:var(--muted);font-size:11px;transition:transform .25s;text-align:center;}
+.scorer-card.open .scorer-arrow{transform:rotate(180deg);}
+.scorer-detail{display:none;background:rgba(0,0,0,.3);padding:10px 16px 12px;border-top:1px solid var(--line);}
+.scorer-card.open .scorer-detail{display:block;}
+.scorer-detail-title{font-family:'Orbitron';font-size:9px;color:var(--muted);letter-spacing:.08em;margin-bottom:8px;}
+.goal-item{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;}
+.goal-item:last-child{border-bottom:none;}
+.goal-min{font-family:'Orbitron';font-size:10px;color:var(--cyan);min-width:36px;}
+.goal-opp{display:flex;align-items:center;gap:5px;color:var(--text);flex:1;}
+.goal-phase{font-size:10px;color:var(--muted);background:rgba(255,255,255,.06);padding:2px 7px;border-radius:10px;}
+.goal-type{font-size:11px;}
 
 /* ESTADIOS */
 .stadium-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
@@ -1255,6 +1270,39 @@ function setupGamesSubnav(){
   });
 }
 
+// Detalhes dos gols: {opp, phase, min, pen}
+const GOAL_DETAILS = {
+  'Lionel Messi':       [{opp:'ALG',phase:'Grupos',min:null},{opp:'ALG',phase:'Grupos',min:null},{opp:'ALG',phase:'Grupos',min:null},{opp:'AUT',phase:'Grupos',min:null},{opp:'JOR',phase:'Grupos',min:80},{opp:'JOR',phase:'Grupos',min:null}],
+  'Kylian Mbappé':      [{opp:'SEN',phase:'Grupos',min:null},{opp:'SEN',phase:'Grupos',min:null},{opp:'IRQ',phase:'Grupos',min:null},{opp:'IRQ',phase:'Grupos',min:null},{opp:'SWE',phase:'R32',min:null},{opp:'SWE',phase:'R32',min:null}],
+  'Erling Haaland':     [{opp:'IRQ',phase:'Grupos',min:null},{opp:'IRQ',phase:'Grupos',min:null},{opp:'SEN',phase:'Grupos',min:null},{opp:'SEN',phase:'Grupos',min:null},{opp:'CIV',phase:'R32',min:86}],
+  'Julián Quiñones':    [{opp:'RSA',phase:'Grupos',min:null},{opp:'KOR',phase:'Grupos',min:null},{opp:'CZE',phase:'Grupos',min:null},{opp:'ECU',phase:'R32',min:null}],
+  'Ousmane Dembélé':    [{opp:'IRQ',phase:'Grupos',min:null},{opp:'NOR',phase:'Grupos',min:6},{opp:'NOR',phase:'Grupos',min:19},{opp:'NOR',phase:'Grupos',min:31}],
+  'Vinícius Jr':        [{opp:'MAR',phase:'Grupos',min:null},{opp:'HAI',phase:'Grupos',min:null},{opp:'SCO',phase:'Grupos',min:null},{opp:'SCO',phase:'Grupos',min:null}],
+  'Cody Gakpo':         [{opp:'JPN',phase:'Grupos',min:null},{opp:'SWE',phase:'Grupos',min:null},{opp:'SWE',phase:'Grupos',min:null},{opp:'TUN',phase:'Grupos',min:null},{opp:'TUN',phase:'Grupos',min:null},{opp:'MAR',phase:'R32',min:null}],
+  'Kai Havertz':        [{opp:'CUR',phase:'Grupos',min:null},{opp:'CIV',phase:'Grupos',min:null},{opp:'PAR',phase:'R32',min:null}],
+  'Raúl Jiménez':       [{opp:'RSA',phase:'Grupos',min:null},{opp:'CZE',phase:'Grupos',min:null},{opp:'ECU',phase:'R32',min:null}],
+  'Julián Quiñones':    [{opp:'RSA',phase:'Grupos',min:null},{opp:'KOR',phase:'Grupos',min:null},{opp:'CZE',phase:'Grupos',min:null},{opp:'ECU',phase:'R32',min:null}],
+  'Lautaro Martínez':   [{opp:'JOR',phase:'Grupos',min:31,pen:true}],
+  'Giovanni Lo Celso':  [{opp:'JOR',phase:'Grupos',min:19}],
+  'Casemiro':           [{opp:'JPN',phase:'R32',min:56}],
+  'Gabriel Martinelli': [{opp:'JPN',phase:'R32',min:92}],
+  'Désiré Doué':        [{opp:'NOR',phase:'Grupos',min:48}],
+  'Tobias Aasgaard':    [{opp:'FRA',phase:'Grupos',min:20}],
+  'Bradley Barcola':    [{opp:'SWE',phase:'R32',min:null}],
+  'Antonio Nusa':       [{opp:'CIV',phase:'R32',min:39}],
+  'Amad Diallo':        [{opp:'NOR',phase:'R32',min:74}],
+  'Riyad Mahrez':       [{opp:'AUT',phase:'Grupos',min:null},{opp:'AUT',phase:'Grupos',min:null}],
+  'Yoane Wissa':        [{opp:'UZB',phase:'Grupos',min:null},{opp:'UZB',phase:'Grupos',min:null}],
+  'Stephen Eustáquio':  [{opp:'RSA',phase:'R32',min:91}],
+  'Harry Kane':         [{opp:'PAN',phase:'Grupos',min:null}],
+  'Jude Bellingham':    [{opp:'PAN',phase:'Grupos',min:null}],
+  'Petar Sucic':        [{opp:'GHA',phase:'Grupos',min:30}],
+  'Nikola Vlasic':      [{opp:'GHA',phase:'Grupos',min:37}],
+  'Mousa Al-Tamari':    [{opp:'ARG',phase:'Grupos',min:55}],
+  'Julio Enciso':       [{opp:'GER',phase:'R32',min:null}],
+  'Kaishu Sano':        [{opp:'BRA',phase:'R32',min:null}],
+};
+
 const SCORERS = [
  {name:'Lionel Messi', code:'ARG', goals:6, club:'Inter Miami', photo:'https://media.api-sports.io/football/players/154.png'},
  {name:'Jonathan David', code:'CAN', goals:3, club:'Juventus', photo:'https://media.api-sports.io/football/players/8489.png'},
@@ -2114,20 +2162,42 @@ function renderBracket(){
 }
 
 /* ============== RENDER: ARTILHEIROS ============== */
+function toggleScorerDetail(idx){
+  const card = document.querySelector(`.scorer-card[data-idx="${idx}"]`);
+  if(card) card.classList.toggle('open');
+}
+
 function renderScorers(){
   const list = document.getElementById('scorersList');
-  list.innerHTML = SCORERS.map((s,i)=>`
-    <div class="scorer-row">
-      <div class="scorer-rank">${i+1}</div>
-      <div class="scorer-avatar">${s.photo
-        ? `<img src="${s.photo}" alt="${s.name}" loading="lazy" data-fallback="${teamFlag(s.code)}" onerror="this.parentElement.textContent=this.dataset.fallback;">`
-        : teamFlag(s.code)}</div>
-      <div>
-        <div class="scorer-name">${s.name}</div>
-        <div class="scorer-club">${s.club} · ${teamName(s.code)}</div>
+  list.innerHTML = SCORERS.map((s,i)=>{
+    const details = GOAL_DETAILS[s.name] || [];
+    const detailHtml = details.length ? `
+      <div class="scorer-detail">
+        <div class="scorer-detail-title">⚽ Gols marcados</div>
+        ${details.map(g=>`
+          <div class="goal-item">
+            <div class="goal-min">${g.min ? g.min+"'" : '–'}</div>
+            <div class="goal-opp">${F(teamFlag(g.opp))} ${teamName(g.opp)||g.opp}${g.pen?' <span style="color:var(--gold);font-size:10px;">(P)</span>':''}</div>
+            <div class="goal-phase">${g.phase}</div>
+          </div>`).join('')}
+      </div>` : `<div class="scorer-detail"><div style="font-size:12px;color:var(--muted);padding:4px 0">Detalhes a confirmar</div></div>`;
+    return `
+    <div class="scorer-card" data-idx="${i}" onclick="toggleScorerDetail(${i})">
+      <div class="scorer-row">
+        <div class="scorer-rank">${i+1}</div>
+        <div class="scorer-avatar">${s.photo
+          ? `<img src="${s.photo}" alt="${s.name}" loading="lazy" onerror="this.parentElement.textContent='${teamFlag(s.code)||'?'}';">`
+          : teamFlag(s.code)}</div>
+        <div>
+          <div class="scorer-name">${F(teamFlag(s.code))} ${s.name}</div>
+          <div class="scorer-club">${s.club} · ${teamName(s.code)}</div>
+        </div>
+        <div class="scorer-goals">${s.goals}<span>gols</span></div>
+        <div class="scorer-arrow">▼</div>
       </div>
-      <div class="scorer-goals">${s.goals}<span>gols</span></div>
-    </div>`).join('');
+      ${detailHtml}
+    </div>`;
+  }).join('');
 }
 
 /* ============== RENDER: ESTADIOS ============== */
@@ -2699,23 +2769,36 @@ async function castVote(type){
 document.getElementById('likeBtn')?.addEventListener('click', ()=>castVote('like'));
 document.getElementById('dislikeBtn')?.addEventListener('click', ()=>castVote('dislike'));
 
-/* INIT */
+/* ============== RENDER ALL — sincroniza todas as abas ============== */
+function renderAll(){
+  renderGroups();
+  renderScorers();
+  buildBracket();      // reconstrói bracket com dados reais
+  renderStadiums();
+  renderGamesTab();
+  renderRanking();
+  // renderHistory não precisa atualizar (dados históricos são estáticos)
+}
+
+/* ============== INIT ============== */
 renderTicker();
 setupTickerPause();
-renderGroups();
-renderScorers();
-buildBracket();     // constrói bracket real na inicialização → times corretos nos estádios
-renderStadiums();
+renderAll();
 renderHistory();
+renderRecordes();
 setupGamesSubnav();
-renderGamesTab();
 initEngagement();
-setInterval(()=>{ renderGamesTab(); }, 60000); // reavalia a cada minuto status ao vivo/encerrado
 renderContinentPills();
 renderCountryGrid();
 setupRankingInfo();
-renderRanking();
-renderRecordes();
+
+// Auto-atualiza todas as abas ao trocar de aba (garante que todas ficam em sincronia)
+document.querySelectorAll('nav.tabs button[data-tab]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{ setTimeout(renderAll, 50); });
+});
+
+// Reavalia status ao vivo a cada 60 segundos e sincroniza tudo
+setInterval(()=>{ renderGamesTab(); renderTicker(); }, 60000);
 
 </script>
 </body>
